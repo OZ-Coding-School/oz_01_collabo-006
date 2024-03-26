@@ -8,7 +8,7 @@
 ### 팀장 : 권혜연
 ### 부팀장 : 강계령
 
-# 프로젝트 팀 디스코드
+# [프로젝트 팀 디스코드](https://discord.gg/pAJC755x)
 
-# 피그잼 피그마
+# [피그잼 피그마](https://www.figma.com/files/project/218049976/Team-project?fuid=1323823591054840908)
 
