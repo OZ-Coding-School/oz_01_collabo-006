@@ -2,8 +2,8 @@
 
 ## * 팀원
 ## - BD : 김동원, 이하나
-## - FE : 강계령, 권용제, 김민성, 정다올, 김혜민
-## - BE : 권혜연, 김하림, 전명환
+## - FE : 강계령, 권용제, 김민성, 정다올
+## - BE : 권혜연, 김하림
 
 ### 팀장 : 권혜연
 ### 부팀장 : 강계령
@@ -12,4 +12,3 @@
 
 # [피그잼 피그마](https://www.figma.com/files/project/218049976/Team-project?fuid=1323823591054840908)
 
-# [Slack](https://app.slack.com/client/T06RH553ATV/C06S623FPJ4)
