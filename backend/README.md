@@ -33,5 +33,40 @@ django-social-auth: 이 모듈도 다양한 소셜 로그인 공급자를 지원
 
 어떤 모듈을 선택할지는 프로젝트의 요구사항과 개발자의 선호도에 따라 다를 수 있습니다. 하지만 대부분의 경우, django-allauth가 포괄적이고 사용하기 쉬운 옵션으로 알려져 있습니다.
 
-## 모델에 이미지 필드사용을 위한 패키지 설치
+## 모델에 이미지 필드사용을 위한 패키지 설치(mysql 이미지 필드 사용 패키지)
 poetry add Pillow
+
+## 장고 데이버베이스 연결을 위한 settings.py 변경
+### mongoengine : 장고에서 MongoDB와 연결할수 있게 해주는 ODM(Object Document Mapper), 연결퀴리를 ORM방식과 유사하게 사용할수 있도록 해준다
+MONGODB_DATABASES = {
+    'default': {
+        'name': 'mydatabase',  # MongoDB 데이터베이스 이름
+        'host': 'localhost',    # MongoDB 호스트
+        'port': 27017,          # MongoDB 포트
+        # 'username': 'username', # MongoDB 사용자 이름 (선택 사항)
+        # 'password': 'password', # MongoDB 비밀번호 (선택 사항)
+    }
+}
+### config 의 __init__.py 에 아래 코드를 추가해준다. 이걸 작성하면 프로젝트 전역에서 사용하룻있게 해준다.
+import mongoengine
+
+mongoengine.connect(
+    db='mydatabase',  # MongoDB 데이터베이스 이름
+    host='localhost',  # MongoDB 호스트
+    port=27017,        # MongoDB 포트
+    # username='username', # MongoDB 사용자 이름 (선택 사항)
+    # password='password', # MongoDB 비밀번호 (선택 사항)
+)
+#### 위 코드를 settings.py에 작성해주고 사용할 곳에서 import mongoengine 해주면 된다.
+
+### djongo : 장고에서 MongoDB와 연결할수 있게 해주는 ODM(Object Document Mapper)
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',    # poetry add djongo 해주기(버전 충돌로 취소)
+        'NAME': 'mydatabase',  # MongoDB 데이터베이스 이름
+        'HOST': 'localhost',   # MongoDB 호스트
+        'PORT': 27017,         # MongoDB 포트
+        'USER': 'username',    # MongoDB 사용자 이름 (선택 사항)
+        'PASSWORD': 'password' # MongoDB 비밀번호 (선택 사항)
+    }
+}

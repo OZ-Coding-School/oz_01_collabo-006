@@ -80,6 +80,16 @@ DATABASES = {
     }
 }
 
+MONGODB_DATABASES = {
+    'default': {
+        'name': 'mydatabase',  # MongoDB 데이터베이스 이름
+        'host': 'localhost',    # MongoDB 호스트
+        'port': 27017,          # MongoDB 포트
+        # 'username': 'username', # MongoDB 사용자 이름 (선택 사항)
+        # 'password': 'password', # MongoDB 비밀번호 (선택 사항)
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
