@@ -12,3 +12,4 @@
 
 # [피그잼 피그마](https://www.figma.com/files/project/218049976/Team-project?fuid=1323823591054840908)
 
+[## 📑 프로젝트 규칙](https://github.com/OZ-Coding-School/project-example/blob/74349c0cef16622964fa80106796a5610fb64f75/README.md?plain=1#L113)
