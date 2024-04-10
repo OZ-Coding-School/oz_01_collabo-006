@@ -295,6 +295,17 @@ mfa = ["qrcode (>=7.0.0)"]
 saml = ["python3-saml (>=1.15.0,<2.0.0)"]
 
 [[package]]
+name = "django-dotenv"
+version = "1.4.2"
+description = "foreman reads from .env. manage.py doesn't. Let's fix that."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-dotenv-1.4.2.tar.gz", hash = "sha256:3812bb0f4876cf31f902aad140f0645e120e51ee30eb7c40c22050f58a0e4adb"},
+    {file = "django_dotenv-1.4.2-py2.py3-none-any.whl", hash = "sha256:a9b1b40a70bd321acd231926acedb9bd2c5e873e33a1873b34a7276d196a765e"},
+]
+
+[[package]]
 name = "django-environ"
 version = "0.11.2"
 description = "A package that allows you to utilize 12factor inspired environment variables to configure your Django application."
@@ -309,6 +320,27 @@ files = [
 develop = ["coverage[toml] (>=5.0a4)", "furo (>=2021.8.17b43,<2021.9.dev0)", "pytest (>=4.6.11)", "sphinx (>=3.5.0)", "sphinx-notfound-page"]
 docs = ["furo (>=2021.8.17b43,<2021.9.dev0)", "sphinx (>=3.5.0)", "sphinx-notfound-page"]
 testing = ["coverage[toml] (>=5.0a4)", "pytest (>=4.6.11)"]
+
+[[package]]
+name = "django-rest-framework-mongoengine"
+version = "3.4.1"
+description = "MongoEngine support for Django Rest Framework."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-rest-framework-mongoengine-3.4.1.tar.gz", hash = "sha256:cabb60f2b8ecf6ceaa13550b47dde0b8f2fe9b6f7b69be681e059cf31b51d729"},
+]
+
+[[package]]
+name = "django-templated-mail"
+version = "1.1.1"
+description = "Send emails using Django template system."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-templated-mail-1.1.1.tar.gz", hash = "sha256:8db807effebb42a532622e2d142dfd453dafcd0d7794c4c3332acb90656315f9"},
+    {file = "django_templated_mail-1.1.1-py3-none-any.whl", hash = "sha256:f7127e1e31d7cad4e6c4b4801d25814d4b8782627ead76f4a75b3b7650687556"},
+]
 
 [[package]]
 name = "djangorestframework"
@@ -347,6 +379,27 @@ doc = ["Sphinx (>=1.6.5,<2)", "sphinx_rtd_theme (>=0.1.9)"]
 lint = ["flake8", "isort", "pep8"]
 python-jose = ["python-jose (==3.3.0)"]
 test = ["cryptography", "freezegun", "pytest", "pytest-cov", "pytest-django", "pytest-xdist", "tox"]
+
+[[package]]
+name = "djoser"
+version = "2.2.2"
+description = "REST implementation of Django authentication system."
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "djoser-2.2.2-py3-none-any.whl", hash = "sha256:efb91ad61e4d5b8d664db029b5947df9d34078289ef2680a1ab665e047144b74"},
+    {file = "djoser-2.2.2.tar.gz", hash = "sha256:9deb831a1c8781ceff325699e1407b4e1be8b4588e87071621d88ba31c09349f"},
+]
+
+[package.dependencies]
+django = ">=3.0.0"
+django-templated-mail = ">=1.1.1,<2.0.0"
+djangorestframework-simplejwt = ">=5.0,<6.0"
+social-auth-app-django = ">=5.0.0,<6.0.0"
+
+[package.extras]
+djet = ["djet (>=0.3.0,<0.4.0)"]
+webauthn = ["webauthn (<1.0)"]
 
 [[package]]
 name = "dnspython"
@@ -392,6 +445,24 @@ files = [
 
 [package.dependencies]
 pymongo = ">=3.4,<5.0"
+
+[[package]]
+name = "mysqlclient"
+version = "2.2.4"
+description = "Python interface to MySQL"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "mysqlclient-2.2.4-cp310-cp310-win_amd64.whl", hash = "sha256:ac44777eab0a66c14cb0d38965572f762e193ec2e5c0723bcd11319cc5b693c5"},
+    {file = "mysqlclient-2.2.4-cp311-cp311-win_amd64.whl", hash = "sha256:329e4eec086a2336fe3541f1ce095d87a6f169d1cc8ba7b04ac68bcb234c9711"},
+    {file = "mysqlclient-2.2.4-cp312-cp312-win_amd64.whl", hash = "sha256:e1ebe3f41d152d7cb7c265349fdb7f1eca86ccb0ca24a90036cde48e00ceb2ab"},
+    {file = "mysqlclient-2.2.4-cp38-cp38-win_amd64.whl", hash = "sha256:3c318755e06df599338dad7625f884b8a71fcf322a9939ef78c9b3db93e1de7a"},
+    {file = "mysqlclient-2.2.4-cp39-cp39-win_amd64.whl", hash = "sha256:9d4c015480c4a6b2b1602eccd9846103fc70606244788d04aa14b31c4bd1f0e2"},
+    {file = "mysqlclient-2.2.4-pp310-pypy310_pp73-win_amd64.whl", hash = "sha256:d43987bb9626096a302ca6ddcdd81feaeca65ced1d5fe892a6a66b808326aa54"},
+    {file = "mysqlclient-2.2.4-pp38-pypy38_pp73-win_amd64.whl", hash = "sha256:4e80dcad884dd6e14949ac6daf769123223a52a6805345608bf49cdaf7bc8b3a"},
+    {file = "mysqlclient-2.2.4-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:9d3310295cb682232cadc28abd172f406c718b9ada41d2371259098ae37779d3"},
+    {file = "mysqlclient-2.2.4.tar.gz", hash = "sha256:33bc9fb3464e7d7c10b1eaf7336c5ff8f2a3d3b88bab432116ad2490beb3bf41"},
+]
 
 [[package]]
 name = "oauthlib"
@@ -687,6 +758,47 @@ requests = ">=2.0.0"
 rsa = ["oauthlib[signedtoken] (>=3.0.0)"]
 
 [[package]]
+name = "social-auth-app-django"
+version = "5.4.0"
+description = "Python Social Authentication, Django integration."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "social-auth-app-django-5.4.0.tar.gz", hash = "sha256:09ac02a063cb313eed5e9ef2f9ac4477c8bf5bbd685925ff3aba43f9072f1bbb"},
+    {file = "social_auth_app_django-5.4.0-py3-none-any.whl", hash = "sha256:28c65b2e2092f30cdb3cf912eeaa6988b49fdf4001b29bd89e683673d700a38e"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+social-auth-core = ">=4.4.1"
+
+[[package]]
+name = "social-auth-core"
+version = "4.5.3"
+description = "Python social authentication made simple."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "social-auth-core-4.5.3.tar.gz", hash = "sha256:9d9b51b7ce2ccd0b7139e6b7f52a32cb922726de819fb13babe35f12ae89852a"},
+    {file = "social_auth_core-4.5.3-py3-none-any.whl", hash = "sha256:8d16e66eb97bb7be43a023d6efa16628cdc94cefd8d8053930c98a0f676867e7"},
+]
+
+[package.dependencies]
+cryptography = ">=1.4"
+defusedxml = ">=0.5.0rc1"
+oauthlib = ">=1.0.3"
+PyJWT = ">=2.7.0"
+python3-openid = ">=3.0.10"
+requests = ">=2.9.1"
+requests-oauthlib = ">=0.6.1"
+
+[package.extras]
+all = ["cryptography (>=2.1.1)", "python3-saml (>=1.5.0)"]
+allpy3 = ["cryptography (>=2.1.1)", "python3-saml (>=1.5.0)"]
+azuread = ["cryptography (>=2.1.1)"]
+saml = ["python3-saml (>=1.5.0)"]
+
+[[package]]
 name = "sqlparse"
 version = "0.4.4"
 description = "A non-validating SQL parser."
@@ -733,4 +845,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "5f8b631ecdc4f9137320032ad6245314a0211bee85daea3d87107f98f8a1b283"
+content-hash = "57cd9fa586a34753808a203896bbd439ae8e45b9b5cdf5871183f8e1ffd865ba"
