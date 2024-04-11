@@ -2,6 +2,7 @@
 
 ### 도커 컨테이너 터미널 들어가는 방법
 새오룬 터미널 창을 띄운다.
+
 docker exec -it backend-web-1 /bin/sh
 <!-- docker exec -it <컨테이너_이름> /bin/sh -->
 <!-- ls,pwd 써서 위치 어딘지 파악해보기(생략해도 됨) -->
@@ -16,5 +17,6 @@ python manage.py migrate
 python manage.py createsuperuser
 <!-- 도커를 재시작했거나, docker-compose down을 했다면 실행 해야함  -->
 
+터미널 종료는 exit
 
 
