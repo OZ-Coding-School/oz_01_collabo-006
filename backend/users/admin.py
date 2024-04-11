@@ -10,8 +10,9 @@ class CustomUserAdmin(admin.ModelAdmin):
   list_filter = ('is_staff', 'is_superuser', 'is_active')
   fieldsets = (
       (None, {'fields': ('email', 'password')}),
-      ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
-      # ('Important dates', {'fields': ('last_login','date_joined',)}),
+      ('개인정보',{'fields':('first_name', 'last_name',)}),
+      ('이미지필드', {'fields': ('profile_image','short_description',)}),
+      ('권한', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
   )
   add_fieldsets = (
       (None, {

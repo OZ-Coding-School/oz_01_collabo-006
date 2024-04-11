@@ -8,7 +8,6 @@ ENV PYTHONUNBUFFERED 1
 
 # 프로젝트 의존성을 설치하기 위해 Poetry를 설치합니다.
 # Install system dependencies
-# Install system dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         curl \
@@ -37,11 +36,12 @@ COPY poetry.lock pyproject.toml /app/
 RUN poetry config virtualenvs.create false \
     && poetry install --no-dev --no-interaction --no-ansi
 
-    # Install psycopg2
+# Install psycopg2
 RUN poetry add psycopg2-binary
 
 # 소스 코드를 복사합니다.
 COPY . /app/
+
 
 # 컨테이너에서 실행할 명령을 설정합니다.
 CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
