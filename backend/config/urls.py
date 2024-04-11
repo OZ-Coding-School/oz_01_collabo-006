@@ -17,10 +17,14 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path ,include
+from config.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('users/', include('users.urls')),
+    path('categories/', include('categories.urls')),
+    path('',index,name='home'),
 ] + static(
   # URL의 접두어가 MEDIA_URL일 떄는 정적파일을 돌려준다.
   prefix=settings.MEDIA_URL,
