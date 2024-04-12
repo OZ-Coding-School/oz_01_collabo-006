@@ -45,7 +45,9 @@ DJANGO_SYSTEM_APPS = [
 ]
 
 CUSTOM_USER_APPS = [
+    # 디렉토리명만 적어도 사용할수있지만 장고 3.7버전 이후부터는 이렇게 쓰기를 권장한다.
     'users.apps.UsersConfig',
+    'categories.apps.CategoriesConfig', 
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
