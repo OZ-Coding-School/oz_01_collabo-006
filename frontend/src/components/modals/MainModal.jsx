@@ -15,18 +15,30 @@ const MainModal = () => {
     }, [])
 
     // 외부 클릭 시 모달 닫기 -> 사용자가 잘못 클릭 할 수 있으니 뺄까요
-    const handleOutsideClick = (event) => {
-        if (modalRef.current && !modalRef.current.contains(event.target)) {
-            setOpen(false)
-        }
-    }
+    // const handleOutsideClick = (event) => {
+    //     if (modalRef.current && !modalRef.current.contains(event.target)) {
+    //         setOpen(false)
+    //     }
+    // }
 
+    // useEffect(() => {
+    //     document.addEventListener('mousedown', handleOutsideClick)
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleOutsideClick)
+    //     }
+    // }, [])
+
+    //모달 띄워져있는 상태에서 스크롤 막기
     useEffect(() => {
-        document.addEventListener('mousedown', handleOutsideClick)
-        return () => {
-            document.removeEventListener('mousedown', handleOutsideClick)
+        if (open) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'auto'
         }
-    }, [])
+        return () => {
+            document.body.style.overflow = 'auto'
+        }
+    }, [open])
 
     const handleClose = () => setOpen(false)
 
@@ -40,53 +52,60 @@ const MainModal = () => {
     return (
         <>
             {open && (
-                <div className="main-modal" ref={modalRef}>
-                    <button className="main-modal-exit" onClick={handleClose}>
-                        <FiX />
-                    </button>
+                <div className="main-modal-background">
+                    <div className="main-modal" ref={modalRef}>
+                        <button
+                            className="main-modal-exit"
+                            onClick={handleClose}
+                        >
+                            <FiX />
+                        </button>
 
-                    <img className="main-modal-logo" src={logo} />
-                    <p className="main-modal-title">
-                        내 반려동물을 사전 설정하고, 동반 가능 맞춤 정보를
-                        제공받으세요!
-                    </p>
-                    <div className="dog-wrap">
-                        {dogsData.map((dog) => (
-                            <label key={dog.id}>
-                                <input
-                                    className="main-modal-radio"
-                                    type="radio"
-                                    name="dogType"
-                                    value={dog.image}
-                                    onChange={() => handleDogSelect(dog)}
-                                />
-                                <div className="dog-component">
-                                    <img
-                                        className="dog-image"
-                                        src={
-                                            selectedDog === dog
-                                                ? dog.hoverImage
-                                                : dog.image
-                                        }
-                                        alt={dog.name}
+                        <img className="main-modal-logo" src={logo} />
+                        <p className="main-modal-title">
+                            내 반려동물을 사전 설정하고, 동반 가능 맞춤 정보를
+                            제공받으세요!
+                        </p>
+                        <div className="dog-wrap">
+                            {dogsData.map((dog) => (
+                                <label key={dog.id}>
+                                    <input
+                                        className="main-modal-radio"
+                                        type="radio"
+                                        name="dogType"
+                                        value={dog.image}
+                                        onChange={() => handleDogSelect(dog)}
                                     />
-                                    <div className="dog-type-wrap">
-                                        <p className="dog-title">{dog.title}</p>
-                                        <p className="dog-detail">
-                                            {dog.detail}
-                                        </p>
+                                    <div className="dog-component">
+                                        <img
+                                            className="dog-image"
+                                            src={
+                                                selectedDog === dog
+                                                    ? dog.hoverImage
+                                                    : dog.image
+                                            }
+                                            alt={dog.name}
+                                        />
+                                        <div className="dog-type-wrap">
+                                            <p className="dog-title">
+                                                {dog.title}
+                                            </p>
+                                            <p className="dog-detail">
+                                                {dog.detail}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </label>
-                        ))}
+                                </label>
+                            ))}
+                        </div>
+                        <button
+                            className="main-modal-btn"
+                            onClick={handleClose}
+                            disabled={isButtonDisabled}
+                        >
+                            페뜨하기
+                        </button>
                     </div>
-                    <button
-                        className="main-modal-btn"
-                        onClick={handleClose}
-                        disabled={isButtonDisabled}
-                    >
-                        페뜨하기
-                    </button>
                 </div>
             )}
         </>

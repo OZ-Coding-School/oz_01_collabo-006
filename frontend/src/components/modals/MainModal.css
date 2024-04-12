@@ -4,6 +4,14 @@
 * {
     font-weight: 200;
 }
+.main-modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+}
 .main-modal {
     position: absolute;
     top: 50%;
