@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load socialaccount %} <!-- social 로그인 기능 불러오기 -->
 {% block content %}
 <div id='Login'>  
   <form method="POST">
@@ -7,6 +7,7 @@
     {% csrf_token %}
     {{ form.as_p}}
     <button type="submit">로그인</button>
+    <a href="{% provider_login_url 'google' %}">구글 로그인</a>
     <a href="/users/signup/" type="button">회원가입</a>
   </form>
 </div> 

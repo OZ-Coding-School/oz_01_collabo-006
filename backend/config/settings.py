@@ -31,7 +31,10 @@ SECRET_KEY = 'django-insecure-c+y=iuypxctoi@ld&rb=4(ipjt)a*6aozevla$vxn5fm@i*6@y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    'localhost'            
+    ]
 
 
 # Application definition
@@ -42,6 +45,7 @@ DJANGO_SYSTEM_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ]
 
 CUSTOM_USER_APPS = [
@@ -50,7 +54,18 @@ CUSTOM_USER_APPS = [
     'categories.apps.CategoriesConfig', 
 ]
 
-INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
+SOCIAL_LOGIN = [
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    
+    # providers / 사용할 소셜로그인 사이트
+    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.github',
+]
+
+INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS + SOCIAL_LOGIN
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,6 +75,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -166,3 +183,39 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+
+# settings.py
+
+# Django-allauth 설정
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_QUERY_USERNAMR = False
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None # username 필드 사용 x
+ACCOUNT_EMAIL_REQUIRED = True            # email 필드 사용 o
+ACCOUNT_USERNAME_REQUIRED = False        # username 필드 사용 x
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+
+# # 소셜 계정 설정
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         },
+#         'ACCOUNT_EMAIL_REQUIRED': True,
+#         'ACCOUNT_USERNAME_REQUIRED': False,
+#         'ACCOUNT_AUTHENTICATION_METHOD': 'email',
+#         'ACCOUNT_USER_MODEL_USERNAME_FIELD': None
+#     }
+# }
