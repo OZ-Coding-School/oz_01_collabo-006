@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-const useStore = create(
+const useLoginStore = create(
     persist(
         (set, get) => ({
             isLogined: false,
