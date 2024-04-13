@@ -1,6 +1,6 @@
 import React from 'react'
 import './RootLayout.css'
-import navLogo from '/images/navLogo.png'
+import navLogo from '/images/nav_logo.png'
 import useLoginStore from '../../../store/login'
 import { Link } from 'react-router-dom'
 import Weather from './Weather'
