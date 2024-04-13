@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FiX } from 'react-icons/fi'
-import dogsData from '../../../public/images/dogs'
-import logo from '../../../public/images/logo.png'
+import dogsData from '/images/dogs.jsx?url'
+import logo from '/images/logo.png'
 import './MainModal.css'
 
 const MainModal = () => {
