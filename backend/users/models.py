@@ -16,6 +16,7 @@ class User(AbstractUser):
   short_description = models.TextField('소개글', blank=True)
   
   USERNAME_FIELD = 'email'  # 이메일을 사용자 식별자로 설정
+  EMAIL_FIELD = 'email'
   REQUIRED_FIELDS = [] # 필수 입력 값을 정하는 필드 비어있는 지금은 아무것도 없는 상태
   username = None
 
