@@ -28,3 +28,9 @@ python manage.py createsuperuser
 
 터미널 종료는 exit
 
+### on_delete=models. 옵션들
+on_delete=models.SET_NULL, null=True 
+이 옵션은 삭제할 데이터가 참조된 데이터는 그 필드를 NULL로 지정한다.
+
+on_delete=models.PROTECT
+이 옵션은 삭제할 데이터가 참조된 곳이 있다면 삭제되지 않는다.

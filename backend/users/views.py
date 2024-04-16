@@ -67,6 +67,9 @@ def signup_view(request):
         # Form 에 에러가 없다면, 곧바로 User 를 생성학고 로그인 후 플레이스 페이지로 이동한다
         if form.is_valid():
             user = form.save()
+            # user = form.save(commit=False)
+            user.backend = 'django.contrib.auth.backends.ModelBackend'  # backend 설정
+            user.save()
             # email = form.cleaned_data['email']
             # password = form.cleaned_data['password']
             # password2 = form.cleaned_data['password2']
@@ -80,6 +83,7 @@ def signup_view(request):
             # )
             login(request, user)
             return redirect('/categories/places/')
+        
         
         # Form에 에러가 있다면, 에러를 포함한 Form을 사용해 회원가입 페잊를 보여준다  
     else:
