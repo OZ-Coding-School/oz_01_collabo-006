@@ -23,7 +23,7 @@
 
 .btn_login button {
     cursor: pointer;
-    background-color: var(--Yellow);
+    background-color: var(--yellow);
     color: white;
     padding: 10px 20px;
     border-radius: 50px;

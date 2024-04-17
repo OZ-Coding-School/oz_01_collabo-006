@@ -1,9 +1,11 @@
-import Banner from '../components/Banner/Banner'
+import MainModal from '@/components/modals/MainModal'
+import Banner from '@/components/Banner/Banner'
 
 function MainPage() {
     return (
         <div>
             <Banner />
+            <MainModal />
         </div>
     )
 }
