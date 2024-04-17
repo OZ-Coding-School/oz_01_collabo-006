@@ -4,9 +4,7 @@ import './Banner.css'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-import bnlogo from '/images/bannerLogo.png'
-import styled from '@emotion/styled'
-
+import bnlogo from '/images/banner_logo.png'
 
 function Banner() {
     const data = [
