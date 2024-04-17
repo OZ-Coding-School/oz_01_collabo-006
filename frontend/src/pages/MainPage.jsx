@@ -23,6 +23,7 @@ const theme = createTheme({
 
 function MainPage() {
     return (
+
         <ThemeProvider theme={theme}>
             <Container
                 maxWidth="md"
