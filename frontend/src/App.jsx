@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import MainPage from './pages/MainPage'
-import DetailPage from './pages/DetailPage'
 import _RootLayout from './components/layout/RootLayout'
+import DetailPage from './pages/DetailPage'
 import ErrorPage from './pages/ErrorPage'
+import MainPage from './pages/MainPage'
 
 const router = createBrowserRouter([
     {
