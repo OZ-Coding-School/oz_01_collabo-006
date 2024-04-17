@@ -1,8 +1,12 @@
-import React from 'react'
-import './RootLayout.css'
-import navLogo from '/images/nav_logo.png'
 import useLoginStore from '@/store/login'
+import { Button, Container } from '@mui/material'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import * as React from 'react'
 import { Link } from 'react-router-dom'
+import navLogo from '../../../../public/images/nav_logo.png'
 import Weather from './Weather'
 
 export const _Navbar = () => {
@@ -33,25 +37,59 @@ export const _Navbar = () => {
     // }
 
     return (
-        <nav className="gnb">
-            <div className="gnb_left">
-                <div className="logo">
-                    <Link to={'/'}>
-                        <img src={navLogo} alt="" />
-                    </Link>
-                </div>
-                <div className="weather">
-                    <Weather />
-                </div>
-            </div>
-
-            <div className="btn_login">
-                {isLogined === false ? (
-                    <button onClick={handleLoginModal}>로그인</button>
-                ) : (
-                    <button onClick={handleLogoutUser}>로그아웃</button>
-                )}
-            </div>
-        </nav>
+        <Box sx={{ flexGrow: 1 }}>
+            <Container maxWidth="md" style={{ padding: 0 }}>
+                <AppBar
+                    position="static"
+                    style={{
+                        backgroundColor: 'white',
+                        boxShadow: 'none',
+                    }}
+                >
+                    <Toolbar>
+                        <Link to={'/'}>
+                            <img src={navLogo} alt="" />
+                        </Link>
+                        <Typography
+                            color={'black'}
+                            variant="h6"
+                            component="div"
+                            sx={{ flexGrow: 1 }}
+                        >
+                            <Weather />
+                        </Typography>
+                        <div>
+                            {isLogined === false ? (
+                                <Button
+                                    style={{
+                                        backgroundColor: '#ffc145',
+                                        borderRadius: '16px',
+                                    }}
+                                    disableElevation
+                                    variant="contained"
+                                    size="medium"
+                                    onClick={handleLoginModal}
+                                >
+                                    로그인
+                                </Button>
+                            ) : (
+                                <Button
+                                    style={{
+                                        backgroundColor: '#ffc145',
+                                        borderRadius: '50px',
+                                    }}
+                                    disableElevation
+                                    variant="contained"
+                                    size="medium"
+                                    onClick={handleLogoutUser}
+                                >
+                                    로그아웃
+                                </Button>
+                            )}
+                        </div>
+                    </Toolbar>
+                </AppBar>
+            </Container>
+        </Box>
     )
 }
