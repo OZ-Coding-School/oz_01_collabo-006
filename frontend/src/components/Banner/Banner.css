@@ -5,11 +5,25 @@
     justify-content: space-between;
     margin: 0 auto;
     gap: 20px;
+    height: 400px;
 }
 
 .bn_logo {
-    flex-shrink: 1;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: bisque;
+}
+.bn_logo h2 {
+    font-size: 52px;
+    font-family: 'SUIT Variable', sans-serif;
 }
 .bn_swiper {
-    flex-shrink: 2;
+    padding: 20px;
+
+    background-color: bisque;
+}
+.bn_swiper_content {
+    background-color: aqua;
+    height: 100%;
+    padding: 20px;
 }
