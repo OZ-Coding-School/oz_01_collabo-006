@@ -7,7 +7,7 @@ from users.models import User
 def login_view(request):
     # 이미 로그인되어 있다면
     if request.user.is_authenticated:
-        return redirect('/categories/places/')
+        return redirect('/api/v1/categories/places/')
     
     if request.method=='POST':
         # LoginForm 인스턴스 생성하며, 입력 데이터는 request.POST를 사용
@@ -35,7 +35,7 @@ def login_view(request):
             # email과 password를 가진 사용자가 있다면
             if user is not None:
                 login(request, user)
-                return redirect('/categories/places/')
+                return redirect('/api/v1/categories/places/')
             
             # email과 password를 가진 사용자가 없다면
             else:
@@ -45,7 +45,7 @@ def login_view(request):
         context = {
             'form': form,
         }
-        return render(request, 'users/login.html', context)
+        return render(request, 'api/v1/users/login.html', context)
         
     else:
         form = LoginForm()
@@ -53,13 +53,13 @@ def login_view(request):
         context = {
             'form': form,
         }
-        return render(request,'users/login.html', context)
+        return render(request,'api/v1/users/login.html', context)
 
 def logout_view(request):
     # Logout 함수 호출에 request를 전달한다
     logout(request)
     # 로그아웃 페이지로 redirect
-    return redirect('/users/login/')
+    return redirect('/api/v1/users/login/')
 
 def signup_view(request):
     if request.method == 'POST':
@@ -82,7 +82,7 @@ def signup_view(request):
             #     short_description=short_description,
             # )
             login(request, user)
-            return redirect('/categories/places/')
+            return redirect('/api/v1/categories/places/')
         
         
         # Form에 에러가 있다면, 에러를 포함한 Form을 사용해 회원가입 페잊를 보여준다  
@@ -92,7 +92,7 @@ def signup_view(request):
     context = {
         'form': form,
     }
-    return render(request,'users/signup.html', context)
+    return render(request,'api/v1/users/signup.html', context)
         
             # # 검증 로직은 Form으로 옮겼으니 여기는 지워주면 된다.(리팩터링) 
             # # 비밀번호와 비밀번호 확인 값이 같은지 검사

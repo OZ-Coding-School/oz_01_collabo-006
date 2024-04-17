@@ -21,7 +21,7 @@ class User(AbstractUser):
   REQUIRED_FIELDS = [] # 필수 입력 값을 정하는 필드 비어있는 지금은 아무것도 없는 상태
   username = None
 
-  dogs_size = models.ForeignKey('Dog', on_delete=models.SET_NULL, null=True)
+  dogs_size = models.ForeignKey('Dog', on_delete=models.SET_NULL, null=True,blank=True)
   
   objects = CustomUserManager()
 
