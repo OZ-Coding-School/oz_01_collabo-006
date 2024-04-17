@@ -9,21 +9,21 @@
 }
 
 .bn_logo {
-    margin: 0 auto;
-    padding: 20px;
-    background-color: bisque;
+    padding: 70px;
+}
+.bn_logo img {
+    width: 400px;
 }
 .bn_logo h2 {
-    font-size: 52px;
+    margin-top: 20px;
+    line-height: 50px;
+    font-size: 32px;
     font-family: 'SUIT Variable', sans-serif;
 }
 .bn_swiper {
     padding: 20px;
-
-    background-color: bisque;
 }
 .bn_swiper_content {
-    background-color: aqua;
     height: 100%;
     padding: 20px;
 }
