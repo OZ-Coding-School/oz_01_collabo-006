@@ -26,11 +26,13 @@ function Banner() {
         <div className="bn_contain">
             <div className="bn_logo">
                 <img src={bnlogo} alt="" />
-                <h2>
-                    반려견과 함께하는
-                    <br />
-                    즐거운 하루를 위해!!
-                </h2>
+                <div className="bn_logo_text">
+                    <p>
+                        반려견과 함께하는
+                        <br />
+                        즐거운 하루를 위해!!
+                    </p>
+                </div>
             </div>
             <Swiper slidesPerView={1} className="bn_swiper">
                 {data.map((data) => (

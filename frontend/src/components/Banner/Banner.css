@@ -11,17 +11,20 @@
 .bn_logo {
     padding: 70px;
 }
-.bn_logo img {
-    width: 400px;
+.bn_logo_text {
+    width: 320px;
 }
-.bn_logo h2 {
+.bn_logo p {
     margin-top: 20px;
-    line-height: 50px;
-    font-size: 32px;
+    line-height: 70px;
+    font-size: 40px;
     font-family: 'SUIT Variable', sans-serif;
+    color: rgb(87, 87, 87);
 }
 .bn_swiper {
     padding: 20px;
+    background-color: rgb(225, 225, 225);
+    border-radius: 2rem;
 }
 .bn_swiper_content {
     height: 100%;
