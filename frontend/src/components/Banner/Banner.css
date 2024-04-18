@@ -1,0 +1,31 @@
+.bn_contain {
+    padding: 0 100px;
+    max-width: 1300px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    gap: 20px;
+    height: 400px;
+}
+.bn_logo {
+    padding: 70px;
+}
+.bn_logo_text {
+    width: 320px;
+}
+.bn_logo p {
+    margin-top: 20px;
+    line-height: 70px;
+    font-size: 40px;
+    font-family: 'SUIT Variable', sans-serif;
+    color: rgb(87, 87, 87);
+}
+.bn_swiper {
+    padding: 20px;
+    background-color: rgb(225, 225, 225);
+    border-radius: 2rem;
+}
+.bn_swiper_content {
+    height: 100%;
+    padding: 20px;
+}

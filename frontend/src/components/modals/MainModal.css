@@ -1,0 +1,221 @@
+@import url('../../index.css');
+
+/* 공통 스타일 */
+* {
+    font-weight: 200;
+}
+.main-modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+}
+.main-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--white);
+    border-radius: 34px;
+    box-shadow: 4px 4px 8px 0px var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.main-modal-exit {
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.main-modal-title {
+    cursor: default;
+}
+.dog-wrap {
+    position: relative;
+    display: flex;
+    align-items: start;
+}
+.dog-image {
+    margin-bottom: 8%;
+    transition:
+        transform 300ms,
+        scale 300ms;
+    cursor: pointer;
+}
+.dog-image:hover {
+    transform: rotate(3deg);
+}
+.dog-image:active {
+    scale: 1.03;
+}
+.dog-component {
+    left: -10%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.dog-title {
+    color: var(--black);
+}
+.dog-detail {
+    color: var(--gray);
+}
+.main-modal-btn {
+    border-radius: 50px;
+    border: none;
+    background-color: var(--yellow);
+    color: var(--white);
+    cursor: pointer;
+}
+.main-modal-btn[disabled] {
+    background-color: var(--purple);
+}
+.main-modal-btn:active {
+    scale: 0.95;
+}
+
+.main-modal-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* 미디어 쿼리 */
+/* 1920px 이상 */
+@media screen and (min-width: 1280px) {
+    .main-modal {
+        height: 60vh;
+        width: 47vw;
+        padding: 16px;
+    }
+    .main-modal-exit {
+        top: 2.7%;
+        right: 2%;
+        font-size: 1.5vw;
+    }
+    .main-modal-logo {
+        width: 9.4vw;
+        margin-bottom: 2%;
+    }
+    .main-modal-title {
+        font-size: 1vw;
+        margin-bottom: 12%;
+    }
+    .dog-wrap {
+        left: -3%;
+        margin-bottom: 5%;
+        justify-content: space-between;
+    }
+    .dog-image {
+        width: 9.4vw;
+    }
+    .dog-title {
+        font-size: 1.1vw;
+    }
+    .dog-detail {
+        font-size: 1.3vmin;
+    }
+    .main-modal-btn {
+        height: 4vh;
+        width: 8vw;
+        font-size: 1.1vw;
+    }
+}
+
+/* 768px이상 1279px이하 */
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+    .main-modal {
+        height: 84vh;
+        width: 40vw;
+        padding: 10px 42px;
+    }
+    .main-modal-exit {
+        position: absolute;
+        top: 3%;
+        right: 5%;
+        border: none;
+        background-color: transparent;
+        font-size: 2vw;
+    }
+    .main-modal-logo {
+        width: 10.2vw;
+        margin-bottom: 4%;
+    }
+    .main-modal-title {
+        font-size: 1.1vw;
+        margin-bottom: 10%;
+    }
+    .dog-wrap {
+        left: -4%;
+        margin-bottom: 6%;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .dog-image {
+        width: 11.2vw;
+    }
+    .dog-title {
+        font-size: 1.1vw;
+    }
+    .dog-detail {
+        font-size: 1.3vmin;
+        margin-bottom: 30%;
+    }
+    .main-modal-btn {
+        height: 5vh;
+        width: 8vw;
+        font-size: 1.2vw;
+    }
+}
+
+/* 767px 이하 */
+@media screen and (max-width: 767px) {
+    .main-modal {
+        height: 88vh;
+        width: 80vw;
+        padding: 3px 40px;
+    }
+    .main-modal-exit {
+        position: absolute;
+        top: 4.3%;
+        right: 6.2%;
+        border: none;
+        background-color: transparent;
+        font-size: 2.5vw;
+    }
+    .main-modal-logo {
+        width: 20vw;
+        margin-bottom: 6%;
+    }
+    .main-modal-title {
+        font-size: 2.2vw;
+        margin-bottom: 19%;
+        text-align: center;
+    }
+    .dog-wrap {
+        left: -4%;
+        margin-bottom: 5%;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .dog-image {
+        width: 26vw;
+    }
+    .dog-title {
+        font-size: 3vw;
+    }
+    .dog-detail {
+        font-size: 2vmin;
+        margin-bottom: 30%;
+    }
+    .main-modal-btn {
+        height: 4vh;
+        width: 15vw;
+        font-size: 2.4vw;
+    }
+}
