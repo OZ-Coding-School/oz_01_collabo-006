@@ -1,3 +1,4 @@
+
 import Banner from '@/components/Banner/Banner'
 import MainModal from '@/components/modals/MainModal'
 import { Container } from '@mui/material'
@@ -20,3 +21,4 @@ function MainPage() {
 }
 
 export default MainPage
+
