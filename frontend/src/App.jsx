@@ -1,4 +1,3 @@
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { Container } from '@mui/material'
@@ -7,6 +6,7 @@ import _RootLayout from './components/layout/RootLayout'
 import DetailPage from './pages/DetailPage'
 import ErrorPage from './pages/ErrorPage'
 import MainPage from './pages/MainPage'
+import AuthPage from './pages/AuthPage'
 
 const theme = createTheme({
     palette: {
@@ -29,6 +29,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <MainPage /> },
             { path: 'detail/:id', element: <DetailPage /> },
+            { path: 'auth', element: <AuthPage /> },
         ],
     },
 ])
@@ -53,4 +54,3 @@ function App() {
 }
 
 export default App
-
