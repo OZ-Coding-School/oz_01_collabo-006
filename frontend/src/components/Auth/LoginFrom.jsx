@@ -80,6 +80,7 @@ function LoginFrom({ isLogin }) {
                         label="비밀번호"
                     />
                 </FormControl>
+                <Box></Box>
                 <Button
                     variant="contained"
                     disableElevation
@@ -92,11 +93,16 @@ function LoginFrom({ isLogin }) {
                 >
                     로그인
                 </Button>
-                <Box component="div">
-                    <Button sx={{ p: 0 }} onClick={naverHandler}>
-                        <img src="/images/btnG_완성형.png" alt="" />
-                    </Button>
-                </Box>
+
+                <Button sx={{ p: 0 }} onClick={naverHandler}>
+                    <img
+                        src="/images/btnG_완성형.png"
+                        alt=""
+                        style={{
+                            width: '200px',
+                        }}
+                    />
+                </Button>
             </Box>
             <div>
                 <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>

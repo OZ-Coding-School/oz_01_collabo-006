@@ -39,7 +39,7 @@ function SignupForm({ isLogin }) {
                     fullWidth
                     id="outlined-basic"
                     label="닉네임"
-                    name="email"
+                    name="_name"
                     variant="outlined"
                     type="text"
                 />
@@ -63,7 +63,7 @@ function SignupForm({ isLogin }) {
                     fullWidth
                     id="outlined-basic"
                     label="비밀번호 확인"
-                    name="password"
+                    name="password2"
                     variant="outlined"
                     type="password"
                 />

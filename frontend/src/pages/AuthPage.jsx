@@ -1,8 +1,8 @@
 import { json, redirect } from 'react-router-dom'
 
 import { useSearchParams } from 'react-router-dom'
-import LoginFrom from '@/components/LoginFrom'
-import SignupForm from '@/components/SignupForm'
+import LoginFrom from '@/components/Auth/LoginFrom'
+import SignupForm from '@/components/Auth/SignupForm'
 
 function AuthPage() {
     const [searchParams] = useSearchParams()
