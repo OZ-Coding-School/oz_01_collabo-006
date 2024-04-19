@@ -1,14 +1,30 @@
 import { Link } from 'react-router-dom'
 
 import Box from '@mui/material/Box'
+
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+import { useState } from 'react'
+import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import InputLabel from '@mui/material/InputLabel'
 
 function LoginFrom({ isLogin }) {
     function naverHandler(e) {
         e.preventDefault()
         alert('hi')
+    }
+
+    const [showPassword, setShowPassword] = useState(false)
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show)
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault()
     }
 
     return (
@@ -37,13 +53,26 @@ function LoginFrom({ isLogin }) {
                     variant="outlined"
                     type="email"
                 />
-                <TextField
-                    fullWidth
-                    id="outlined-basic"
+                <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPassword ? 'text' : 'password'}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                            >
+                                {showPassword ? (
+                                    <VisibilityOff />
+                                ) : (
+                                    <Visibility />
+                                )}
+                            </IconButton>
+                        </InputAdornment>
+                    }
                     label="비밀번호"
-                    name="password"
-                    variant="outlined"
-                    type="password"
                 />
                 <Button
                     variant="contained"
