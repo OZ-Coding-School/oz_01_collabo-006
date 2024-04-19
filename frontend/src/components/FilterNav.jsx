@@ -1,7 +1,7 @@
 import { FormControl, InputBase, MenuItem, Select } from '@mui/material'
 import React from 'react'
 import dogsData from '../../public/images/dogs' // dogsData import 추가
-import useStore from './store' // store import 추가
+import useStore from '../store/mainModal' // store import 추가
 
 const FilterNav = () => {
     const { selectedDog, setSelectedDog } = useStore() // 상태 및 액션 가져오기
