@@ -12,6 +12,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
+import FormControl from '@mui/material/FormControl'
 
 function LoginFrom({ isLogin }) {
     function naverHandler(e) {
@@ -53,27 +54,32 @@ function LoginFrom({ isLogin }) {
                     variant="outlined"
                     type="email"
                 />
-                <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={showPassword ? 'text' : 'password'}
-                    endAdornment={
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                            >
-                                {showPassword ? (
-                                    <VisibilityOff />
-                                ) : (
-                                    <Visibility />
-                                )}
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                    label="비밀번호"
-                />
+                <FormControl variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">
+                        비밀번호
+                    </InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? (
+                                        <VisibilityOff />
+                                    ) : (
+                                        <Visibility />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        label="비밀번호"
+                    />
+                </FormControl>
                 <Button
                     variant="contained"
                     disableElevation
@@ -92,7 +98,6 @@ function LoginFrom({ isLogin }) {
                     </Button>
                 </Box>
             </Box>
-
             <div>
                 <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>
                     <Typography

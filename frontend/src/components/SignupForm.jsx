@@ -10,11 +10,25 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import { useState } from 'react'
 
+import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import OutlinedInput from '@mui/material/OutlinedInput'
+
 function SignupForm({ isLogin }) {
     const [dog, setDge] = useState('')
 
     const handleChange = (event) => {
         setDge(event.target.value)
+    }
+
+    const [showPassword, setShowPassword] = useState(false)
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show)
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault()
     }
 
     return (
@@ -51,22 +65,58 @@ function SignupForm({ isLogin }) {
                     variant="outlined"
                     type="email"
                 />
-                <TextField
-                    fullWidth
-                    id="outlined-basic"
-                    label="비밀번호"
-                    name="password"
-                    variant="outlined"
-                    type="password"
-                />
-                <TextField
-                    fullWidth
-                    id="outlined-basic"
-                    label="비밀번호 확인"
-                    name="password"
-                    variant="outlined"
-                    type="password"
-                />
+                <FormControl variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">
+                        비밀번호
+                    </InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? (
+                                        <VisibilityOff />
+                                    ) : (
+                                        <Visibility />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        label="비밀번호"
+                    />
+                </FormControl>
+                <FormControl variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">
+                        비밀번호 확인
+                    </InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? (
+                                        <VisibilityOff />
+                                    ) : (
+                                        <Visibility />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        label="비밀번호 확인"
+                    />
+                </FormControl>
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">
                         멍돌이 사이즈
