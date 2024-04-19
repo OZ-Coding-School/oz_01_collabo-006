@@ -1,3 +1,4 @@
+
 import { useParams } from 'react-router-dom'
 
 function DetailPage() {
@@ -8,3 +9,4 @@ function DetailPage() {
 }
 
 export default DetailPage
+

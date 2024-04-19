@@ -1,13 +1,12 @@
-import useLoginStore from '@/store/login'
-import { Button, Container } from '@mui/material'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import * as React from 'react'
 import { Link } from 'react-router-dom'
-import navLogo from '../../../../public/images/nav_logo.png'
+import useLoginStore from '@/store/login'
 import Weather from './Weather'
+import navLogo from '/images/nav_logo.png'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Avatar from '@mui/material/Avatar'
+import { Button, Container } from '@mui/material'
+import { green } from '@mui/material/colors'
 
 export const _Navbar = () => {
     const { isLogined, setIsLogined } = useLoginStore((state) => state)
@@ -37,59 +36,89 @@ export const _Navbar = () => {
     // }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Container maxWidth="md" style={{ padding: 0 }}>
-                <AppBar
-                    position="static"
-                    style={{
-                        backgroundColor: 'white',
-                        boxShadow: 'none',
+        <Container maxWidth="md" style={{ padding: 0 }}>
+            <Box
+                component="div"
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    mt: 2,
+                }}
+            >
+                <Box
+                    component="div"
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 2,
                     }}
                 >
-                    <Toolbar>
-                        <Link to={'/'}>
-                            <img src={navLogo} alt="" />
+                    <Link to={'/'}>
+                        <img src={navLogo} alt="" />
+                    </Link>
+                    <Typography
+                        color={'black'}
+                        variant="h8"
+                        component="div"
+                        sx={{ flexGrow: 1 }}
+                    >
+                        <Weather />
+                    </Typography>
+                </Box>
+                <Box>
+                    {isLogined === false ? (
+                        <Link to="/auth?mode=login">
+                            <Button
+                                style={{
+                                    backgroundColor: '#ffc145',
+                                    borderRadius: '16px',
+                                }}
+                                disableElevation
+                                variant="contained"
+                                size="medium"
+                                // onClick={handleLoginModal}
+                            >
+                                로그인
+                            </Button>
                         </Link>
-                        <Typography
-                            color={'black'}
-                            variant="h6"
-                            component="div"
-                            sx={{ flexGrow: 1 }}
+                    ) : (
+                        <Box
+                            component="section"
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                gap: 1,
+                            }}
                         >
-                            <Weather />
-                        </Typography>
-                        <div>
-                            {isLogined === false ? (
-                                <Button
-                                    style={{
-                                        backgroundColor: '#ffc145',
-                                        borderRadius: '16px',
-                                    }}
-                                    disableElevation
-                                    variant="contained"
-                                    size="medium"
-                                    onClick={handleLoginModal}
-                                >
-                                    로그인
-                                </Button>
-                            ) : (
-                                <Button
-                                    style={{
-                                        backgroundColor: '#ffc145',
-                                        borderRadius: '50px',
-                                    }}
-                                    disableElevation
-                                    variant="contained"
-                                    size="medium"
-                                    onClick={handleLogoutUser}
-                                >
-                                    로그아웃
-                                </Button>
-                            )}
-                        </div>
-                    </Toolbar>
-                </AppBar>
-            </Container>
-        </Box>
+                            <Avatar
+                                alt="Remy Sharp"
+                                src="images/nav_logo.png"
+                                sx={{
+                                    width: 36,
+                                    height: 36,
+                                    bgcolor: green[500],
+                                }}
+                            />
+                            <Button
+                                style={{
+                                    backgroundColor: '#ffc145',
+                                    borderRadius: '50px',
+                                }}
+                                disableElevation
+                                variant="contained"
+                                size="medium"
+                                onClick={handleLogoutUser}
+                            >
+                                로그아웃
+                            </Button>
+                        </Box>
+                    )}
+                </Box>
+            </Box>
+        </Container>
     )
 }

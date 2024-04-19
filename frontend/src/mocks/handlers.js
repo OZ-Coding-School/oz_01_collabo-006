@@ -1,3 +1,4 @@
+
 import { HttpResponse, http } from 'msw'
 export const handlers = [
     // By calling “http.get()” we’re instructing MSW
@@ -11,3 +12,4 @@ export const handlers = [
         return HttpResponse.json({})
     }),
 ]
+
