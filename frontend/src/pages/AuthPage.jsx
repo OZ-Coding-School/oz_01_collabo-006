@@ -1,7 +1,54 @@
-import React from 'react'
+import { json, redirect } from 'react-router-dom'
+
+import { useSearchParams } from 'react-router-dom'
+import LoginFrom from '@/components/LoginFrom'
+import SignupForm from '@/components/SignupForm'
 
 function AuthPage() {
-    return <div>AuthPage</div>
+    const [searchParams] = useSearchParams()
+    const isLogin = searchParams.get('mode') === 'login'
+
+    if (isLogin) {
+        return <LoginFrom isLogin={isLogin} />
+    } else {
+        return <SignupForm isLogin={isLogin} />
+    }
 }
 
 export default AuthPage
+
+// 아래는 보통 이런식으로 로그인을 해결한다 예시.
+export async function action({ request }) {
+    const searchParams = new URL(request.url).searchParams
+    const mode = searchParams.get('mode') || 'login'
+
+    if (mode !== 'login' && mode !== 'signup') {
+        throw json({ message: '노ㅁㄴㅇㄹㅁㄴㄹㅇ' }, { status: 442 })
+    }
+
+    const data = request.formData()
+    const authData = {
+        email: data.get('email'),
+        password: data.get('password'),
+    }
+
+    const response = await fetch('http://localhost:5173/' + mode, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(authData),
+    })
+
+    if (response.status === 422 || response.status === 401) {
+        return response
+    }
+
+    if (!response.ok) {
+        throw json({ message: '사용자 찾을 수 없음.' }, { status: 500 })
+    }
+
+    // 토큰 받고 관리
+
+    return redirect('/')
+}

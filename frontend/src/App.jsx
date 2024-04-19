@@ -6,7 +6,7 @@ import _RootLayout from './components/layout/RootLayout'
 import DetailPage from './pages/DetailPage'
 import ErrorPage from './pages/ErrorPage'
 import MainPage from './pages/MainPage'
-import AuthPage from './pages/AuthPage'
+import AuthPage, { action as authAction } from './pages/AuthPage'
 
 const theme = createTheme({
     palette: {
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <MainPage /> },
             { path: 'detail/:id', element: <DetailPage /> },
-            { path: 'auth', element: <AuthPage /> },
+            { path: 'auth', element: <AuthPage />, action: authAction },
         ],
     },
 ])
