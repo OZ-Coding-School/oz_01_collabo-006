@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { FiX } from 'react-icons/fi'
-import useStore from '../store' // store import 추가
+import useStore from '../../store/mainModal' // store import 추가
 import './MainModal.css'
 import dogsData from '/images/dogs.jsx?url'
 import logo from '/images/logo.png'
