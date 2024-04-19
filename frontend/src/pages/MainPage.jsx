@@ -32,6 +32,7 @@ function MainPage() {
     }
 
     return (
+
         <ThemeProvider theme={theme}>
             <Container
                 maxWidth="md"
