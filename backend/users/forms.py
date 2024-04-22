@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from users.models import User,Dog
+from users import User,Dog
 
 class LoginForm(forms.Form):
   email= forms.EmailField(

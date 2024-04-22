@@ -1,0 +1,11 @@
+{
+  "name": "patte06",
+  "version": "1.0.0",
+  "description": "### 도커 컨테이너 터미널 들어가는 방법 새오룬 터미널 창을 띄운다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

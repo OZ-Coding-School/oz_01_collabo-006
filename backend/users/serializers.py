@@ -1,7 +1,7 @@
 import re
 from rest_framework.exceptions import ParseError, ValidationError
 from rest_framework import serializers 
-from .models import User, FeedbackUser
+from users.models import User, FeedbackUser
 from django.contrib.auth.hashers import make_password
 
 
