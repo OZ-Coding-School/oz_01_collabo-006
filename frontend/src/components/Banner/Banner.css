@@ -1,0 +1,15 @@
+.bn_contain {
+    padding: 0 100px;
+    max-width: 1300px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.bn_logo {
+    flex-shrink: 1;
+}
+.bn_swiper {
+    flex-shrink: 2;
+}
