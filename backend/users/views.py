@@ -3,6 +3,8 @@ from users.forms import LoginForm, SignupForm
 from django.contrib.auth import authenticate, login, logout
 from users.models import User
 
+
+
 # Create your views here.
 def login_view(request):
     # 이미 로그인되어 있다면
@@ -45,7 +47,7 @@ def login_view(request):
         context = {
             'form': form,
         }
-        return render(request, 'api/v1/users/login.html', context)
+        return render(request, 'users/login.html', context)
         
     else:
         form = LoginForm()
@@ -53,12 +55,13 @@ def login_view(request):
         context = {
             'form': form,
         }
-        return render(request,'api/v1/users/login.html', context)
+        return render(request,'users/login.html', context)
+
 
 def logout_view(request):
     # Logout 함수 호출에 request를 전달한다
     logout(request)
-    # 로그아웃 페이지로 redirect
+    # 로그인 페이지로 redirect
     return redirect('/api/v1/users/login/')
 
 def signup_view(request):
@@ -92,7 +95,7 @@ def signup_view(request):
     context = {
         'form': form,
     }
-    return render(request,'api/v1/users/signup.html', context)
+    return render(request,'users/signup.html', context)
         
             # # 검증 로직은 Form으로 옮겼으니 여기는 지워주면 된다.(리팩터링) 
             # # 비밀번호와 비밀번호 확인 값이 같은지 검사

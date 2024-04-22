@@ -83,3 +83,11 @@ class Place(CommonModel):
   def reviews(self):
     return self.review_manage.all()
   
+# class place_Image(models.Model):
+#   # place
+#   place = models.ForeignKey('Place', verbose_name='시설 사진', on_delete=models.CASCADE)
+#   # 시설사진
+#   place_img = models.ImageField(
+#       "시설_이미지", upload_to='place/', blank=True, null=True
+#   )
+  
