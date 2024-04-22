@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from users.managers import CustomUserManager
 
+
 # Create your models here.
 class User(AbstractUser):
   """
@@ -24,6 +25,8 @@ class User(AbstractUser):
   dogs_size = models.ForeignKey('Dog', on_delete=models.SET_NULL, null=True,blank=True)
   
   objects = CustomUserManager()
+  
+
 
 class Dog(models.Model):
   id = models.fields.AutoField(primary_key=True)

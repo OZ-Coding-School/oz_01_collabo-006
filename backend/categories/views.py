@@ -1,4 +1,16 @@
 from django.shortcuts import render, redirect
+from .models import Place, place_Image
+
+# viewsets 사용을 위한 추가
+from rest_framework import viewsets
+from rest_framework import status
+from rest_framework.response import Response
+from .serializers import PlaceSerializer
+
+class PlaceViewSet(viewsets.ModelViewSet):
+    queryset = Place.objects.all()
+    serializer_class = PlaceSerializer
+
 
 # Create your views here.
 def places(request):
@@ -16,3 +28,50 @@ def places(request):
     return redirect(request, 'api/v1/users/login/')
   
   return render(request, 'categories/places.html')
+
+# APIview 를 사용할떄 
+# from rest_framework.views import APIView
+
+# class PlaceListCreateAPIView(APIView):
+#     def get(self, request):
+#         places = Place.objects.all()
+#         serializer = PlaceSerializer(places, many=True)
+#         return Response(serializer.data)
+
+#     def post(self, request):
+#         serializer = PlaceSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class PlaceRetrieveUpdateDestroyAPIView(APIView):
+#     def get_object(self, pk):
+#         try:
+#             return Place.objects.get(pk=pk)
+#         except Place.DoesNotExist:
+#             return None
+
+#     def get(self, request, pk):
+#         place = self.get_object(pk)
+#         if place:
+#             serializer = PlaceSerializer(place)
+#             return Response(serializer.data)
+#         return Response({'error': 'Place not found'}, status=status.HTTP_404_NOT_FOUND)
+
+#     def put(self, request, pk):
+#         place = self.get_object(pk)
+#         if place:
+#             serializer = PlaceSerializer(place, data=request.data)
+#             if serializer.is_valid():
+#                 serializer.save()
+#                 return Response(serializer.data)
+#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         return Response({'error': 'Place not found'}, status=status.HTTP_404_NOT_FOUND)
+
+#     def delete(self, request, pk):
+#         place = self.get_object(pk)
+#         if place:
+#             place.delete()
+#             return Response(status=status.HTTP_204_NO_CONTENT)
+#         return Response({'error': 'Place not found'}, status=status.HTTP_404_NOT_FOUND)

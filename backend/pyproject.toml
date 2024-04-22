@@ -21,6 +21,7 @@ mysqlclient = "^2.2.4"
 django-dotenv = "^1.4.2"
 pandas = "^2.2.2"
 sqlalchemy = "^2.0.29"
+django-admin-thumbnails = "^0.2.8"
 
 
 [build-system]

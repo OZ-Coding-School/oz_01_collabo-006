@@ -51,3 +51,13 @@ on_delete=models.SET_NULL, null=True
 
 on_delete=models.PROTECT
 이 옵션은 삭제할 데이터가 참조된 곳이 있다면 삭제되지 않는다.
+
+
+### viewsets url 설정
+
+({'get':'list'}): 리소스 목록을 반환합니다. HTTP GET 요청에 대응됩니다.
+({'get':'retrieve'}): 특정 리소스의 세부 정보를 반환합니다. HTTP GET 요청에 대응됩니다.
+({'post':'create'}): 새로운 리소스를 생성합니다. HTTP POST 요청에 대응됩니다.
+({'put':'update'}): 특정 리소스의 정보를 업데이트합니다. HTTP PUT 요청에 대응됩니다.
+({'put':'partial_update'}): 특정 리소스의 일부 정보를 업데이트합니다. HTTP PATCH 요청에 대응됩니다.
+({'delete':'destroy'}): 특정 리소스를 삭제합니다. HTTP DELETE 요청에 대응됩니다.

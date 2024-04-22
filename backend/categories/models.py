@@ -61,10 +61,10 @@ class Place(CommonModel):
   # 오시는길
   how_to_go = models.TextField(null=True, blank=True)
 
-  # 시설사진
-  place_img = models.ImageField(
-      "시설_이미지", upload_to='place/', blank=True, null=True
-  )
+  # # 시설사진
+  # place_img = models.ImageField(
+  #     "시설_이미지", upload_to='place/', blank=True, null=True
+  # )
 
   # 하고싶은말
   place_comment = models.TextField(null=True, blank=True)
@@ -78,16 +78,20 @@ class Place(CommonModel):
   def __str__(self):
     return self.Place_Name
   
+  def place_images(self):
+    return self.place_images.all()
+
+  
   # 리뷰 역참조 필드 추가
   @property
   def reviews(self):
     return self.review_manage.all()
   
-# class place_Image(models.Model):
-#   # place
-#   place = models.ForeignKey('Place', verbose_name='시설 사진', on_delete=models.CASCADE)
-#   # 시설사진
-#   place_img = models.ImageField(
-#       "시설_이미지", upload_to='place/', blank=True, null=True
-#   )
+class place_Image(models.Model):
+  # place
+  place = models.ForeignKey('Place', verbose_name='시설 사진', on_delete=models.CASCADE)
+  # 시설사진
+  place_img = models.ImageField(
+      "시설_이미지", upload_to='place/', blank=True, null=True
+  )
   
