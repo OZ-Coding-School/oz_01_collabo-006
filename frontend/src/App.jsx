@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import theme from './theme'
 
 import _RootLayout from './components/layout/RootLayout'
-import AuthPage from './pages/AuthPage'
+import AuthPage, { action as authAction } from './pages/AuthPage'
 import DetailPage from './pages/DetailPage'
 import ErrorPage from './pages/ErrorPage'
 import MainPage from './pages/MainPage'
