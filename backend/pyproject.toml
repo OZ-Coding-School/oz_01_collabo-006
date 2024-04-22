@@ -19,6 +19,8 @@ djangorestframework = "^3.15.1"
 django-rest-framework-mongoengine = "^3.4.1"
 mysqlclient = "^2.2.4"
 django-dotenv = "^1.4.2"
+pandas = "^2.2.2"
+sqlalchemy = "^2.0.29"
 
 
 [build-system]

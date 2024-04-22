@@ -3,11 +3,13 @@ from users.forms import LoginForm, SignupForm
 from django.contrib.auth import authenticate, login, logout
 from users.models import User
 
+
+
 # Create your views here.
 def login_view(request):
     # 이미 로그인되어 있다면
     if request.user.is_authenticated:
-        return redirect('/categories/places/')
+        return redirect('/api/v1/categories/places/')
     
     if request.method=='POST':
         # LoginForm 인스턴스 생성하며, 입력 데이터는 request.POST를 사용
@@ -35,7 +37,7 @@ def login_view(request):
             # email과 password를 가진 사용자가 있다면
             if user is not None:
                 login(request, user)
-                return redirect('/categories/places/')
+                return redirect('/api/v1/categories/places/')
             
             # email과 password를 가진 사용자가 없다면
             else:
@@ -55,11 +57,12 @@ def login_view(request):
         }
         return render(request,'users/login.html', context)
 
+
 def logout_view(request):
     # Logout 함수 호출에 request를 전달한다
     logout(request)
-    # 로그아웃 페이지로 redirect
-    return redirect('/users/login/')
+    # 로그인 페이지로 redirect
+    return redirect('/api/v1/users/login/')
 
 def signup_view(request):
     if request.method == 'POST':
@@ -67,6 +70,9 @@ def signup_view(request):
         # Form 에 에러가 없다면, 곧바로 User 를 생성학고 로그인 후 플레이스 페이지로 이동한다
         if form.is_valid():
             user = form.save()
+            # user = form.save(commit=False)
+            user.backend = 'django.contrib.auth.backends.ModelBackend'  # backend 설정
+            user.save()
             # email = form.cleaned_data['email']
             # password = form.cleaned_data['password']
             # password2 = form.cleaned_data['password2']
@@ -79,7 +85,8 @@ def signup_view(request):
             #     short_description=short_description,
             # )
             login(request, user)
-            return redirect('/categories/places/')
+            return redirect('/api/v1/categories/places/')
+        
         
         # Form에 에러가 있다면, 에러를 포함한 Form을 사용해 회원가입 페잊를 보여준다  
     else:
