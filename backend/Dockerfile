@@ -29,7 +29,7 @@ RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/usr/local/python-
 ENV PATH="${PATH}:/usr/local/python-poetry/bin"
 
 # Poetry의 의존성 파일을 복사하고, 의존성을 설치합니다.
-COPY poetry.lock pyproject.toml /app/
+COPY ../poetry.lock pyproject.toml /app/
 
 
 # Install dependencies

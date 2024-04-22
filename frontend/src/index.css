@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --white: #ffffff;
+    --yellow: #ffc145;
+    --red: #ff6b6c;
+    --purple: #b8b8d1;
+    --black: #48495c;
+    --gray: #a7a7a7;
+}
+
+@font-face {
+    font-family: 'SUIT Variable', sans-serif;
+    src: url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/variable/woff2/SUIT-Variable.woff2')
+        format('woff2');
+}
+
+body {
+    font-family: 'SUIT Variable', sans-serif;
+}
