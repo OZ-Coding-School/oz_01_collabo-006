@@ -61,3 +61,23 @@ on_delete=models.PROTECT
 ({'put':'update'}): 특정 리소스의 정보를 업데이트합니다. HTTP PUT 요청에 대응됩니다.
 ({'put':'partial_update'}): 특정 리소스의 일부 정보를 업데이트합니다. HTTP PATCH 요청에 대응됩니다.
 ({'delete':'destroy'}): 특정 리소스를 삭제합니다. HTTP DELETE 요청에 대응됩니다.
+
+
+### 
+http://localhost:8000/api/v1/categories/places?address=대구광역시&number=053
+http://localhost:8000/api/v1/categories/places?address=대구광역시
+
+from rest_framework import viewsets
+from .models import Place
+from .serializers import PlaceSerializer
+
+class PlaceViewSet(viewsets.ModelViewSet):
+    queryset = Place.objects.all()
+    serializer_class = PlaceSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        address = self.request.query_params.get('address', None)
+        if address:
+            queryset = queryset.filter(place_where1__icontains=address)
+        return queryset

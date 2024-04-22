@@ -9,7 +9,7 @@ router.register(r'places', PlaceViewSet)
 
 urlpatterns = [
   # 메소드를 따로 지정하지 않아도 사용할수 있는 방식
-  path('',include(router.urls)),
+  path('',include(router.urls), name="places"),
   
   # 메소드를 따로따로 지정하는 방식
   # path('', PlaceViewSet.as_view({'get':'list'}), name='places'),

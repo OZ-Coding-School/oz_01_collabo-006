@@ -50,6 +50,8 @@ CUSTOM_USER_APPS = [
     'users.apps.UsersConfig',
     'categories.apps.CategoriesConfig', 
     'reviews.apps.ReviewsConfig',
+    'rest_framework',
+    'drf_yasg',
 ]
 
 SOCIAL_LOGIN = [
