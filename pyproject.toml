@@ -19,14 +19,8 @@ djangorestframework = "^3.15.1"
 django-rest-framework-mongoengine = "^3.4.1"
 mysqlclient = "^2.2.4"
 django-dotenv = "^1.4.2"
-python-dotenv = "^1.0.1"
-psycopg2-binary = "^2.9.9"
-drf-spectacular = "^0.27.2"
-environ = "^1.0"
-django-cors-headers = "^4.3.1"
-django-colorfield = "^0.11.0"
-whitenoise = "^6.6.0"
-common = "^0.1.2"
+pandas = "^2.2.2"
+sqlalchemy = "^2.0.29"
 
 
 [build-system]
