@@ -1,3 +1,5 @@
+import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import {
     FormControl,
     Grid,
@@ -6,15 +8,15 @@ import {
     MenuItem,
     Paper,
     Select,
+    ToggleButton,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import React from 'react'
-import { FaMapMarkerAlt } from 'react-icons/fa'
-import { IoSearch } from 'react-icons/io5'
-import dogsData from '../../public/images/dogs' // dogsData import 추가
-import useStore from '../store/mainModal' // store import 추가
+import dogsData from '../../public/images/dogs'
+import useStore from '../store/mainModal'
 
-const FilterNav = () => {
+const FilterNav = ({ naviSelected, setNaviSelected }) => {
+    const [selected, setSelected] = React.useState(false)
     const { selectedDog, setSelectedDog } = useStore() // 상태 및 액션 가져오기
     const theme = useTheme()
     // 라디오 버튼과 셀렉트 박스의 값을 동시에 업데이트하는 함수
@@ -214,24 +216,39 @@ const FilterNav = () => {
                         }}
                         aria-label="search"
                     >
-                        <IoSearch
+                        <SearchRoundedIcon
                             style={{
                                 fontSize: '21px', // 직접 픽셀 단위로 크기를 지정
                             }}
                         />
                     </IconButton>
                 </Paper>
-                <IconButton
+                <ToggleButton
+                    value="navigation"
+                    selected={naviSelected}
+                    onChange={() => {
+                        setNaviSelected(!naviSelected)
+                    }}
                     color="primary"
-                    sx={{ p: '10px', color: theme.palette.common.customYellow }}
+                    sx={{
+                        p: '10px',
+                        color: theme.palette.common.customGray,
+                        '&.MuiToggleButton-root.Mui-selected': {
+                            color: theme.palette.common.customYellow,
+
+                            backgroundColor: 'transparent',
+                        },
+                        border: 'none',
+                        borderRadius: '50%',
+                    }}
                     aria-label="directions"
                 >
-                    <FaMapMarkerAlt
+                    <LocationOnRoundedIcon
                         style={{
-                            fontSize: '21px', // 직접 픽셀 단위로 크기를 지정
+                            fontSize: '21px',
                         }}
                     />
-                </IconButton>
+                </ToggleButton>
             </Grid>
         </Grid>
     )

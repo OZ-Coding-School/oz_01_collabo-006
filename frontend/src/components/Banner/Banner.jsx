@@ -63,7 +63,7 @@ function Banner() {
                             alt="logo"
                             style={{
                                 width: 'auto', // 이미지를 그리드 아이템에 꽉 차도록 설정
-                                height: '40%', // 비율 유지
+                                height: '30%', // 비율 유지
                             }}
                         />
                         <h1>
