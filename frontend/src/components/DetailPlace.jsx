@@ -176,19 +176,25 @@ const DetailPlace = () => {
                             </TableContainer>
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
-                            <Button
-                                variant="contained"
-                                disableElevation
-                                style={{
-                                    marginTop: '8px',
-                                    backgroundColor:
-                                        theme.palette.common.customYellow,
-                                    borderRadius: '25px',
-                                    width: '100%',
-                                }}
+                            <a
+                                href={place.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
-                                Disable elevation
-                            </Button>
+                                <Button
+                                    variant="contained"
+                                    disableElevation
+                                    style={{
+                                        marginTop: '8px',
+                                        backgroundColor:
+                                            theme.palette.common.customYellow,
+                                        borderRadius: '25px',
+                                        width: '100%',
+                                    }}
+                                >
+                                    홈페이지 바로가기
+                                </Button>
+                            </a>
                         </Grid>
                     </Grid>
                 </Grid>

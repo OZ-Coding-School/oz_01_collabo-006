@@ -9,6 +9,7 @@ import Places from '../components/Places'
 function MainPage() {
     const [isModalOpen, setIsModalOpen] = useState(true)
     const [selectedDog, setSelectedDog] = useState(null)
+    const [naviSelected, setNaviSelected] = useState(false)
     const theme = useTheme()
 
     const handleCloseModal = () => {
@@ -25,10 +26,13 @@ function MainPage() {
                 <Banner />
             </Grid>
             <Grid item xs={12}>
-                <FilterNav />
+                <FilterNav
+                    naviSelected={naviSelected}
+                    setNaviSelected={setNaviSelected}
+                />
             </Grid>
             <Grid item xs={12}>
-                <Places />
+                <Places naviSelected={naviSelected} />
             </Grid>
             <Grid item xs={12}>
                 <MainModal

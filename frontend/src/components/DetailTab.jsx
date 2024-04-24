@@ -1,7 +1,8 @@
 import { Box, Tab, Tabs, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import PropTypes from 'prop-types'
 import * as React from 'react'
-import theme from '../theme'
+import Review from './Review'
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props
@@ -37,6 +38,7 @@ function a11yProps(index) {
 }
 
 const DetailTab = () => {
+    const theme = useTheme()
     const [value, setValue] = React.useState(0)
     const handleChange = (event, newValue) => {
         setValue(newValue)
@@ -69,7 +71,7 @@ const DetailTab = () => {
                     지도뿌려
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
-                    리뷰뿌려
+                    <Review />
                 </CustomTabPanel>
             </Box>
         </>

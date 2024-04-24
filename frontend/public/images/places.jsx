@@ -19,7 +19,7 @@ const placesData = [
     {
         id: 1,
         // 아마 아이디 빼도 될껄 계령아
-        img: '../../public/images/hello.jpg',
+        img: '/public/images/hello.jpg',
         title: `시설`,
         distance: `00km`,
         information: `설명`,
@@ -29,6 +29,21 @@ const placesData = [
         dog: '애완견 기준',
         inside: '실내',
         outside: '실외',
+        url: 'https://velog.io/@rgfdds98/React%EC%97%90%EC%84%9C-%ED%81%B4%EB%A6%AD%EC%8B%9C-%EC%99%B8%EB%B6%80%EB%A7%81%ED%81%AC%EB%A1%9C-%EC%97%B4%EA%B8%B0',
+        users: [
+            {
+                id: 'q',
+                img: '/krk.jpg',
+                name: '바보',
+                comment: '하잉',
+            },
+            {
+                id: 'w',
+                img: '/krk.jpg',
+                name: '냠냠',
+                comment: '히잉',
+            },
+        ],
     },
     {
         id: 2,
@@ -43,6 +58,21 @@ const placesData = [
         dog: '애완s견 기준',
         inside: '실내',
         outside: '실외',
+        url: 'https://www.naver.com/',
+        users: [
+            {
+                id: 'r',
+                img: './krk.jpg',
+                name: '바부양',
+                comment: '안뇽',
+            },
+            {
+                id: 't',
+                img: './krk.jpg',
+                name: '냠냐미',
+                comment: '히잉헹',
+            },
+        ],
     },
 ]
 
