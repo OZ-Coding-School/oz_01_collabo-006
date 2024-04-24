@@ -3,37 +3,48 @@ import { Card, CardMedia, Pagination } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import placesData from '../../public/images/places'
+import prin from '../../public/images/prin.jpg'
+import instance from '../api/axios'
 
-const Places = ({ naviSelected }) => {
+const Places = ({ naviSelected, sortBy, filteredItems }) => {
     const [items, setItems] = useState([])
     const [currentPage, setCurrentPage] = React.useState(1)
 
     useEffect(() => {
-        // 여기에 아이템을 가져오는 비동기 작업을 수행하는 axios 요청을 추가할 수 있습니다.
-        // 임시로 생성한 데이터를 설정합니다.
-        setItems(placesData)
+        const fetchData = async () => {
+            try {
+                const response = await instance.get(`/categories/places/`)
+                setItems(response.data.results)
+                console.log('아이템', response.data.results)
+            } catch (error) {
+                console.error('저쩌구에러', error)
+            }
+        }
+        fetchData()
+        // setItems(placesData)
     }, [])
 
-    // useEffect(() => {
-    //     // 80개의 임시 아이템을 생성하여 설정합니다.
-    //     const extendedItems = Array.from({ length: 80 }, (_, index) => ({
-    //         id: index + 1,
-    //         img: '../../public/images/hello.jpg',
-    //         title: `시설 ${index + 1}`,
-    //         distance: `00km`,
-    //         information: `설명`,
-    //         closed: '쉬는날',
-    //         sectors: '분류',
-    //         time: '00:00 ~ 00:00',
-    //         dog: '애완견 기준',
-    //         inside: '실내',
-    //         outside: '실외',
-    //     }))
-    //     setItems(extendedItems)
-    // }, [])
+    useEffect(() => {
+        // 필터링된 결과가 바뀔 때마다 페이지를 1로 초기화합니다.
+        setCurrentPage(1)
+    }, [filteredItems])
 
-    const itemsPerPage = 20 // 페이지당 아이템 수
+    useEffect(() => {
+        if (sortBy === 'popularity') {
+            // 인기순으로 정렬하는 식 추가.
+        }
+        if (sortBy === 'distance') {
+            let sortedItems =
+                filteredItems.length > 0 ? [...filteredItems] : [...items]
+            sortedItems.sort((a, b) => a.distance - b.distance)
+            setItems(sortedItems)
+        }
+    }, [sortBy, filteredItems])
+
+    // displayItems를 items 대신 filteredItems로 사용하도록 수정
+    let displayItems = Array.isArray(filteredItems) ? filteredItems : items
+
+    const itemsPerPage = 20
 
     const handleChangePage = (event, newPage) => {
         setCurrentPage(newPage)
@@ -50,8 +61,8 @@ const Places = ({ naviSelected }) => {
                 columns={{ xs: 4, md: 8, lg: 12 }}
             >
                 {/* 현재 페이지에 맞는 아이템들을 보여줌 */}
-                {items.slice(startIndex, endIndex).map((item, index) => (
-                    <Grid item xs={2} md={4} lg={3} key={index}>
+                {items.slice(startIndex, endIndex).map((item) => (
+                    <Grid item xs={2} md={4} lg={3} key={item.id}>
                         <Grid
                             container
                             spacing={1}
@@ -71,12 +82,11 @@ const Places = ({ naviSelected }) => {
                                             position: 'relative',
                                             cursor: 'pointer',
                                         }}
-                                        onClick={() => handleCardClick(item.id)}
                                     >
                                         <CardMedia
                                             component="img"
-                                            image={item.img}
-                                            alt={item.title}
+                                            image={prin}
+                                            alt={item.Place_Name}
                                             sx={{
                                                 position: 'absolute',
                                                 top: 0,
@@ -96,13 +106,15 @@ const Places = ({ naviSelected }) => {
                                     columns={{ xs: 6, md: 8, lg: 8 }}
                                 >
                                     <Grid item xs={3.6} md={6.6} lg={4.8}>
-                                        <p>{item.title}</p>
-                                        <p>{item.information}</p>
+                                        <p>{item.Place_Name}</p>
+                                        <p>{item.Opening_hours}</p>
                                     </Grid>
                                     <Grid item xs={2.4} md={1.4} lg={3.2}>
                                         {naviSelected && (
                                             <p>
-                                                {item.distance}{' '}
+                                                00
+                                                {/* {item.Off_Day} */}
+                                                {'km'}
                                                 <LocationOnRoundedIcon
                                                     style={{
                                                         fontSize: '21px',
@@ -123,7 +135,7 @@ const Places = ({ naviSelected }) => {
                     justifyContent: 'center',
                     marginTop: '20px',
                 }}
-                count={Math.ceil(items.length / itemsPerPage)}
+                count={Math.ceil(displayItems.length / itemsPerPage)}
                 page={currentPage}
                 onChange={handleChangePage}
                 size="small"
