@@ -46,48 +46,121 @@ class PlaceSearchAPIView(ListAPIView):
     pagination_class.page_size = 20
 
     def get_queryset(self):
-      search_query = self.request.GET.get('query', None)
+      search_query = self.kwargs.get('search_query')  # URL 경로에서 검색어 가져오기
+      queryset = Place.objects.all()
+      
       if search_query:
             queryset = queryset.filter(
-                Q(Place_Name__icontains=search_query) |
                 Q(Category1__icontains=search_query) |
                 Q(Category2__icontains=search_query) |
                 Q(place_where1__icontains=search_query) |
-                Q(place_where2__icontains=search_query)
+                Q(place_where2__icontains=search_query) |
+                Q(Place_Name__icontains=search_query) 
             )
-      else:
-          queryset = Place.objects.all()
+      # else:
+      #     queryset = Place.objects.all()
+      return queryset
+class Category1SearchAPIView(ListAPIView):
+    serializer_class = PlaceSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 20
+
+    def get_queryset(self):
+      search_query = self.kwargs.get('search_query')  # URL 경로에서 검색어 가져오기
+      queryset = Place.objects.all()
+      
+      if search_query:
+            queryset = queryset.filter(
+                Q(Category1__icontains=search_query) &
+                Q(Category2__icontains=search_query) |
+                Q(place_where1__icontains=search_query) |
+                Q(place_where2__icontains=search_query) |
+                Q(Place_Name__icontains=search_query) 
+            )
+      # else:
+      #     queryset = Place.objects.all()
+      return queryset
+class Category2SearchAPIView(ListAPIView):
+    serializer_class = PlaceSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 20
+
+    def get_queryset(self):
+      search_query = self.kwargs.get('search_query')  # URL 경로에서 검색어 가져오기
+      queryset = Place.objects.all()
+      
+      if search_query:
+            queryset = queryset.filter(
+                Q(Category1__icontains=search_query) &
+                Q(Category2__icontains=search_query) &
+                Q(place_where1__icontains=search_query) |
+                Q(place_where2__icontains=search_query) |
+                Q(Place_Name__icontains=search_query) 
+            )
+      # else:
+      #     queryset = Place.objects.all()
+      return queryset
+    
+class Where1SearchAPIView(ListAPIView):
+    serializer_class = PlaceSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 20
+
+    def get_queryset(self):
+      search_query = self.kwargs.get('search_query')  # URL 경로에서 검색어 가져오기
+      queryset = Place.objects.all()
+      
+      if search_query:
+            queryset = queryset.filter(
+                Q(Category1__icontains=search_query) &
+                Q(Category2__icontains=search_query) &
+                Q(place_where1__icontains=search_query) &
+                Q(place_where2__icontains=search_query) |
+                Q(Place_Name__icontains=search_query) 
+            )
+      # else:
+      #     queryset = Place.objects.all()
+      return queryset
+class Where2SearchAPIView(ListAPIView):
+    serializer_class = PlaceSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 20
+
+    def get_queryset(self):
+      search_query = self.kwargs.get('search_query')  # URL 경로에서 검색어 가져오기
+      queryset = Place.objects.all()
+      
+      if search_query:
+            queryset = queryset.filter(
+                Q(Category1__icontains=search_query) &
+                Q(Category2__icontains=search_query) &
+                Q(place_where1__icontains=search_query) &
+                Q(place_where2__icontains=search_query) &
+                Q(Place_Name__icontains=search_query) 
+            )
+      # else:
+      #     queryset = Place.objects.all()
       return queryset
 
-class QueryParamsAPIView(ListAPIView):
-  serializer_class = PlaceSerializer
-  pagination_class = PageNumberPagination
-  pagination_class.page_size = 20
+# class QueryParamsAPIView(ListAPIView):
+#     serializer_class = PlaceSerializer
+#     pagination_class = PageNumberPagination
+#     pagination_class.page_size = 20
   
-  def get_queryset(self): 
-    search_query = self.request.query_params.get('query', None)
-    queryset = Place.objects.all()
-    if search_query:
-      queryset = queryset.filter(Place_Name__icontains=search_query) | \
-                  queryset.filter(Category1__icontains=search_query) | \
-                  queryset.filter(Category2__icontains=search_query) | \
-                  queryset.filter(place_where1__icontains=search_query) | \
-                  queryset.filter(place_where2__icontains=search_query)
-    return queryset
+#     def get_queryset(self):
+#         search_query = self.request.query_params.get('query', None)
+#         queryset = Place.objects.all()
 
-  def list(self, request, *args, **kwargs):
-        """
-        Get a list of places filtered by search query.
+#         if search_query:
+#             queryset = queryset.filter(
+#                 Q(Place_Name__icontains=search_query) |
+#                 Q(Category1__icontains=search_query) |
+#                 Q(Category2__icontains=search_query) |
+#                 Q(place_where1__icontains=search_query) |
+#                 Q(place_where2__icontains=search_query)
+#             )
 
-        ---
-        parameters:
-            - name: query
-              description: Search query string
-              required: false
-              type: string
-        """
-
-        return super().list(request, *args, **kwargs)
+#         return queryset
 
 # # Create your views here.
 # def places(request):

@@ -52,6 +52,7 @@ CUSTOM_USER_APPS = [
     'reviews.apps.ReviewsConfig',
     'rest_framework',
     'drf_yasg',
+    'corsheaders',
 ]
 
 SOCIAL_LOGIN = [
@@ -76,7 +77,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
-    
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -206,7 +207,12 @@ ACCOUNT_EMAIL_REQUIRED = True            # email 필드 사용 o
 ACCOUNT_USERNAME_REQUIRED = False        # username 필드 사용 x
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
+CORS_ALLOW_ALL_ORIGINS = False
 
+CORS_ALLOWED_ORIGINS = [
+    "http://223.130.139.240:80/",
+    "https://223.130.139.240:80/",
+]
 # # 소셜 계정 설정
 # SOCIALACCOUNT_PROVIDERS = {
 #     'google': {
