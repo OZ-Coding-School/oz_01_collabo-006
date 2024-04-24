@@ -61,30 +61,57 @@ from rest_framework.views import APIView
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 
-class LoginAPIView(APIView):
-  def post(self, request, *args, **kwargs):
-    email = request.data.get('email')
-    password = request.data.get('password')
-    user = authenticate(request, email=email, password=password)
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        password = request.data.get('password')
+        
+        # 이메일로 사용자 확인
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({"message": "User with this email does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+        # 비밀번호 인증
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return super().post(request, *args, **kwargs)
+        else:
+            return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+
+# class LoginAPIView(APIView):
+#   def post(self, request, *args, **kwargs):
+#     email = request.data.get('email')
+#     password = request.data.get('password')
+#     user = authenticate(request, email=email, password=password)
   
-    try:
-      user = User.objects.get(email=email)
-    except User.DoesNotExist:
-      return Response({"message": "User with this email does not exist"}, status=status.HTTP_404_NOT_FOUND)
+#     try:
+#       user = User.objects.get(email=email)
+#     except User.DoesNotExist:
+#       return Response({"message": "User with this email does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
-    # 비밀번호 인증
-    user = authenticate(request, email=email, password=password)
-    if user is not None:
-      login(request, user)
-      return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
-    else:
-      return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
+#     # 비밀번호 인증
+#     user = authenticate(request, email=email, password=password)
+#     if user is not None:
+#       login(request, user)
+#       return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+#     else:
+#       return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
 
-
-class LogoutAPIView(APIView):
+class CustomLogoutView(APIView):
     def post(self, request, *args, **kwargs):
         logout(request)
         return Response({"detail": "Logged out successfully."}, status=status.HTTP_200_OK)
+
+# class LogoutAPIView(APIView):
+#     def post(self, request, *args, **kwargs):
+#         logout(request)
+#         return Response({"detail": "Logged out successfully."}, status=status.HTTP_200_OK)
 
 class SignupAPIView(APIView):
     def post(self, request, format=None):

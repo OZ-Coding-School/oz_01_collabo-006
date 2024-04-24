@@ -112,10 +112,10 @@ class Where1SearchAPIView(ListAPIView):
       
       if search_query:
             queryset = queryset.filter(
-                Q(Category1__icontains=search_query) &
-                Q(Category2__icontains=search_query) &
                 Q(place_where1__icontains=search_query) &
                 Q(place_where2__icontains=search_query) |
+                Q(Category1__icontains=search_query) |
+                Q(Category2__icontains=search_query) |
                 Q(Place_Name__icontains=search_query) 
             )
       # else:

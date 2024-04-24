@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import environ
-
+from datetime import timedelta
 
 # 사용법: {app 이름}.{model 이름}
 AUTH_USER_MODEL = 'users.User'
@@ -33,6 +33,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']          
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+SIMPLE_JWT = {
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+}
 
 # Application definition
 DJANGO_SYSTEM_APPS = [
@@ -50,9 +60,11 @@ CUSTOM_USER_APPS = [
     'users.apps.UsersConfig',
     'categories.apps.CategoriesConfig', 
     'reviews.apps.ReviewsConfig',
-    'rest_framework',
     'drf_yasg',
     'corsheaders',
+
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 SOCIAL_LOGIN = [
@@ -207,11 +219,13 @@ ACCOUNT_EMAIL_REQUIRED = True            # email 필드 사용 o
 ACCOUNT_USERNAME_REQUIRED = False        # username 필드 사용 x
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://223.130.139.240:80/",
-    "https://223.130.139.240:80/",
+    "http://0.0.0.0:8000",
+    "https://0.0.0.0:8000",
+    "http://223.130.139.240:8000",
+    "https://223.130.139.240:8000",
 ]
 # # 소셜 계정 설정
 # SOCIALACCOUNT_PROVIDERS = {
