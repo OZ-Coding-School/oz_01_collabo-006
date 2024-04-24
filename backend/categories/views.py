@@ -15,7 +15,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
     pagination_class = PageNumberPagination
-    pagination_class.page_size = 20
+    pagination_class.page_size = 80
 
     
     # def list(self, request):
@@ -43,7 +43,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
 class PlaceSearchAPIView(ListAPIView):
     serializer_class = PlaceSerializer
     pagination_class = PageNumberPagination
-    pagination_class.page_size = 20
+    pagination_class.page_size = 80
 
     def get_queryset(self):
       search_query = self.kwargs.get('search_query')  # URL 경로에서 검색어 가져오기
