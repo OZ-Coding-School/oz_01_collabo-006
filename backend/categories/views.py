@@ -12,7 +12,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
     pagination_class = PageNumberPagination
-    pagination_class.page_size = 10
+    pagination_class.page_size = 20
     
     def list(self, request):
       pass
