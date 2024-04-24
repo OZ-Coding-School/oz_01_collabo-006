@@ -10,6 +10,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 
+from django.db.models import Q
 class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
@@ -47,7 +48,13 @@ class PlaceSearchAPIView(ListAPIView):
     def get_queryset(self):
       search_query = self.request.GET.get('query', None)
       if search_query:
-          queryset = Place.objects.filter(Place_Name__icontains=search_query) | Place.objects.filter(Category1__icontains=search_query) | Place.objects.filter(Category2__icontains=search_query)
+            queryset = queryset.filter(
+                Q(Place_Name__icontains=search_query) |
+                Q(Category1__icontains=search_query) |
+                Q(Category2__icontains=search_query) |
+                Q(place_where1__icontains=search_query) |
+                Q(place_where2__icontains=search_query)
+            )
       else:
           queryset = Place.objects.all()
       return queryset
@@ -63,7 +70,9 @@ class QueryParamsAPIView(ListAPIView):
     if search_query:
       queryset = queryset.filter(Place_Name__icontains=search_query) | \
                   queryset.filter(Category1__icontains=search_query) | \
-                  queryset.filter(Category2__icontains=search_query)
+                  queryset.filter(Category2__icontains=search_query) | \
+                  queryset.filter(place_where1__icontains=search_query) | \
+                  queryset.filter(place_where2__icontains=search_query)
     return queryset
 
   def list(self, request, *args, **kwargs):
