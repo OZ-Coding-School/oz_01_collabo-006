@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import environ
+from datetime import timedelta
 
 
 # 사용법: {app 이름}.{model 이름}
@@ -28,11 +29,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-c+y=iuypxctoi@ld&rb=4(ipjt)a*6aozevla$vxn5fm@i*6@y'
 
+NAVER_REST_API_KEY = '9dT4v1PZdnuzO4n1AH9z'
+NAVER_ADMIN_KEY = 'Iik5M_Jjmo'
+NAVER_REST_API_SECRET = 'Iik5M_Jjmo'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']          
 
+THIRD_PARTY_APPS = [
+    'rest_framework',
+    # "rest_framework.authtoken",
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
+    'colorfield',
+    'whitenoise',
+]
 
 # Application definition
 DJANGO_SYSTEM_APPS = [
@@ -50,7 +64,6 @@ CUSTOM_USER_APPS = [
     'users.apps.UsersConfig',
     'categories.apps.CategoriesConfig', 
     'reviews.apps.ReviewsConfig',
-    'rest_framework',
     'drf_yasg',
 ]
 
@@ -65,7 +78,7 @@ SOCIAL_LOGIN = [
     # 'allauth.socialaccount.providers.github',
 ]
 
-INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS + SOCIAL_LOGIN
+INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS + SOCIAL_LOGIN + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,8 +89,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'config.urls'
 
@@ -100,17 +117,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 # environ 객체 생성
 env = environ.Env()
@@ -164,6 +170,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+DATE_INPUT_FORMATS = ["%Y-%m-%d"]
+
+DATE_FORMAT = "F j"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -198,12 +208,6 @@ LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_QUERY_USERNAMR = False
 
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None # username 필드 사용 x
-ACCOUNT_EMAIL_REQUIRED = True            # email 필드 사용 o
-ACCOUNT_USERNAME_REQUIRED = False        # username 필드 사용 x
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-
-
 # # 소셜 계정 설정
 # SOCIALACCOUNT_PROVIDERS = {
 #     'google': {
@@ -219,3 +223,101 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 #         'ACCOUNT_USER_MODEL_USERNAME_FIELD': None
 #     }
 # }
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "jwt",
+    "drf-yasg",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_ALLOW_ALL = True  # 모든 호스트 허용
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+# 리액트와 연결 시 필요한 설정
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5713",
+    "http://localhost:5713",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:5713",
+    "http://localhost:5713",
+]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+}
+
+# JWT settings
+REST_USE_JWT = True
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),  # 토큰 유효 시간
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),  # 리프레시 토큰 유효 시간
+    "ROTATE_REFRESH_TOKENS": False,  # 새로고침 토큰 사용 여부
+    "BLACKLIST_AFTER_ROTATION": True,  # 블랙리스트 사용 여부
+    "SIGNING_KEY": SECRET_KEY,
+    "ALGORITHM": "HS256",
+    "VERIFYING_KEY": None,
+    "UPDATE_LAST_LOGIN": True,
+    "AUDIENCE": None,
+    "ISSUER": None,
+    "JWK_URL": None,
+    "LEEWAY": 0,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "USER_ID_CLAIM": "email",  # 사용자의 아이디 JWT 토큰에 저장할 필드
+    "AUTH_TOKEN_CLASSES": (
+        "rest_framework_simplejwt.tokens.UntypedToken",
+        "rest_framework_simplejwt.tokens.AccessToken",
+    ),
+    "TOKEN_TYPE_CLAIM": "token_type",  # 토큰 타입 필드
+    "JTI_CLAIM": "jti",  # JWT ID 필드
+    "TOKEN_USER_CLASS": "users.User",
+    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=30),
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+}
+
+APPEND_SLASH = True
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"  # 메일을 보내는 방식
+EMAIL_HOST = env("EMAIL_HOST")  # 메일을 호스트 하는 서버
+EMAIL_PORT = 587  # 메일과 통신하는 포트
+EMAIL_USE_TLS = True  # TLS 보안 사용
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")  # 발신할 네이버 이메일
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")  # 네이버 앱 비밀번호
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # 사이트와 관련한 자동 응답 받을 이메일 주소
+
+ACCOUNT_AUTHENTICATION_METHOD = "email"  # 로그인시 username 이 아니라 email을 사용하게 하는 설정
+ACCOUNT_EMAIL_REQUIRED = True  # 회원가입시 필수 이메일을 필수항목으로 만들기
+ACCOUNT_USERNAME_REQUIRED = False  # USERNAME 을 필수항목에서 제거
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"  # 이메일 인증을 필수로 설정
+ACCOUNT_EMAIL_ON_GET = True  # 이메일 인증시 이메일을 보내줌
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[회원가입 이메일 인증] "  # 이메일에 자동으로 표시되는 제목
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True  # 유저가 받은 링크를 클릭하면 회원가입 완료
+
+URL_FRONT = (
+    "http://127.0.0.1:5713",
+)  # 프론트 주소
+
+
+ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = True  # 비밀번호 지워지지않음
+ACCOUNT_SESSION_REMEMBER = True  # 브라우저를 닫아도 세션기록 유지! [ 로그인 안풀리게 ! ]
+SESSION_COOKIE_AGE = 3600
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
