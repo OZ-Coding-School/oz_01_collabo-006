@@ -18,7 +18,7 @@ function SignupForm({ isLogin }) {
     }
 
     return (
-        <Box component="form" method="post" autoComplete="off" sx={{ mt: 7 }}>
+        <Box sx={{ mt: 7 }}>
             <Typography
                 variant="h4"
                 gutterBottom

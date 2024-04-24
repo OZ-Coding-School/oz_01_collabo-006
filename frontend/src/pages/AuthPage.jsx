@@ -1,4 +1,4 @@
-import { json, redirect } from 'react-router-dom'
+import { json, redirect, Form } from 'react-router-dom'
 
 import { useSearchParams } from 'react-router-dom'
 import LoginFrom from '@/components/Auth/LoginFrom'
@@ -9,9 +9,17 @@ function AuthPage() {
     const isLogin = searchParams.get('mode') === 'login'
 
     if (isLogin) {
-        return <LoginFrom isLogin={isLogin} />
+        return (
+            <Form method="post">
+                <LoginFrom isLogin={isLogin} />
+            </Form>
+        )
     } else {
-        return <SignupForm isLogin={isLogin} />
+        return (
+            <Form method="post">
+                <SignupForm isLogin={isLogin} />
+            </Form>
+        )
     }
 }
 
