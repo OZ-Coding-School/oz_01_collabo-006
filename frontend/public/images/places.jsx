@@ -33,13 +33,13 @@ const placesData = [
         users: [
             {
                 id: 'q',
-                img: '/krk.jpg',
+                img: '',
                 name: '바보',
                 comment: '하잉',
             },
             {
                 id: 'w',
-                img: '/krk.jpg',
+                img: '/public/images/krk.jpg',
                 name: '냠냠',
                 comment: '히잉',
             },
@@ -62,13 +62,13 @@ const placesData = [
         users: [
             {
                 id: 'r',
-                img: './krk.jpg',
+                img: '/public/images/krk.jpg',
                 name: '바부양',
                 comment: '안뇽',
             },
             {
                 id: 't',
-                img: './krk.jpg',
+                img: '',
                 name: '냠냐미',
                 comment: '히잉헹',
             },

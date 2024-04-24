@@ -32,7 +32,7 @@ const Review = () => {
                         <Paper sx={{ p: 2, borderRadius: '15px' }}>
                             <Grid container spacing={1}>
                                 <Grid xs={3} md={1} lg={1}>
-                                    {/* 브로큰이미지인지뭔지는 MUI에 자체적으로 있는듯. 이미지 있으면 이미지 띄우고 없으면 이거띄우기 어떰   */}
+                                    {/* 사진없으면 사람모양으로뜸.  */}
                                     <Avatar src={userData.img} />
                                 </Grid>
                                 <Grid xs={6} md={9} lg={11}>
