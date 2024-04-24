@@ -3,35 +3,82 @@ from .models import Place, place_Image
 
 # viewsets 사용을 위한 추가
 from rest_framework import viewsets
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.response import Response
 from .serializers import PlaceSerializer
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 
 class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
     pagination_class = PageNumberPagination
     pagination_class.page_size = 20
+
     
-    def list(self, request):
-      pass
+    # def list(self, request):
+    #   pass
 
-    def create(self, request):
-      pass
+    # def create(self, request):
+    #   pass
 
-    def retrieve(self, request, pk=None):
-      pass
+    # def retrieve(self, request, pk=None):
+    #   pass
 
-    def update(self, request, pk=None):
-      pass
+    # def update(self, request, pk=None):
+    #   pass
 
-    def partial_update(self, request, pk=None):
-      pass
+    # def partial_update(self, request, pk=None):
+    #   pass
 
-    def destroy(self, request, pk=None):
-      pass
+    # def destroy(self, request, pk=None):
+    #   pass
 
+
+
+
+
+class PlaceSearchAPIView(ListAPIView):
+    serializer_class = PlaceSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 20
+
+    def get_queryset(self):
+      search_query = self.request.GET.get('query', None)
+      if search_query:
+          queryset = Place.objects.filter(Place_Name__icontains=search_query) | Place.objects.filter(Category1__icontains=search_query) | Place.objects.filter(Category2__icontains=search_query)
+      else:
+          queryset = Place.objects.all()
+      return queryset
+
+class QueryParamsAPIView(ListAPIView):
+  serializer_class = PlaceSerializer
+  pagination_class = PageNumberPagination
+  pagination_class.page_size = 20
+  
+  def get_queryset(self): 
+    search_query = self.request.query_params.get('query', None)
+    queryset = Place.objects.all()
+    if search_query:
+      queryset = queryset.filter(Place_Name__icontains=search_query) | \
+                  queryset.filter(Category1__icontains=search_query) | \
+                  queryset.filter(Category2__icontains=search_query)
+    return queryset
+
+  def list(self, request, *args, **kwargs):
+        """
+        Get a list of places filtered by search query.
+
+        ---
+        parameters:
+            - name: query
+              description: Search query string
+              required: false
+              type: string
+        """
+
+        return super().list(request, *args, **kwargs)
 
 # # Create your views here.
 # def places(request):

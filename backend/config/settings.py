@@ -130,6 +130,9 @@ DATABASES = {
         'PASSWORD': env('POSTGRES_PASSWORD'),  # PostgreSQL 컨테이너에서 설정한 환경 변수를 가져옵니다.
         'HOST': 'db',  # Docker Compose 내부에서는 'localhost'가 아니라 'db'로 연결해야 합니다.
         'PORT': '5432',  # PostgreSQL의 기본 포트는 5432입니다.
+        'OPTIONS': {
+            'client_encoding': 'utf8',
+            }
     }
 }
 
