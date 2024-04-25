@@ -69,7 +69,7 @@ const DetailTab = ({ place }) => {
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={0}>
-                    <NaverMap />
+                    <NaverMap intvalue={0}/>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
                     <Review place={place} />

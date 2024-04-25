@@ -1,7 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState  } from 'react';
 
-function NaverMap() {
+function NaverMap( intvalue ) {
+
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
+    const fetchCoordinatesAndRenderMap = async () => {
+      try {
+        // API 호출하여 데이터 받아오기
+        const response = await fetch('http://223.130.139.240/api/v1/categories/places/');
+        const data = await response.json();
+        
+        // 받아온 데이터에서 좌표 값을 추출하여 상태로 설정
+        const latitude = parseFloat(data.results[intvalue - 1].Latitude);
+        const longitude = parseFloat(data.results[intvalue - 1].Longitude);
+        
+        setLatitude(latitude);
+        setLongitude(longitude);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+
+      setIsLoaded(true);
+    };
+
+    fetchCoordinatesAndRenderMap();
+  }, [intvalue]);
+
+    
+  useEffect(() => {
+    if (isLoaded) {
     // Naver 지도 API 로드
     const script = document.createElement('script');
     script.src = 'https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=k7uu5g5so9';
@@ -9,8 +39,12 @@ function NaverMap() {
     document.head.appendChild(script);
 
     script.onload = () => {
+
+        
+
+
       // Naver 지도 생성
-      const cityhall = new window.naver.maps.LatLng(37.5666805, 126.9784147);
+      const cityhall = new window.naver.maps.LatLng(latitude, longitude);
       const map = new window.naver.maps.Map('map', {
         center: cityhall.destinationPoint(0, 500),
         zoom: 15
@@ -56,7 +90,8 @@ function NaverMap() {
     return () => {
       document.head.removeChild(script);
     };
-  }, []);
+    }
+  }, [isLoaded]);
 
   return (
     <div id="map" style={{ width: '700px', height: '500px' }}></div>
