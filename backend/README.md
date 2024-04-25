@@ -24,6 +24,8 @@ docker-compose run --rm web sh -c 'python manage.py createsuperuser'
 #### 플레이스임포트
 docker-compose run --rm web sh -c 'python manage.py place_import'
 
+#### 캐시 삭제
+docker-compose run --rm web sh -c 'python manage.py clearcache'
 
 ### 도커 컨테이너 터미널 들어가는 방법
 #### 이 방식은 사용할 일이 적겠지만 알아두면 좋으니 적어두겠습니다.
@@ -81,3 +83,30 @@ class PlaceViewSet(viewsets.ModelViewSet):
         if address:
             queryset = queryset.filter(place_where1__icontains=address)
         return queryset
+
+### 여기에는 SIMPLE_JWT 설정의 각 항목에 대한 설명이 있습니다:
+
+ACCESS_TOKEN_LIFETIME: 액세스 토큰의 수명입니다. 기본값은 30분입니다. (timedelta 객체)
+REFRESH_TOKEN_LIFETIME: 리프레시 토큰의 수명입니다. 기본값은 7일입니다. (timedelta 객체)
+ROTATE_REFRESH_TOKENS: True로 설정할 경우, 리프레시 토큰을 사용하여 새로운 액세스 토큰과 리프레시 토큰을 반환합니다. 기본값은 True입니다.
+BLACKLIST_AFTER_ROTATION: True로 설정할 경우, 이전의 리프레시 토큰은 블랙리스트 처리됩니다. 기본값은 True입니다.
+UPDATE_LAST_LOGIN: True로 설정할 경우, 사용자 모델의 last_login 필드가 갱신됩니다. 기본값은 True입니다.
+ALGORITHM: 토큰에 사용되는 암호화 알고리즘입니다. 기본값은 HS256입니다.
+SIGNING_KEY: 토큰을 서명할 때 사용되는 키입니다. 기본값은 SECRET_KEY로 설정됩니다.
+VERIFYING_KEY: 토큰을 확인할 때 사용되는 키입니다. 기본값은 None이며, 필요한 경우 설정해야 합니다.
+AUDIENCE: 토큰의 대상(aud) 클레임의 값을 지정합니다. 기본값은 None입니다.
+ISSUER: 토큰의 발급자(iss) 클레임의 값을 지정합니다. 기본값은 None입니다.
+JWK_URL: JSON 웹 키 URL을 지정합니다. 기본값은 None입니다.
+LEEWAY: 토큰 유효성 검사 시의 여유 시간입니다. 기본값은 0입니다.
+AUTH_HEADER_TYPES: 인증 헤더의 유형을 지정합니다. 기본값은 ("Bearer",)입니다.
+AUTH_HEADER_NAME: 인증 헤더의 이름을 지정합니다. 기본값은 "HTTP_AUTHORIZATION"입니다.
+USER_ID_FIELD: 토큰의 사용자 ID 클레임에 사용되는 사용자 모델의 필드입니다. 기본값은 "id"입니다.
+USER_ID_CLAIM: 토큰의 사용자 ID 클레임의 이름입니다. 기본값은 "user_id"입니다.
+USER_AUTHENTICATION_RULE: 사용자 인증 규칙을 지정하는 함수입니다. 기본값은 default_user_authentication_rule입니다.
+AUTH_TOKEN_CLASSES: 인증 토큰의 클래스를 지정합니다. 기본값은 (AccessToken,)입니다.
+TOKEN_TYPE_CLAIM: 토큰의 유형을 지정하는 클레임의 이름입니다. 기본값은 "token_type"입니다.
+TOKEN_USER_CLASS: 토큰과 관련된 사용자 모델의 클래스입니다. 기본값은 "rest_framework_simplejwt.models.TokenUser"입니다.
+JTI_CLAIM: 토큰의 JTI 클레임의 이름입니다. 기본값은 "jti"입니다.
+SLIDING_TOKEN_REFRESH_EXP_CLAIM: 슬라이딩 리프레시 토큰의 만료 클레임의 이름입니다. 기본값은 "refresh_exp"입니다.
+SLIDING_TOKEN_LIFETIME: 슬라이딩 토큰의 수명입니다. 기본값은 5분입니다. (timedelta 객체)
+SLIDING_TOKEN_REFRESH_LIFETIME: 슬라이딩 리프레시 토큰의 수명입니다. 기본값은 1일입니다. (timedelta 객체)

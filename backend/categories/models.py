@@ -87,7 +87,11 @@ class Place(CommonModel):
   def reviews(self):
     return self.review_manage.all()
   
-class place_Image(models.Model):
+  
+  # class Meta:
+  #   app_label = 'categories'
+    
+class place_Images(models.Model):
   # place
   place = models.ForeignKey('Place', verbose_name='시설 사진', on_delete=models.CASCADE)
   # 시설사진
@@ -95,3 +99,5 @@ class place_Image(models.Model):
       "시설_이미지", upload_to='place/', blank=True, null=True
   )
   
+  class Meta:
+    app_label = 'categories'

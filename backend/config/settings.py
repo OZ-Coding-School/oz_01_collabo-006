@@ -9,14 +9,23 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+# import django
+# django.setup()
+
 
 from pathlib import Path
 import os
 import environ
+
 from datetime import timedelta
 
-# 사용법: {app 이름}.{model 이름}
-AUTH_USER_MODEL = 'users.User'
+# Rest framework imports
+from rest_framework_simplejwt.authentication import default_user_authentication_rule
+from rest_framework_simplejwt.tokens import AccessToken
+
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,10 +49,31 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': True,
+    # "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    # "BLACKLIST_AFTER_ROTATION": True,
+    # "UPDATE_LAST_LOGIN": True,
+    # "ALGORITHM": "HS256",
+    # # "SIGNING_KEY": SECRET_KEY,
+    # "VERIFYING_KEY": None,
+    # "AUDIENCE": None,
+    # "ISSUER": None,
+    # "JWK_URL": None,
+    # "LEEWAY": 0,
+    # "AUTH_HEADER_TYPES": ("Bearer",),
+    # "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    # "USER_ID_FIELD": "id",
+    # "USER_ID_CLAIM": "user_id",
+    # "USER_AUTHENTICATION_RULE": default_user_authentication_rule,
+    # "AUTH_TOKEN_CLASSES": (AccessToken,),
+    # "TOKEN_TYPE_CLAIM": "token_type",
+    # "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
+    # "JTI_CLAIM": "jti",
+    # "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    # "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
+    # "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
-
 # Application definition
 DJANGO_SYSTEM_APPS = [
     'django.contrib.admin',
@@ -62,9 +92,9 @@ CUSTOM_USER_APPS = [
     'reviews.apps.ReviewsConfig',
     'drf_yasg',
     'corsheaders',
-
     'rest_framework',
-    'rest_framework.authtoken',
+    # 'rest_framework_simplejwt',
+    'rest_framework.authtoken',  
 ]
 
 SOCIAL_LOGIN = [
@@ -79,6 +109,7 @@ SOCIAL_LOGIN = [
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS + SOCIAL_LOGIN
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -206,6 +237,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
+
 LOGIN_REDIRECT_URL = '/'
 
 # settings.py
@@ -222,6 +254,8 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+    "https://localhost:8080",
     "http://0.0.0.0:8000",
     "https://0.0.0.0:8000",
     "http://223.130.139.240:8000",
@@ -242,3 +276,7 @@ CORS_ALLOWED_ORIGINS = [
 #         'ACCOUNT_USER_MODEL_USERNAME_FIELD': None
 #     }
 # }
+
+
+# 사용법: {app 이름}.{model 이름}
+AUTH_USER_MODEL = 'users.User'

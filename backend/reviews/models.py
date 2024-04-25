@@ -21,4 +21,5 @@ class Review(CommonModel):
   def __str__(self):
     return f"{self.user.email}님의 리뷰입니다."
   
-  
+  class Meta:
+    app_label = 'reviews'

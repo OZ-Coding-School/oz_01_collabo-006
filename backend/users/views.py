@@ -59,7 +59,7 @@ class MyPageViewSet(viewsets.ModelViewSet):
 # Logout은 상호작용이 필요없기때문에 APIView를 이용해 POST로 구현한다.
 from rest_framework.views import APIView
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
