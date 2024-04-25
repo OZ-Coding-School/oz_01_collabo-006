@@ -10,6 +10,8 @@ function MainPage() {
     const [isModalOpen, setIsModalOpen] = useState(true)
     const [selectedDog, setSelectedDog] = useState(null)
     const [naviSelected, setNaviSelected] = useState(false)
+    const [sortBy, setSortBy] = useState('')
+    const [filteredItems, setFilteredItems] = useState([])
     const theme = useTheme()
 
     const handleCloseModal = () => {
@@ -29,10 +31,18 @@ function MainPage() {
                 <FilterNav
                     naviSelected={naviSelected}
                     setNaviSelected={setNaviSelected}
+                    sortBy={sortBy}
+                    setSortBy={setSortBy}
+                    setFilteredItems={setFilteredItems}
+                    filteredItems={filteredItems}
                 />
             </Grid>
             <Grid item xs={12}>
-                <Places naviSelected={naviSelected} />
+                <Places
+                    sortBy={sortBy}
+                    naviSelected={naviSelected}
+                    filteredItems={filteredItems}
+                />
             </Grid>
             <Grid item xs={12}>
                 <MainModal

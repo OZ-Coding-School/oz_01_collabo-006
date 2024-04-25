@@ -21,7 +21,7 @@ const placesData = [
         // 아마 아이디 빼도 될껄 계령아
         img: '/public/images/hello.jpg',
         title: `시설`,
-        distance: `00km`,
+        distance: 12,
         information: `설명`,
         closed: '쉬는날',
         sectors: '분류',
@@ -50,7 +50,7 @@ const placesData = [
         // 아마 아이디 빼도 될껄 계령아
         img: '../../public/images/hello.jpg',
         title: `시1설`,
-        distance: `010km`,
+        distance: 10,
         information: `설명1`,
         closed: '쉬는d날',
         sectors: '분1류',

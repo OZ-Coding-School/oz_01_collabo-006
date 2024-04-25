@@ -37,7 +37,7 @@ function a11yProps(index) {
     }
 }
 
-const DetailTab = () => {
+const DetailTab = ({ place }) => {
     const theme = useTheme()
     const [value, setValue] = React.useState(0)
     const handleChange = (event, newValue) => {
@@ -71,7 +71,7 @@ const DetailTab = () => {
                     지도뿌려
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
-                    <Review />
+                    <Review place={place} />
                 </CustomTabPanel>
             </Box>
         </>

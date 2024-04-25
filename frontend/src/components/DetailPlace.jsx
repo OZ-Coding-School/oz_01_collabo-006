@@ -11,8 +11,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import * as React from 'react'
-import { useParams } from 'react-router-dom'
-import placesData from '../../public/images/places'
+import prin from '../../public/images/prin.jpg'
 
 // function createData(name, detail) {
 //     return { name, detail }
@@ -48,10 +47,10 @@ import placesData from '../../public/images/places'
 //     ),
 // ]
 
-const DetailPlace = () => {
+const DetailPlace = ({ place }) => {
     const theme = useTheme()
-    const { id } = useParams()
-    const place = placesData.find((place) => place.id === parseInt(id))
+    // const { id } = useParams()
+    // const place = placesData.find((place) => place.id === parseInt(id))
 
     // place가 null이거나 undefined이면 해당하는 데이터가 없다는 메시지를 표시합니다.
     if (!place) {
@@ -60,15 +59,16 @@ const DetailPlace = () => {
 
     // id 값에 해당하는 장소 정보를 사용하여 firstRows와 secondRows를 업데이트합니다.
     const firstRows = [
-        { name: '쉬는날', detail: place.closed },
-        { name: '분류', detail: place.sectors },
-        { name: '이용시간', detail: place.time },
+        { name: '쉬는날', detail: place.Off_Day },
+        { name: '분류', detail: place.Category2 },
+        { name: '이용시간', detail: place.Opening_hours },
     ]
 
     const secondRows = [
-        { name: '애완견 기준', detail: place.dog },
-        { name: '실내', detail: place.inside },
-        { name: '실외', detail: place.outside },
+        { name: '애완견 기준', detail: place.Dog_Size },
+
+        { name: '주차가능여부', detail: place.Parking },
+        { name: '상세설명', detail: place.Location_Description },
     ]
     return (
         <>
@@ -90,12 +90,11 @@ const DetailPlace = () => {
                             position: 'relative', // Card의 자식 요소들을 절대 위치로 배치하기 위해 position 속성을 추가
                             cursor: 'pointer',
                         }}
-                        onClick={() => handleCardClick(item.id)}
                     >
                         <CardMedia
                             component="img"
-                            image={place.img}
-                            alt={place.title}
+                            image={prin}
+                            alt={place.Place_Name}
                             sx={{
                                 position: 'absolute', // 이미지를 절대 위치로 설정하여 Card 안에 꽉 차게 배치
                                 top: 0,
@@ -120,7 +119,7 @@ const DetailPlace = () => {
                                     paddingBottom: '10px',
                                 }}
                             >
-                                {place.title}
+                                {place.Place_Name}
                             </h1>
                         </Grid>
                         <Grid item xs={6} md={6} lg={12}>
@@ -177,7 +176,7 @@ const DetailPlace = () => {
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
                             <a
-                                href={place.url}
+                                href={place.Home_Page}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >

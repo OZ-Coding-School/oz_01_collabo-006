@@ -8,6 +8,7 @@ import AuthPage, { action as authAction } from './pages/AuthPage'
 import DetailPage from './pages/DetailPage'
 import ErrorPage from './pages/ErrorPage'
 import MainPage from './pages/MainPage'
+import MyPage from './pages/MyPage'
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <MainPage /> },
             { path: 'detail/:id', element: <DetailPage /> },
+            { path: 'my', element: <MyPage /> },
             { path: 'auth', element: <AuthPage />, action: authAction },
         ],
     },

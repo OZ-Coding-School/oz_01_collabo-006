@@ -9,15 +9,11 @@ import Grid from '@mui/material/Unstable_Grid2'
 import { useTheme } from '@mui/material/styles'
 import * as React from 'react'
 // import userData from '../../public/images/user'
-import { useParams } from 'react-router-dom'
-import placesData from '../../public/images/places'
+// import instance from '../api/axios'
 
-const Review = () => {
+const Review = ({ place }) => {
     const theme = useTheme()
     // const reviewData = userData[0]
-
-    const { id } = useParams()
-    const place = placesData.find((place) => place.id === parseInt(id))
 
     // place가 null이거나 undefined이면 해당하는 데이터가 없다는 메시지를 표시합니다.
     if (!place) {
@@ -27,19 +23,19 @@ const Review = () => {
     return (
         <>
             <Grid container spacing={1} columns={{ xs: 9, md: 10, lg: 12 }}>
-                {place.users.map((userData, index) => (
-                    <Grid xs={9} md={10} lg={12} key={index}>
+                {place.review_set.map((item) => (
+                    <Grid xs={9} md={10} lg={12} key={item.id}>
                         <Paper sx={{ p: 2, borderRadius: '15px' }}>
                             <Grid container spacing={1}>
                                 <Grid xs={3} md={1} lg={1}>
                                     {/* 사진없으면 사람모양으로뜸.  */}
-                                    <Avatar src={userData.img} />
+                                    <Avatar src={item.img} />
                                 </Grid>
                                 <Grid xs={6} md={9} lg={11}>
                                     <Grid container spacing={1}>
                                         <Grid xs={12} md={12} lg={12}>
-                                            <h4>{userData.name}</h4>
-                                            <p>{userData.comment}</p>
+                                            <h4>{item.user}</h4>
+                                            <p>{item.content}</p>
                                         </Grid>
                                     </Grid>
                                 </Grid>

@@ -11,14 +11,24 @@ import {
     ToggleButton,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import React from 'react'
+import React, { useState } from 'react'
 import dogsData from '../../public/images/dogs'
+import placesData from '../../public/images/places'
 import useStore from '../store/mainModal'
 
-const FilterNav = ({ naviSelected, setNaviSelected }) => {
+const FilterNav = ({
+    naviSelected,
+    setNaviSelected,
+    sortBy,
+    setSortBy,
+    filteredItems,
+    setFilteredItems,
+}) => {
+    const [searchTerm, setSearchTerm] = useState('')
     const [selected, setSelected] = React.useState(false)
     const { selectedDog, setSelectedDog } = useStore() // 상태 및 액션 가져오기
     const theme = useTheme()
+
     // 라디오 버튼과 셀렉트 박스의 값을 동시에 업데이트하는 함수
     const handleSelectDogChange = (event) => {
         const selectedDogId = event.target.value
@@ -29,7 +39,7 @@ const FilterNav = ({ naviSelected, setNaviSelected }) => {
     const [trial, setTrial] = React.useState('')
     const [city, setCity] = React.useState('')
     const [facilityType, setFacilityType] = React.useState('')
-    const [sortBy, setSortBy] = React.useState('')
+    // const [sortBy, setSortBy] = React.useState('')
 
     const handleTrialChange = (event) => {
         setTrial(event.target.value)
@@ -41,7 +51,42 @@ const FilterNav = ({ naviSelected, setNaviSelected }) => {
         setFacilityType(event.target.value)
     }
     const handleSortByChange = (event) => {
-        setSortBy(event.target.value)
+        const selectedSortBy = event.target.value
+        let sortedItems = [...filteredItems]
+
+        if (selectedSortBy === '' || selectedSortBy === 'id') {
+            // 아이디 순으로 정렬
+            sortedItems.sort((a, b) => a.id - b.id)
+        }
+        if (selectedSortBy === 'popularity') {
+            // 인기순으로 정렬
+            // 인기순으로 정렬하는 코드를 추가하세요.
+        }
+        if (selectedSortBy === 'distance') {
+            // 거리순으로 정렬
+            sortedItems.sort((a, b) => a.distance - b.distance)
+        }
+
+        // 정렬된 아이템을 상태에 반영
+        setSortBy(selectedSortBy)
+        setFilteredItems(sortedItems)
+    }
+
+    const handleSearch = () => {
+        const filteredItems = placesData.filter((item) =>
+            item.title.includes(searchTerm)
+        )
+
+        // 검색 결과를 거리순으로 다시 정렬
+        if (sortBy === 'distance') {
+            filteredItems.sort((a, b) => a.distance - b.distance)
+        }
+
+        setFilteredItems(filteredItems)
+    }
+
+    const handleChangeSearchTerm = (event) => {
+        setSearchTerm(event.target.value)
     }
 
     return (
@@ -173,8 +218,10 @@ const FilterNav = ({ naviSelected, setNaviSelected }) => {
                         <MenuItem value="">
                             <p>정렬기준</p>
                         </MenuItem>
-                        <MenuItem value={10}>인기순</MenuItem>
-                        <MenuItem value={20}>거리순</MenuItem>
+                        <MenuItem value="popularity">인기순</MenuItem>
+                        <MenuItem value="distance" disabled={!naviSelected}>
+                            거리순
+                        </MenuItem>
                     </Select>
                 </FormControl>
             </Grid>
@@ -200,16 +247,22 @@ const FilterNav = ({ naviSelected, setNaviSelected }) => {
                         borderRadius: '25px',
                         width: '100%',
                     }}
+                    onSubmit={(e) => {
+                        e.preventDefault() // 폼 제출 방지
+                        handleSearch() // 검색 실행
+                    }}
                 >
                     <InputBase
                         sx={{ ml: 1, flex: 1 }}
+                        value={searchTerm}
+                        onChange={handleChangeSearchTerm}
                         placeholder="검색해보세요!"
                         inputProps={{
                             'aria-label': '검색해보세요!',
                         }}
                     />
                     <IconButton
-                        type="button"
+                        type="submit"
                         sx={{
                             p: '10px',
                             color: theme.palette.common.customYellow,
