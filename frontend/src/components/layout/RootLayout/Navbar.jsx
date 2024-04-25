@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom'
 import useLoginStore from '@/store/login'
-import Weather from './Weather'
-import navLogo from '/images/nav_logo.png'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Avatar from '@mui/material/Avatar'
 import { Button, Container } from '@mui/material'
+import AppBar from '@mui/material/AppBar'
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
 import { green } from '@mui/material/colors'
+import { Link } from 'react-router-dom'
+import navLogo from '/images/nav_logo.png'
 
 export const _Navbar = () => {
     const { isLogined, setIsLogined } = useLoginStore((state) => state)
@@ -36,89 +37,84 @@ export const _Navbar = () => {
     // }
 
     return (
-        <Container maxWidth="md" style={{ padding: 0 }}>
-            <Box
-                component="div"
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    mt: 2,
-                }}
-            >
-                <Box
-                    component="div"
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        gap: 2,
+        <Box sx={{ flexGrow: 1 }}>
+            <Container maxWidth="md" style={{ padding: 0 }}>
+                <AppBar
+                    position="static"
+                    style={{
+                        backgroundColor: 'white',
+                        boxShadow: 'none',
                     }}
                 >
-                    <Link to={'/'}>
-                        <img src={navLogo} alt="" />
-                    </Link>
-                    <Typography
-                        color={'black'}
-                        variant="h8"
-                        component="div"
-                        sx={{ flexGrow: 1 }}
-                    >
-                        <Weather />
-                    </Typography>
-                </Box>
-                <Box>
-                    {isLogined === false ? (
-                        <Link to="/auth?mode=login">
-                            <Button
-                                style={{
-                                    backgroundColor: '#ffc145',
-                                    borderRadius: '16px',
-                                }}
-                                disableElevation
-                                variant="contained"
-                                size="medium"
-                                // onClick={handleLoginModal}
-                            >
-                                로그인
-                            </Button>
-                        </Link>
-                    ) : (
-                        <Box
-                            component="section"
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                gap: 1,
-                            }}
-                        >
-                            <Avatar
-                                alt="Remy Sharp"
-                                src="images/nav_logo.png"
-                                sx={{
-                                    width: 36,
-                                    height: 36,
-                                    bgcolor: green[500],
-                                }}
+                    <Toolbar style={{ padding: 0 }}>
+                        <Link to={'/'}>
+                            <img
+                                src={navLogo}
+                                alt=""
+                                style={{ marginRight: '12px' }}
                             />
-                            <Button
-                                style={{
-                                    backgroundColor: '#ffc145',
-                                    borderRadius: '50px',
-                                }}
-                                disableElevation
-                                variant="contained"
-                                size="medium"
-                                onClick={handleLogoutUser}
-                            >
-                                로그아웃
-                            </Button>
+                        </Link>
+                        <Typography
+                            color={'black'}
+                            variant="h6"
+                            component="div"
+                            sx={{ flexGrow: 1, cursor: 'default' }}
+                        >
+                            {/* <Weather /> */}
+                        </Typography>
+                        <Box>
+                            {isLogined === false ? (
+                                <Link to="/auth?mode=login">
+                                    <Button
+                                        style={{
+                                            backgroundColor: '#ffc145',
+                                            borderRadius: '16px',
+                                        }}
+                                        disableElevation
+                                        variant="contained"
+                                        size="medium"
+                                        // onClick={handleLoginModal}
+                                    >
+                                        로그인
+                                    </Button>
+                                </Link>
+                            ) : (
+                                <Box
+                                    component="section"
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        gap: 1,
+                                    }}
+                                >
+                                    <Avatar
+                                        alt="Remy Sharp"
+                                        src="images/nav_logo.png"
+                                        sx={{
+                                            width: 36,
+                                            height: 36,
+                                            bgcolor: green[500],
+                                        }}
+                                    />
+                                    <Button
+                                        style={{
+                                            backgroundColor: '#ffc145',
+                                            borderRadius: '50px',
+                                        }}
+                                        disableElevation
+                                        variant="contained"
+                                        size="medium"
+                                        onClick={handleLogoutUser}
+                                    >
+                                        로그아웃
+                                    </Button>
+                                </Box>
+                            )}
                         </Box>
-                    )}
-                </Box>
-            </Box>
-        </Container>
+                    </Toolbar>
+                </AppBar>
+            </Container>
+        </Box>
     )
 }

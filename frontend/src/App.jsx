@@ -1,25 +1,14 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { Container } from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import theme from './theme'
 
 import _RootLayout from './components/layout/RootLayout'
+import AuthPage, { action as authAction } from './pages/AuthPage'
 import DetailPage from './pages/DetailPage'
 import ErrorPage from './pages/ErrorPage'
 import MainPage from './pages/MainPage'
-import AuthPage from './pages/AuthPage'
-
-const theme = createTheme({
-    palette: {
-        common: {
-            customWhite: '#ffffff',
-            customYellow: '#ffc145',
-            customRed: '#ff6b6c',
-            customPurple: '#b8b8d1',
-            customBlack: '#48495c',
-            customGray: '#a7a7a7',
-        },
-    },
-})
+import MyPage from './pages/MyPage'
 
 const router = createBrowserRouter([
     {
@@ -29,7 +18,8 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <MainPage /> },
             { path: 'detail/:id', element: <DetailPage /> },
-            { path: 'auth', element: <AuthPage /> },
+            { path: 'my', element: <MyPage /> },
+            { path: 'auth', element: <AuthPage />, action: authAction },
         ],
     },
 ])
