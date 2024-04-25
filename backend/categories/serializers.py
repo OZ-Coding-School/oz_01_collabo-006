@@ -10,7 +10,7 @@ class PlaceImageSerializer(ModelSerializer):
 
 class PlaceSerializer(ModelSerializer):
   
-  place_image_set = PlaceImageSerializer(many=True,read_only=False)
+  place_images_set = PlaceImageSerializer(many=True,read_only=False)
   review_set = ReviewSerializer(many=True,read_only=True)
   
   class Meta:

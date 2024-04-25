@@ -26,8 +26,8 @@ class User(AbstractUser):
   
   objects = CustomUserManager()
   
-  class Meta:
-    app_label = 'users'
+  # class Meta:
+  #   app_label = 'users'
 
 
 class Dog(models.Model):
@@ -42,5 +42,5 @@ class Dog(models.Model):
   def search_dogs_by_weight_range(cls, min_weight, max_weight):
     return cls.objects.filter(min_weight__gte=min_weight, max_weight__lte=max_weight)
 
-  class Meta:
-    app_label = 'users'
+  # class Meta:
+  #   app_label = 'users'

@@ -99,5 +99,5 @@ class place_Images(models.Model):
       "시설_이미지", upload_to='place/', blank=True, null=True
   )
   
-  class Meta:
-    app_label = 'categories'
+  # class Meta:
+  #   app_label = 'categories'

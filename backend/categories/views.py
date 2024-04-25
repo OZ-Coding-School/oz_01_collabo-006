@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Place, place_Images
 
+from django.core.paginator import Paginator
 # viewsets 사용을 위한 추가
 from rest_framework import viewsets
 from rest_framework import status, generics
@@ -29,99 +30,99 @@ class PlaceDetailAPIView(APIView):
 class SearchAPIView(APIView):
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter('page', openapi.IN_QUERY, description="페이지 번호", type=openapi.TYPE_INTEGER),
-            openapi.Parameter('page_size', openapi.IN_QUERY, description="페이지 크기", type=openapi.TYPE_INTEGER),
-            openapi.Parameter('province', openapi.IN_QUERY, description="시/도", type=openapi.TYPE_STRING),
-            openapi.Parameter('city', openapi.IN_QUERY, description="시/군/구", type=openapi.TYPE_STRING),
-            openapi.Parameter('category2', openapi.IN_QUERY, description="카테고리", type=openapi.TYPE_STRING),
-            openapi.Parameter('dog_size', openapi.IN_QUERY, description="견종크기", type=openapi.TYPE_STRING),
-            openapi.Parameter('search', openapi.IN_QUERY, description="시설명 검색어", type=openapi.TYPE_STRING),
+            openapi.Parameter('page', openapi.IN_QUERY, description="페이지 번호", type=openapi.TYPE_INTEGER, default=1),
+            openapi.Parameter('page_size', openapi.IN_QUERY, description="페이지 크기", type=openapi.TYPE_INTEGER, default=80),
+            openapi.Parameter('province', openapi.IN_QUERY, description="시/도", type=openapi.TYPE_STRING, required=False),
+            openapi.Parameter('city', openapi.IN_QUERY, description="시/군/구", type=openapi.TYPE_STRING, required=False),
+            openapi.Parameter('category2', openapi.IN_QUERY, description="카테고리", type=openapi.TYPE_STRING, required=False),
+            openapi.Parameter('dog_size', openapi.IN_QUERY, description="견종크기", type=openapi.TYPE_STRING, required=False),
+            openapi.Parameter('search', openapi.IN_QUERY, description="시설명 검색어", type=openapi.TYPE_STRING, required=False),
         ]
     )
     def get(self, request):
-        # 쿼리 파라미터 가져오기
-        page = int(request.GET.get('page', 1))
-        page_size = int(request.GET.get('page_size', 80))
-        
-        # 드롭다운으로 선택된 값들을 쿼리 파라미터에서 가져옵니다.
-        province_city = request.GET.get('Place_Where1')
+        try:
+            # 쿼리 파라미터 가져오기
+            page = int(request.GET.get('page', 1))
+            # page_size = int(request.GET.get('page_size', 80))
+            
 
-        # Place_Where1에서 province와 city를 추출합니다.
-        if province_city:
-            parts = province_city.split(' ')
-            if len(parts) >= 2:
-                province = parts[0]
-                city = parts[1]
+            # 드롭다운으로 선택된 값들을 쿼리 파라미터에서 가져옵니다.
+            province_city = request.GET.get('Place_Where1')
+
+            # Place_Where1에서 province와 city를 추출합니다.
+            if province_city:
+                parts = province_city.split(' ')
+                if len(parts) >= 2:
+                    province = parts[0]
+                    city = parts[1]
+                else:
+                    province = province_city
+                    city = ''
             else:
-                province = province_city
-                city = None
-        else:
-            province = None
-            city = None
+                province = ''
+                city = ''
 
-        Category2 = request.GET.get('Category2')
-        Dog_Size = request.GET.get('Dog_Size')
-        
-        # 시설명 검색어를 쿼리 파라미터에서 가져옵니다.
-        search_query = request.GET.get('search')
-        
-        # Place 모델을 기반으로 쿼리셋을 필터링합니다.
-        places = Place.objects.all()
-        
-        # 드롭다운으로 선택된 값들에 따라 필터링합니다.
-        # province와 city로 필터링합니다.
-        if province:   
-            places = places.filter(place_where1__icontains=province)
-        if city:
-            places = places.filter(place_where1__icontains=city)
-        
-        # 나머지 필터링 조건들을 적용합니다.
-        if Category2:
-            places = places.filter(Category2=Category2)
-        if Dog_Size:
-            places = places.filter(Dog_Size=Dog_Size)
-        
-        # 검색어가 주어진 경우, 시설명에 검색어가 포함된 장소를 필터링합니다.
-        if search_query:
-            places = places.filter(name__icontains=search_query)
-        
-        # PlaceSerializer를 사용하여 쿼리셋을 직렬화합니다.
-        serializer = PlaceSerializer(places, many=True)
-    
-        # 드롭다운으로 보낼 데이터를 가져옵니다.
-        dropdown_data = {
-            'provinces': set(),  # 중복을 피하기 위해 set 사용
-            'cities': set(),     # 중복을 피하기 위해 set 사용
-            'categories': Place.objects.values_list('Category2', flat=True).distinct(),
-            'dog_sizes': Place.objects.values_list('Dog_Size', flat=True).distinct()
-        }
+            Category2 = request.GET.get('Category2','')
+            Dog_Size = request.GET.get('Dog_Size','')
 
-        # Place_Where1에서 province와 city를 추출합니다.
-        for place in Place.objects.all():
-            place_where1 = place.place_where1
-            parts = place_where1.split(' ')
-            if len(parts) >= 2:
-                province = parts[0]
-                city = parts[1]
-                dropdown_data['provinces'].add(province)
-                dropdown_data['cities'].add(city)
-            else:
-                dropdown_data['provinces'].add(place_where1)
+            # 시설명 검색어를 쿼리 파라미터에서 가져옵니다.
+            search_query = request.GET.get('search','')
 
-        # set을 list로 변환하여 순서를 유지하도록 합니다.
-        dropdown_data['provinces'] = list(dropdown_data['provinces'])
-        dropdown_data['cities'] = list(dropdown_data['cities'])
+            # Place 모델을 기반으로 쿼리셋을 필터링합니다.
+            places = Place.objects.all()
+            page_size = Paginator(places, 80)
+            
+            get_page = page_size.get_page(page)
 
-        
-        # 직렬화된 데이터와 드롭다운 데이터를 합쳐 응답합니다.
-        response_data = {
-            'places': serializer.data,
-            'dropdown_data': dropdown_data
-        }
+            # 드롭다운으로 선택된 값들에 따라 필터링합니다.
+            # province와 city로 필터링합니다.
+            if province:   
+                places = places.filter(place_where1__icontains=province)
+            if city:
+                places = places.filter(place_where1__icontains=city)
 
-        return Response(response_data)
-    
-    
+            # 나머지 필터링 조건들을 적용합니다.
+            if Category2:
+                places = places.filter(Category2=Category2)
+            if Dog_Size:
+                places = places.filter(Dog_Size=Dog_Size)
+
+            # 검색어가 주어진 경우, 시설명에 검색어가 포함된 장소를 필터링합니다.
+            if search_query:
+                places = places.filter(Place_Name__icontains=search_query)
+
+            # PlaceSerializer를 사용하여 쿼리셋을 직렬화합니다.
+            serializer = PlaceSerializer(get_page, many=True)
+
+            # 드롭다운으로 보낼 데이터를 가져옵니다.
+            dropdown_data = {
+                'provinces': set(),
+                'cities': set(),
+                'categories': Place.objects.values_list('Category2', flat=True).distinct(),
+                'dog_sizes': Place.objects.values_list('Dog_Size', flat=True).distinct()
+            }
+
+            for place in Place.objects.all():
+                place_where1 = place.place_where1
+                parts = place_where1.split(' ')
+                if len(parts) >= 2:
+                    province = parts[0]
+                    city = parts[1]
+                    dropdown_data['provinces'].add(province)
+                    dropdown_data['cities'].add(city)
+                else:
+                    dropdown_data['provinces'].add(place_where1)
+
+            # 직렬화된 데이터와 드롭다운 데이터를 합쳐 응답합니다.
+            response_data = {
+                'places': serializer.data,
+                'dropdown_data': dropdown_data
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     
 # 뷰셋사용과 퀴리파라미터 구현을 못했던 잔제
 
