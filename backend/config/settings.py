@@ -19,17 +19,8 @@ import environ
 
 from datetime import timedelta
 
-# Rest framework imports
-from rest_framework_simplejwt.authentication import default_user_authentication_rule
-from rest_framework_simplejwt.tokens import AccessToken
-
-
-
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -108,7 +99,7 @@ SOCIAL_LOGIN = [
     # 'allauth.socialaccount.providers.github',
 ]
 
-INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS + SOCIAL_LOGIN
+INSTALLED_APPS = SOCIAL_LOGIN + CUSTOM_USER_APPS + DJANGO_SYSTEM_APPS 
 
 
 MIDDLEWARE = [

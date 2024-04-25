@@ -1,12 +1,12 @@
 from django.contrib import admin
-from categories.models import Place, place_Image
+from categories.models import Place, place_Images
 from reviews.models import Review
 import admin_thumbnails
 
 # Register your models here.
 @admin_thumbnails.thumbnail('place_img')
 class PlaceImageInline(admin.TabularInline):
-  model = place_Image
+  model = place_Images
   extra = 1
 
 class ReviewInline(admin.TabularInline):
@@ -21,6 +21,6 @@ class PlaceAdmin(admin.ModelAdmin):
     PlaceImageInline,
   ]
 
-@admin.register(place_Image)
+@admin.register(place_Images)
 class PlaceImageAdmin(admin.ModelAdmin):
   list_display = ('id', 'place', 'place_img')

@@ -1,10 +1,10 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Place , place_Image
+from .models import Place , place_Images
 from reviews.serializers import ReviewSerializer
 
 class PlaceImageSerializer(ModelSerializer):
   class Meta:
-    model = place_Image
+    model = place_Images
     fields = '__all__'
 
 

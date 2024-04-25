@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Place, place_Image
+from .models import Place, place_Images
 
 # viewsets 사용을 위한 추가
 from rest_framework import viewsets
