@@ -10,7 +10,7 @@ import theme from '../theme'
 
 function DetailPage() {
     const { id } = useParams()
-    // console.log(id)
+    
     const [place, setPlace] = useState([])
 
     useEffect(() => {
@@ -39,7 +39,7 @@ function DetailPage() {
             <ThemeProvider theme={theme}>
                 <DetailPlace id={id} place={place} />
 
-                <DetailTab place={place} />
+                <DetailTab id = {id} place={place} />
                 {/* 프롭스로 값을 내려줘 */}
             </ThemeProvider>
         </>

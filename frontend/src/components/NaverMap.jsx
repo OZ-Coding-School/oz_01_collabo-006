@@ -1,33 +1,53 @@
 import React, { useEffect, useState  } from 'react';
 
-function NaverMap( intvalue ) {
+function NaverMap( {intValue} ) {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const [placeName, setPlaceName] = useState(null);
+  const [placewhere1, setPlacewhere1] = useState(null);
+  const [homepage, setHomepage] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+
     const fetchCoordinatesAndRenderMap = async () => {
-      try {
-        // API 호출하여 데이터 받아오기
-        const response = await fetch('http://223.130.139.240/api/v1/categories/places/');
-        const data = await response.json();
+      if(intValue > 0)
+      {
+          console.log(intValue);
+          try {
+            // API 호출하여 데이터 받아오기
+            const response = await fetch('http://223.130.139.240/api/v1/categories/places/');
+            const data = await response.json();
+            
+            // 받아온 데이터에서 좌표 값을 추출하여 상태로 설정
+            const latitude = parseFloat(data.results[intValue - 1].Latitude);
+            const longitude = parseFloat(data.results[intValue - 1].Longitude);
+
+            const placeName = data.results[intValue - 1].Place_Name;
+            const placewhere1 = data.results[intValue - 1].place_where1;
+            const homepage = data.results[intValue - 1].Home_Page;
+
+           
+            
+            setLatitude(latitude);
+            setLongitude(longitude);
+            setPlaceName(placeName);
+            setPlacewhere1(placewhere1);
+            setHomepage(homepage);
+            
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+    
+          setIsLoaded(true);
+        };
+    
         
-        // 받아온 데이터에서 좌표 값을 추출하여 상태로 설정
-        const latitude = parseFloat(data.results[intvalue - 1].Latitude);
-        const longitude = parseFloat(data.results[intvalue - 1].Longitude);
-        
-        setLatitude(latitude);
-        setLongitude(longitude);
-      } catch (error) {
-        console.error('Error fetching data:', error);
       }
-
-      setIsLoaded(true);
-    };
-
-    fetchCoordinatesAndRenderMap();
-  }, [intvalue]);
+      fetchCoordinatesAndRenderMap();
+      
+  }, [intValue]);
 
     
   useEffect(() => {
@@ -57,16 +77,14 @@ function NaverMap( intvalue ) {
       });
 
       // 정보 창에 들어갈 HTML 문자열
-      const contentString = [
-        '<div class="iw_inner">',
-        '   <h3>서울특별시청</h3>',
-        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
-        '       <img src="./img/example/hi-seoul.jpg" width="10" height="10" alt="서울시청" class="thumb" /><br />',
-        '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
-        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
-        '   </p>',
-        '</div>'
-      ].join('');
+      const contentString = `
+      <div class="iw_inner">
+        <h3>${placeName}</h3>
+        <p>${placewhere1}<br />
+           <a href="${homepage}" target="_blank">관련링크</a>
+        </p>
+      </div>
+    `;
 
       // 정보 창 객체 생성
       const infowindow = new window.naver.maps.InfoWindow({

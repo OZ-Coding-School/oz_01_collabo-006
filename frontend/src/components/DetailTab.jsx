@@ -39,9 +39,13 @@ function a11yProps(index) {
 }
 
 const DetailTab = ({ place }) => {
+
+    console.log(place.id);
+
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
+        console.log(newValue);
         setValue(newValue);
     };
 
@@ -69,7 +73,7 @@ const DetailTab = ({ place }) => {
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={0}>
-                    <NaverMap intvalue={0}/>
+                    <NaverMap intValue={place.id}/>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
                     <Review place={place} />
