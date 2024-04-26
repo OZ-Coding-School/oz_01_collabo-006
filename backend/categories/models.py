@@ -18,6 +18,12 @@ class Place(CommonModel):
   
   # 경도
   Longitude = models.CharField(max_length=255, null=True, blank=True)
+
+  # 시/도
+  Province = models.CharField(max_length=255, null=True, blank=True)
+
+  # 시/군/구
+  City = models.CharField(max_length=255, null=True, blank=True)
   
   # 우편번호
   Postal_Code = models.CharField(max_length=50, null=True, blank=True)

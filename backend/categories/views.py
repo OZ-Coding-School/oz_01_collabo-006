@@ -43,75 +43,68 @@ class SearchAPIView(APIView):
         try:
             # 쿼리 파라미터 가져오기
             page = int(request.GET.get('page', 1))
-            # page_size = int(request.GET.get('page_size', 80))
-            
+            page_size = int(request.GET.get('page_size', 80))
 
             # 드롭다운으로 선택된 값들을 쿼리 파라미터에서 가져옵니다.
-            province_city = request.GET.get('Place_Where1')
 
-            # Place_Where1에서 province와 city를 추출합니다.
-            if province_city:
-                parts = province_city.split(' ')
-                if len(parts) >= 2:
-                    province = parts[0]
-                    city = parts[1]
-                else:
-                    province = province_city
-                    city = ''
-            else:
-                province = ''
-                city = ''
+            # # Place_Where1에서 province와 city를 추출합니다.
+            # if province_city:
+            #     parts = province_city.split(' ')
+            #     if len(parts) >= 2:
+            #         province = parts[0]
+            #         city = parts[1]
+            #     else:
+            #         province = province_city
+            #         city = None
+            # else:
+            #     province = None
+            #     city = None
 
-            Category2 = request.GET.get('Category2','')
-            Dog_Size = request.GET.get('Dog_Size','')
+            places = Place.objects.all()
+            province = request.GET.get('province',None)
+            city = request.GET.get('city',None)
+            Category2 = request.GET.get('Category2', None)
+            Dog_Size = request.GET.get('Dog_Size', None)
 
             # 시설명 검색어를 쿼리 파라미터에서 가져옵니다.
-            search_query = request.GET.get('search','')
-
-            # Place 모델을 기반으로 쿼리셋을 필터링합니다.
-            places = Place.objects.all()
-            page_size = Paginator(places, 80)
-            
-            get_page = page_size.get_page(page)
+            search_query = request.GET.get('search', None)
 
             # 드롭다운으로 선택된 값들에 따라 필터링합니다.
             # province와 city로 필터링합니다.
-            if province:   
-                places = places.filter(place_where1__icontains=province)
+            if province:
+                places = places.filter(Province__contains=province)
             if city:
-                places = places.filter(place_where1__icontains=city)
+                places = places.filter(City__startswith=city)
 
             # 나머지 필터링 조건들을 적용합니다.
             if Category2:
-                places = places.filter(Category2=Category2)
+                places = places.filter(Category2__contains=Category2)
             if Dog_Size:
-                places = places.filter(Dog_Size=Dog_Size)
+                places = places.filter(Dog_Size__contains=Dog_Size)
 
             # 검색어가 주어진 경우, 시설명에 검색어가 포함된 장소를 필터링합니다.
             if search_query:
-                places = places.filter(Place_Name__icontains=search_query)
+                places = places.filter(Place_Name__contains=search_query)
+
+            paginator = Paginator(places, page_size)
+            page_data = paginator.get_page(page)
 
             # PlaceSerializer를 사용하여 쿼리셋을 직렬화합니다.
-            serializer = PlaceSerializer(get_page, many=True)
-
+            serializer = PlaceSerializer(page_data, many=True)
+            
             # 드롭다운으로 보낼 데이터를 가져옵니다.
             dropdown_data = {
-                'provinces': set(),
+                'provinces': Place.objects.values_list('Province', flat=True).distinct(),
                 'cities': set(),
                 'categories': Place.objects.values_list('Category2', flat=True).distinct(),
                 'dog_sizes': Place.objects.values_list('Dog_Size', flat=True).distinct()
             }
 
-            for place in Place.objects.all():
-                place_where1 = place.place_where1
-                parts = place_where1.split(' ')
-                if len(parts) >= 2:
-                    province = parts[0]
-                    city = parts[1]
-                    dropdown_data['provinces'].add(province)
-                    dropdown_data['cities'].add(city)
-                else:
-                    dropdown_data['provinces'].add(place_where1)
+
+            # 시티 데이터 수정
+            city_data = Place.objects.values_list('City', flat=True).distinct()
+            splitted_cities = [City.split()[0] if City else "" for City in city_data]  # 스플릿하여 0번 인덱스만 추출
+            dropdown_data['cities'].update(splitted_cities)
 
             # 직렬화된 데이터와 드롭다운 데이터를 합쳐 응답합니다.
             response_data = {

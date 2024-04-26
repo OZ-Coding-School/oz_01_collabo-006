@@ -44,7 +44,7 @@ COPY . /app/
 
 
 # 컨테이너에서 실행할 명령을 설정합니다.
-CMD ["run.sh"]
+CMD ["./run.sh"]
 
 
 
