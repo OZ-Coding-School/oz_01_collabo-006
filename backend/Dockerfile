@@ -42,6 +42,9 @@ RUN poetry add psycopg2-binary
 # 소스 코드를 복사합니다.
 COPY . /app/
 
+# run.sh 파일에 실행 권한 부여
+RUN chmod +x run.sh
+
 
 # 컨테이너에서 실행할 명령을 설정합니다.
 CMD ["./run.sh"]

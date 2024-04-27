@@ -1,6 +1,16 @@
 from django.db import models
 from common.models import CommonModel
+from django.core.exceptions import ValidationError
+
 # Create your models here.
+
+class place_Images(models.Model):
+  # place
+  place = models.ForeignKey('Place', verbose_name='시설 사진', on_delete=models.CASCADE)
+  # 시설사진
+  place_img = models.ImageField(
+      "시설_이미지", upload_to='place/', blank=True, null=True
+  )
 class Place(CommonModel):
   id = models.AutoField(primary_key=True)
   
@@ -67,10 +77,10 @@ class Place(CommonModel):
   # 오시는길
   how_to_go = models.TextField(null=True, blank=True)
 
-  # # 시설사진
-  # place_img = models.ImageField(
-  #     "시설_이미지", upload_to='place/', blank=True, null=True
-  # )
+  # 시설 대표 사진
+  thumbnail= models.ImageField(
+      "시설_이미지", upload_to='place/thumbnail/', blank=True, null=True, default='place/thumbnail/default_pette.png',
+  )
 
   # 하고싶은말
   place_comment = models.TextField(null=True, blank=True)
@@ -93,17 +103,17 @@ class Place(CommonModel):
   def reviews(self):
     return self.review_manage.all()
   
+  def set_thumbnail(self, image_id):
+    try:
+      image = place_Images.objects.get(id=image_id)
+      self.thumbnail = image.place_img
+      self.save()
+    except place_Images.DoesNotExist:
+      raise ValidationError("해당 이미지가 존재하지 않습니다.")
   
   # class Meta:
   #   app_label = 'categories'
     
-class place_Images(models.Model):
-  # place
-  place = models.ForeignKey('Place', verbose_name='시설 사진', on_delete=models.CASCADE)
-  # 시설사진
-  place_img = models.ImageField(
-      "시설_이미지", upload_to='place/', blank=True, null=True
-  )
   
   # class Meta:
   #   app_label = 'categories'

@@ -72,13 +72,13 @@ class SearchAPIView(APIView):
             # 드롭다운으로 선택된 값들에 따라 필터링합니다.
             # province와 city로 필터링합니다.
             if province:
-                places = places.filter(Province__contains=province)
+                places = places.filter(Province__contains=province) # 나중에 Province__exact 로 수정하기
             if city:
                 places = places.filter(City__startswith=city)
 
             # 나머지 필터링 조건들을 적용합니다.
             if Category2:
-                places = places.filter(Category2__contains=Category2)
+                places = places.filter(Category2__contains=Category2) # 나중에 Category2__exact 로 수정하기
             if Dog_Size:
                 places = places.filter(Dog_Size__contains=Dog_Size)
 
@@ -97,15 +97,22 @@ class SearchAPIView(APIView):
                 'provinces': Place.objects.values_list('Province', flat=True).distinct(),
                 'cities': set(),
                 'categories': Place.objects.values_list('Category2', flat=True).distinct(),
-                'dog_sizes': Place.objects.values_list('Dog_Size', flat=True).distinct()
+                # 'dog_sizes': Place.objects.values_list('Dog_Size', flat=True).distinct()
             }
+            
+
+            # 사용자가 선택한 Province
+            selected_province = request.GET.get('province', '')
 
 
             # 시티 데이터 수정
-            city_data = Place.objects.values_list('City', flat=True).distinct()
+            city_data = Place.objects.filter(Province__contains=selected_province).values_list('City', flat=True).distinct()
+            # city_data = Place.objects.values_list('City', flat=True).distinct()
             splitted_cities = [City.split()[0] if City else "" for City in city_data]  # 스플릿하여 0번 인덱스만 추출
             dropdown_data['cities'].update(splitted_cities)
-
+            
+            dropdown_data_tuples = tuple((key, value) for key, value in dropdown_data.items())
+            
             # 직렬화된 데이터와 드롭다운 데이터를 합쳐 응답합니다.
             response_data = {
                 'places': serializer.data,
