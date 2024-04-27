@@ -101,17 +101,40 @@ class SearchAPIView(APIView):
             }
             
 
+
             # 사용자가 선택한 Province
-            selected_province = request.GET.get('province', '')
+            # selected_province = request.GET.get('province', '')
 
 
-            # 시티 데이터 수정
-            city_data = Place.objects.filter(Province__contains=selected_province).values_list('City', flat=True).distinct()
-            # city_data = Place.objects.values_list('City', flat=True).distinct()
-            splitted_cities = [City.split()[0] if City else "" for City in city_data]  # 스플릿하여 0번 인덱스만 추출
-            dropdown_data['cities'].update(splitted_cities)
+            # # 시티 데이터 수정
+            # city_data = Place.objects.filter(Province__contains=selected_province).values_list('City', flat=True).distinct()
+            # # city_data = Place.objects.values_list('City', flat=True).distinct()
+            # splitted_cities = [City.split()[0] if City else "" for City in city_data]  # 스플릿하여 0번 인덱스만 추출
+            # dropdown_data['cities'].update(splitted_cities)
             
-            dropdown_data_tuples = tuple((key, value) for key, value in dropdown_data.items())
+            city_data = Place.objects.values('Province', 'City').order_by('Province', 'City')
+
+            # 각 Province에 속하는 City 목록을 저장하기 위한 딕셔너리 생성
+            province_city_dict = {}
+
+            # 시티 데이터를 기반으로 각 Province에 속하는 City를 모아서 저장
+            for item in city_data:
+                province = item['Province']
+                city = item['City'].split()[0] if item['City'] else ""
+                # province = sorted(province_a)
+                # city = sorted(city_a)
+                if province in province_city_dict:
+                    province_city_dict[province].add(city)
+                else:
+                    province_city_dict[province] = {city}
+                    
+            for province, cities in province_city_dict.items():
+                sorted_cities = sorted(cities)
+                province_city_dict[province] = sorted_cities
+                
+            # dropdown_data에 저장
+            dropdown_data['provinces'] = province_city_dict
+
             
             # 직렬화된 데이터와 드롭다운 데이터를 합쳐 응답합니다.
             response_data = {
