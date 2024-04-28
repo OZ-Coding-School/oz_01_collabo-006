@@ -8,53 +8,67 @@ function AuthPage() {
 
     if (isLogin) {
         return (
-            <Form method="post">
-                <LoginFrom isLogin={isLogin} />
-            </Form>
+            // <Form method="post" >
+            <LoginFrom isLogin={isLogin} />
+            // </Form>
         )
     } else {
         return (
-            <Form method="post">
-                <SignupForm isLogin={isLogin} />
-            </Form>
+            // <Form method="post">
+            <SignupForm isLogin={isLogin} />
+            // </Form>
         )
     }
 }
 
 export default AuthPage
 
-// 아래는 보통 이런식으로 로그인을 해결한다 예시.
-export async function action({ request }) {
-    const searchParams = new URL(request.url).searchParams
-    const mode = searchParams.get('mode') || 'login'
+// export async function action({ request }) {
+//     const searchParams = new URL(request.url).searchParams
+//     const mode = searchParams.get('mode') || 'login'
 
-    if (mode !== 'login' && mode !== 'signup') {
-        throw json({ message: '노ㅁㄴㅇㄹㅁㄴㄹㅇ' }, { status: 442 })
-    }
+//     if (mode !== 'login' && mode !== 'signup') {
+//         throw json({ message: '노ㅁㄴㅇㄹㅁㄴㄹㅇ' }, { status: 442 })
+//     }
 
-    const data = request.formData()
-    const authData = {
-        email: data.get('email'),
-        password: data.get('password'),
-    }
+//     const data = request.formData()
 
-    const response = await fetch('http://localhost:5173/' + mode, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(authData),
-    })
+//     let authData
+//     if (mode === 'login') {
+//         authData = {
+//             email: data.get('email'),
+//             password: data.get('password'),
+//         }
+//         console.log(authData)
+//     } else {
+//         authData = {
+//             email: data.get('email'),
+//             password: data.get('password'),
+//             name: data.get('_name'),
+//             size: data.get('dogSize'),
+//         }
+//     }
 
-    if (response.status === 422 || response.status === 401) {
-        return response
-    }
+//     const response = await fetch(
+//         'http://223.130.139.240/api/v1/users/' + mode,
+//         {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify(authData),
+//         }
+//     )
 
-    if (!response.ok) {
-        throw json({ message: '사용자 찾을 수 없음.' }, { status: 500 })
-    }
+//     if (response.status === 422 || response.status === 401) {
+//         return response
+//     }
 
-    // 토큰 받고 관리
+//     if (!response.ok) {
+//         throw json({ message: '사용자 찾을 수 없음.' }, { status: 500 })
+//     }
 
-    return redirect('/')
-}
+//     // 토큰 받고 관리
+
+//     return redirect('/')
+// }

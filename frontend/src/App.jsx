@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import theme from './theme'
 
 import _RootLayout from './components/layout/RootLayout'
-import AuthPage, { action as authAction } from './pages/AuthPage'
+import AuthPage from './pages/AuthPage'
 import DetailPage from './pages/DetailPage'
 import ErrorPage from './pages/ErrorPage'
 import MainPage from './pages/MainPage'
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
             { index: true, element: <MainPage /> },
             { path: 'detail/:id', element: <DetailPage /> },
             { path: 'my', element: <MyPage /> },
-            { path: 'auth', element: <AuthPage />, action: authAction },
+            { path: 'auth', element: <AuthPage /> },
         ],
     },
 ])
