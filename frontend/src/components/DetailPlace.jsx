@@ -8,8 +8,8 @@ import {
     TableCell,
     TableContainer,
     TableRow,
+    useTheme,
 } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 import * as React from 'react'
 import prin from '../../public/images/prin.jpg'
 

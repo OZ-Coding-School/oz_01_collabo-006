@@ -2,11 +2,11 @@ import {
     Avatar,
     Button,
     FormControl,
+    Grid,
     OutlinedInput,
     Paper,
+    useTheme,
 } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
-import { useTheme } from '@mui/material/styles'
 import * as React from 'react'
 // import userData from '../../public/images/user'
 // import instance from '../api/axios'
@@ -24,16 +24,16 @@ const Review = ({ place }) => {
         <>
             <Grid container spacing={1} columns={{ xs: 9, md: 10, lg: 12 }}>
                 {place.review_set.map((item) => (
-                    <Grid xs={9} md={10} lg={12} key={item.id}>
+                    <Grid item xs={9} md={10} lg={12} key={item.id}>
                         <Paper sx={{ p: 2, borderRadius: '15px' }}>
                             <Grid container spacing={1}>
-                                <Grid xs={3} md={1} lg={1}>
+                                <Grid item xs={3} md={1} lg={1}>
                                     {/* 사진없으면 사람모양으로뜸.  */}
                                     <Avatar src={item.img} />
                                 </Grid>
-                                <Grid xs={6} md={9} lg={11}>
+                                <Grid item xs={6} md={9} lg={11}>
                                     <Grid container spacing={1}>
-                                        <Grid xs={12} md={12} lg={12}>
+                                        <Grid item xs={12} md={12} lg={12}>
                                             <h4>{item.user}</h4>
                                             <p>{item.content}</p>
                                         </Grid>
@@ -44,16 +44,16 @@ const Review = ({ place }) => {
                     </Grid>
                 ))}
 
-                <Grid xs={9} md={10} lg={12}>
+                <Grid item xs={9} md={10} lg={12}>
                     <Paper sx={{ p: 2, borderRadius: '15px' }}>
                         <FormControl sx={{ width: '100%' }}>
-                            <Grid xs={9} md={10} lg={12}>
+                            <Grid item xs={9} md={10} lg={12}>
                                 <Grid
                                     container
                                     spacing={1}
                                     columns={{ xs: 9, md: 12, lg: 12 }}
                                 >
-                                    <Grid xs={12} md={12} lg={12}>
+                                    <Grid item xs={12} md={12} lg={12}>
                                         <OutlinedInput
                                             placeholder="리뷰를 입력하세요!"
                                             variant="outlined"
@@ -64,6 +64,7 @@ const Review = ({ place }) => {
                                         />
                                     </Grid>
                                     <Grid
+                                        item
                                         xs={3}
                                         xsOffset={6}
                                         md={2}
