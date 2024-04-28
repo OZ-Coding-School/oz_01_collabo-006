@@ -1,5 +1,4 @@
-import { Card, CardMedia, Pagination } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
+import { Card, CardMedia, Grid, Pagination } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import prin from '../../public/images/prin.jpg'
@@ -109,8 +108,8 @@ const Places = ({ sortBy, filteredItems, filteredCityItems }) => {
 
 export default Places
 
-// import { Card, CardMedia, Pagination } from '@mui/material'
-// import Grid from '@mui/material/Unstable_Grid2'
+// import { Card, CardMedia, Pagination, Grid } from '@mui/material'
+
 // import React, { useState } from 'react'
 // import { Link } from 'react-router-dom'
 // import prin from '../../public/images/prin.jpg'
