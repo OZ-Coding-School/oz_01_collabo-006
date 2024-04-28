@@ -19,7 +19,7 @@ function DetailPage() {
                 setPlace(response.data)
                 console.log('아이디', response.data)
             } catch (error) {
-                console.error('어쩌구에러', error)
+                console.error('어쩌구에러c', error)
             }
         }
         fetchData()
