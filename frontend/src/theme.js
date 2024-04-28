@@ -12,12 +12,20 @@ const theme = createTheme({
         },
     },
     typography: {
-        fontSize: {
-            xs: 16, // 모바일
-            md: 20, // 태블릿
-            lg: 24, // 데스크톱
-        },
+        fontFamily: ['SUIT Variable', 'sans-serif'],
+        // fontSize: {
+        //     xs: 16, // 모바일
+        //     md: 20, // 태블릿
+        //     lg: 24, // 데스크톱
+        // },
     },
+    // components: {
+    //     MuiFormControl: {
+    //         defaultProps: {
+    //             // fontSize 제거
+    //         },
+    //     },
+    // },
 })
 
 export default theme
