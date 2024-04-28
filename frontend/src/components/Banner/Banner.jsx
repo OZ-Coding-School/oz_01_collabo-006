@@ -1,5 +1,5 @@
-import { Box, Card, CardActionArea } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
+import { Box, Card, CardActionArea, Grid } from '@mui/material'
+
 import { useTheme } from '@mui/material/styles'
 import React from 'react'
 import 'swiper/css'
