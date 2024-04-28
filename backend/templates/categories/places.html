@@ -1,8 +1,13 @@
-{% extends 'base.html' %}
-{% block content %}
-<div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
   <h1>Places</h1>
   <div>{{ user.email }}</div>
-  <a href="{% url 'logout' %}">로그아웃</a>
-</div>
-{% endblock %}
+  <a href="/users/logout/">로그아웃</a>
+</body>
+</html>

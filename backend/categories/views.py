@@ -13,6 +13,6 @@ def places(request):
   
   #요청에 포함된 사용자가 로그인하지 않은 경우(AnonymousUser 인 경우)
   if not request.user.is_authenticated:
-    return redirect(request, 'api/v1/users/login/')
+    return redirect(request, '/users/login/')
   
   return render(request, 'categories/places.html')

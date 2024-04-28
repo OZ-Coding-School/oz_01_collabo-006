@@ -22,9 +22,9 @@ from config.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/users/', include('users.urls')),
-    path('api/v1/categories/', include('categories.urls')),
-    path('api/v1/accounts/', include('social.urls')),
+    path('users/', include('users.urls')),
+    path('categories/', include('categories.urls')),
+    path('accounts/', include('social.urls')),
     path('',index,name='home'),
 ] + static(
   # URL의 접두어가 MEDIA_URL일 떄는 정적파일을 돌려준다.

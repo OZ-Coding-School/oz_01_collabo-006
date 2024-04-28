@@ -8,7 +8,7 @@
     {{ form.as_p}}
     <button type="submit">로그인</button>
     <a href="{% provider_login_url 'google' %}">구글 로그인</a>
-    <a href="{% url 'signup' %}" type="button">회원가입</a>
+    <a href="/users/signup/" type="button">회원가입</a>
   </form>
 </div> 
 {% endblock %}

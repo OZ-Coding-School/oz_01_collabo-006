@@ -1,5 +1,3 @@
-## 사용방법
-최초 실행시 어드민페이지에서 소셜 어플리케이션 설정을 해줘야지만 오류가 발생하지 않는다
 
 ### 깃허브액션에서 
  ${HOME} = home/<user>
@@ -9,21 +7,6 @@ docker-compose run --rm web sh -c '장고 명령어'
 이걸 사용하면 내 로컬환경에도 변화가 적용되기 때문에 터미널 방식처럼
 실행할때마다 쓸 필요없이 필요할때 필요한 부분을 사용하면 된다.
 docker-compose run --rm <docker-compose.services_이름> sh -c
-
-모델에 변경이 있으면 해준다(makemigrations/migrate)
-#### 마이그레이션즈
-docker-compose run --rm web sh -c 'python manage.py makemigrations'
-
-#### 마이그레이트
-docker-compose run --rm web sh -c 'python manage.py migrate'
-
-docker-compose down, 혹은 도커 오류가 있었을떄 해준다(createsuperuser/olace_import)
-#### 크리에이트슈퍼유저
-docker-compose run --rm web sh -c 'python manage.py createsuperuser'
-
-#### 플레이스임포트
-docker-compose run --rm web sh -c 'python manage.py place_import'
-
 
 ### 도커 컨테이너 터미널 들어가는 방법
 #### 이 방식은 사용할 일이 적겠지만 알아두면 좋으니 적어두겠습니다.
@@ -45,9 +28,3 @@ python manage.py createsuperuser
 
 터미널 종료는 exit
 
-### on_delete=models. 옵션들
-on_delete=models.SET_NULL, null=True 
-이 옵션은 삭제할 데이터가 참조된 데이터는 그 필드를 NULL로 지정한다.
-
-on_delete=models.PROTECT
-이 옵션은 삭제할 데이터가 참조된 곳이 있다면 삭제되지 않는다.

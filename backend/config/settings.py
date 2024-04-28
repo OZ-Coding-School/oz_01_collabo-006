@@ -31,7 +31,10 @@ SECRET_KEY = 'django-insecure-c+y=iuypxctoi@ld&rb=4(ipjt)a*6aozevla$vxn5fm@i*6@y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']          
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    'localhost'            
+    ]
 
 
 # Application definition
@@ -49,7 +52,6 @@ CUSTOM_USER_APPS = [
     # 디렉토리명만 적어도 사용할수있지만 장고 3.7버전 이후부터는 이렇게 쓰기를 권장한다.
     'users.apps.UsersConfig',
     'categories.apps.CategoriesConfig', 
-    'reviews.apps.ReviewsConfig',
 ]
 
 SOCIAL_LOGIN = [
