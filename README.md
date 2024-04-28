@@ -1,21 +1,3 @@
-# \* 반려 동물 동반 가능 서비스
-
-## \* 팀원
-
-## - BD : 김동원, 이하나
-
-## - FE : 강계령, 권용제, 김민성, 정다올, 김혜민
-
-## - BE : 권혜연, 김하림, 전명환
-
-### 팀장 : 권혜연
-
-### 부팀장 : 강계령
-
-# [프로젝트 팀 디스코드](https://discord.gg/pAJC755x)
-
-# [피그잼 피그마](https://www.figma.com/files/project/218049976/Team-project?fuid=1323823591054840908)
-
 ## 📖 프로젝트 소개
 
 > 🐾반려동물 동반 가능 서비스!<br/>
@@ -49,29 +31,13 @@
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | <img src="https://lh3.googleusercontent.com/_WEmqGBbE04OIWsmijjjMk7eyk2jKBC9qXLFTWJjpWHfcUknRcVfOSA5Xy5QqTILk75qm4EcbgyXNM5h8dtitdmfuQ7Gg7YSR_Hb8GBffFeiEMLx6NYXVPDLA8BwHVUHrfZtHl-yATyXIiJhtdsaOMoMqA=s2048" alt="Login2"> | <img src="https://lh6.googleusercontent.com/wQiDqzndpvTRfIsHy-l3_eCjPDQ0JF28pCmLrDdSFQfR0UTuJHiF_erHsz57FuHFDWbHMnmOLquWxJxqUwjeAy_JnhaOzpjdemsvAzwPQdfK6J-H6vqOj3GwrnpBMs43Gl6BhC_idUh9lVyONEgCdIHMPQ=s2048" alt="CreateUpdateShare"> | <img src="https://lh6.googleusercontent.com/l6hiRBG-gYZpIp_E23PVm4sOBS-W2wFvncoP5bKlZQfU66NRMzxmfdgyJDagDmnqJLwxnJ9P7tu1eBlmOerah9AOx8NcBDLQR1lmLTZ083GR4zr0kBpI9XVdqVHDe571bTYFZ5fnCztg4Yw2JVyv0W-Sug=s2048" alt="ShareList"> |
 
-|                                                                                                        나눔글 이미지 업로드                                                                                                         |                                                                                                            나눔글 댓글                                                                                                            |                                                                                                          나눔 상태 토글                                                                                                          |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://lh6.googleusercontent.com/uQJWChKZY7rtI-IdUgG9AxKSUfEeAUbFu3vnfrEkxDXSYHF7-e2ban3omp9Hn0yjtIh6uyQUC3DY8FXOOTLZEk5oK5t3BhD4WS6_jdJclc-L-zn8iavUnRgtLf0In1yH_C933V2MVtYE6_a40slzphM88A=s2048" alt="UpdateShareImg"> | <img src="https://lh6.googleusercontent.com/gs8HXpN_GGwlXTG9ZXldKc2rIYwqKE3IzQY3r6SYVwmp1M7-0_KJggGrbM0-VY_yL_Gh8V4_1argDczgglGIKjGuteRAFVKNCyK8BtM_Gsarut-Y4K-_1H7_Bj168cxmw1f7zRT9FUVjYnoGl2AG574nIg=s2048" alt="ShareComment"> | <img src="https://lh4.googleusercontent.com/iFbgPqWgK__YmSB8ha53yHTLfU_LtwJNEAf7KCDUxbraZbJhh1vQkAjTMLhaQF24HN2s3oniEsOL75mfiiMV2gRUs0exNptePw0hp0a9Q0Ko3XzfN3l4lPoWY5NP3Eif4KONMmgWQ-kKTYamb2mOiGiMlw=s2048" alt="ShareStatus"> |
-
-|                                                                                                         나눔 게시글 검색                                                                                                         |                                                                                                            요청글 등록                                                                                                             |                                                                                                            요청글 수정                                                                                                             |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://lh4.googleusercontent.com/TBqn1-oJm59EbLQyqSPLZ5_cidaanTljcr1Qq_XTPxcdTzD-IwxHrKL0ZfQhoZrkOVjokRLckca1x-9w8k0me4-6JTHPG6rbwuQ4pkmrgjEpAJZxAMM8HxR5x6vDtiCotwODnUJbo0wYK-Y62U4BTx17Cw=s2048" alt="SearchShare"> | <img src="https://lh4.googleusercontent.com/3od9me49rKBnI9saCG7TuRqlg4RQGb9JX4z8PyXMHfpqW6jF4gLgly_fZympLUsQUzxVBfWeEDIOha2-TyV-6pV_BiIbafOb9AG6vZVAgBomqyfgr8r6I_Xilqyi-p5rTA6q8lJeVqt-en4I1jnEGoK19Q=s2048" alt="CreateRequset"> | <img src="https://lh4.googleusercontent.com/vJ2PSqYwWttmoXqED3pfS8HQxiaL-FSLZAjJa45u3KQ7bqkNbLW9_y8HN5MjURQGTmClDCqnkJxLvxJ5gX6v96iQKuTpmRY2fekNh22LPfuJrah7QgNGe7z6P45e4sZ3bAig0vei49TauuLdwPcAQPGDzg=s2048" alt="UpdateRequest"> |
-
-|                                                                                                             요청글 댓글                                                                                                             |                                                                                                            요청글 검색                                                                                                             |                                                                                                          도서 평점 등록                                                                                                           |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://lh5.googleusercontent.com/ngtbM1TwsYkrv1gAbcs7S61jJtgIKb66IdtppaIvVCT9mbthSK3Q66YBV9EOZ3ipc3SrlahE7OlVw7Bu-nwLeACpUKZ0BzYmoFTZSNPwgC0xVA_pZ69Spq34yk5xfNo7AgTN0FEiTmRVNs0_vXnlfrwUCQ=s2048" alt="RequestComment"> | <img src="https://lh6.googleusercontent.com/AV4lIIXPUjDm9RTAmZSn8vkyJx8Ltiybi5wD6gyrydKw5uXa0EMRK3ysShfVhHLdZYoDSHNbdfEr_pc9yUEDWEwT2cTdf7vDSZcbCKxcy_gDiBjL15ofE94LCoXZu4VuQ5BTkImsh8RzgwL31sSib5VBVg=s2048" alt="SearchRequest"> | <img src="https://lh6.googleusercontent.com/16_o-x4RHI9TU7pypuH0E2dypPuYE2G2jP8VhTxWwiiZuNSVTxqdkprKOigJ2F0okPILkVNd9BnYyKjgEYTH9uKkuEtEm5TBqy9gJOxRli6DP7DRCqORo6o07ym1onjJVsCbOvEIAVSMYL6-oGroAVJyjw=s2048" alt="CreateRating"> |
-
-|                                                                                                      도서 평점 수정 및 삭제                                                                                                      |                                                                                                         마이페이지 1                                                                                                         |                                                                                                         마이페이지2                                                                                                          |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://lh5.googleusercontent.com/KjjwMZ-FrNzlWa0N8IS2iYAr92JgQCMbOFEwZdtScJJwzt5XY70dZII-OyvHUSbWV_7qBNCFc3pslsgcfLX9ZAM54y0F5pRrO4e2EMv8ee1K2FzzieU5ByAn9UhBqB08Fk1pHUaGvRzxGt8HhFh17fongw=s2048" alt="UpateRating"> | <img src="https://lh5.googleusercontent.com/KRfPZ8P2TzvLBeHAcApzzHDn6xbkCYp8Z9sDmWSifQNwQwfC7HAjczd-KHVs5dGbKhi2AO5O3A8wd8mewcze3TKb_yM9y5-PHQVE7axz5HVdWsI1alg2-qatjn7G2c0Y6Fx786KMjoiIULFLpCoQx6HWJA=s2048" alt="MyPage1"> | <img src="https://lh5.googleusercontent.com/eTvLqwjRti-QhqDMWb2gMw692w-qmSipvVOjcXHvVIetlZiBvgbzcDakCP2Gmf-kGNx5vuZ5fm_3ExzA3_rD3ux4DaDK5xaP90LgDmK6fRYPdGdolg8dJrdh8fKT7a4H0odAYlK9t4-iLxjtsbinTnz0ow=s2048" alt="MyPage2"> |
-
 ---
 
 ## 🧰 사용 스택
 
 ### :wrench: System Architecture
 
-<img src="https://user-images.githubusercontent.com/90237119/215304129-d8006105-cf1c-49c7-a819-4f819dfac523.png"/>
+![System Architecture](https://github.com/OZ-Coding-School/oz_01_collabo-006/assets/153696250/a5b47194-8958-46da-a4bf-abe429e9f27b)
 
 ### FE
 
@@ -88,8 +54,8 @@
   <br>
 
   <img src="https://img.shields.io/badge/axios-6935D3?style=for-the-badge&logo=axios&logoColor=white">
-  <img src="https://img.shields.io/badge/styled Components-E9568E?style=for-the-badge&logo=styledComponents&logoColor=white">
-  <img src="https://img.shields.io/badge/redux toolkit-66459B?style=for-the-badge&logo=redux&logoColor=white">
+  <img src="https://img.shields.io/badge/mui-007FFF?style=for-the-badge&logo=mui&logoColor=white">
+  <img src="https://img.shields.io/badge/redux vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
   <img src="https://img.shields.io/badge/npm-ED1C24?style=for-the-badge&logo=npm&logoColor=white">
   
   <br>
@@ -98,21 +64,17 @@
 ### BE
 
 <div align=center> 
-  <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white">
-  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
-  <img src="https://img.shields.io/badge/redis-D0271D?style=for-the-badge&logo=redis&logoColor=white">
+  <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
+  <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> 
+  <img src="https://img.shields.io/badge/postgresql-4169E1?style=for-the-badge&logo=postgresql&logoColor=white">
   <br>
 
-  <img src="https://img.shields.io/badge/spring Boot-6DB33F?style=for-the-badge&logo=springBoot&logoColor=white">
-  <img src="https://img.shields.io/badge/fly way-ED1C24?style=for-the-badge&logo=flyway&logoColor=white">
-  <img src="https://img.shields.io/badge/linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"> 
-  <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+  <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/navercloud-03C75A?style=for-the-badge&logo=naver&logoColor=white">
+  <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white">
+<img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black">
   <br>
 
-  <img src="https://img.shields.io/badge/nginx-006272?style=for-the-badge&logo=nginx&logoColor=green">
-  <img src="https://img.shields.io/badge/spring security-6DB33F?style=for-the-badge&logo=springSecurity&logoColor=white">
-  <img src="https://img.shields.io/badge/query dsl-008FC7?style=for-the-badge&logo=queryDsl&logoColor=white">
-  <br>
 </div>
 
 ---
@@ -121,15 +83,15 @@
 
 ### FE
 
-| <a href=https://github.com/><img src="https://avatars.githubusercontent.com/u/93540726?v=4" width=100px/><br/><sub><b>@GithubID</b></sub></a><br/> | <a href=https://github.com/><img src="https://avatars.githubusercontent.com/u/93540726?v=4" width=100px/><br/><sub><b>@GithubID</b></sub></a><br/> | <a href=https://github.com/><img src="https://avatars.githubusercontent.com/u/93540726?v=4" width=100px/><br/><sub><b>@GithubID</b></sub></a><br/> | <a href=https://github.com/><img src="https://avatars.githubusercontent.com/u/111436967?v=4" width=100px/><br/><sub><b>@GithubID</b></sub></a><br/> |
-| :------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                                                                       홍길동                                                                       |                                                                        김00                                                                        |                                                                        강00                                                                        |                                                                        송00                                                                         |
+| <a href=https://github.com/burgerk98/><img src="https://avatars.githubusercontent.com/u/153696250?v=4" width=100px/><br/><sub><b>@burgerK98</b></sub></a><br/> | <a href=https://github.com/sonsodockje/><img src="https://avatars.githubusercontent.com/u/121798650?v=4" width=100px/><br/><sub><b>@sonsodockje</b></sub></a><br/> | <a href=https://github.com/rnjsdydwp9/><img src="https://avatars.githubusercontent.com/u/153696287?v=4" width=100px/><br/><sub><b>@rnjsdywp9</b></sub></a><br/> |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                             강계령                                                                             |                                                                               김혜민                                                                               |                                                                             권용제                                                                              |
 
 ### BE
 
-| <a href=https://github.com/><img src="https://avatars.githubusercontent.com/u/85716720?v=4" width=100px/><br/><sub><b>@GithubID</b></sub></a><br/> | <a href=https://github.com/orioncsy><img src="https://avatars.githubusercontent.com/u/90237119?v=4" width=100px/><br/><sub><b>@GithubID</b></sub></a><br/> | <a href=https://github.com/><img src="https://avatars.githubusercontent.com/u/77969043?v=4" width=100px/><br/><sub><b>@GithubID</b></sub></a><br/> |
-| :------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                                                                        박00                                                                        |                                                                            이00                                                                            |                                                                        한00                                                                        |
+| <a href=https://github.com/friedrice93/><img src="https://avatars.githubusercontent.com/u/153698085?v=4" width=100px/><br/><sub><b>@friedrice93</b></sub></a><br/> | <a href=https://github.com/JMHman><img src="https://avatars.githubusercontent.com/u/153697827?v=4" width=100px/><br/><sub><b>@JMHman</b></sub></a><br/> | <a href=https://github.com/hari1010haley/><img src="https://avatars.githubusercontent.com/u/153698072?v=4" width=100px/><br/><sub><b>@hari1010haley</b></sub></a><br/> |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                               권혜연                                                                               |                                                                         전명환                                                                          |                                                                                 김하림                                                                                 |
 
 ## 📑 프로젝트 규칙
 
@@ -145,24 +107,26 @@
 > 2. 커밋 메시지 내용 작성
 > 3. 내용 뒤에 이슈 (#이슈 번호)와 같이 작성하여 이슈 연결
 
-> | 접두사     | 설명                           |
-> | ---------- | ------------------------------ |
-> | Feat :     | 새로운 기능 구현               |
-> | Add :      | 에셋 파일 추가                 |
-> | Fix :      | 버그 수정                      |
-> | Docs :     | 문서 추가 및 수정              |
-> | Style :    | 스타일링 작업                  |
-> | Refactor : | 코드 리팩토링 (동작 변경 없음) |
-> | Test :     | 테스트                         |
-> | Deploy :   | 배포                           |
-> | Conf :     | 빌드, 환경 설정                |
-> | Chore :    | 기타 작업                      |
+> | 접두사     | 설명                          |
+> | ---------- | ----------------------------- |
+> | Feat :     | 기능완성                      |
+> | Update :   | 업데이트                      |
+> | Bug :      | 버그 발견 후 해결 못하고 커밋 |
+> | Fix :      | 버그 해결                     |
+> | Update :   | 오타 수정                     |
+> | Docs :     | 리드미 작성                   |
+> | Style :    | 스타일링, ui, 레이아웃        |
+> | Test :     | 테스트                        |
+> | Refactor : | 리팩                          |
+> | Deploy :   | 배포                          |
+> | Config :   | 설정                          |
 
 ### Pull Request
 
 > ### Title
 >
-> - 제목은 '[Feat] 홈 페이지 구현'과 같이 작성합니다.
+> - Style 레이아웃 개발(엔터) 본문 작성
+>   ~다.<br/> 로 안끝내고 짧고 정확하게 작성
 
 > ### PR Type
 >
@@ -209,17 +173,17 @@
 
 ### Communication Rules
 
-> - Discord 활용
+> - Slack 활용
 > - 정기 회의
 
 ## :clipboard: Documents
 
-> [📜 API 명세서 예시](https://docs.google.com/spreadsheets/d/1XODUQC8tFNQjoZS7I4rcyaQpin6WzuuruZIVmdMwmeU/edit#gid=0)
+> [📜 API 명세서](https://docs.google.com/spreadsheets/d/1R4AnOO9jbN9v4sjQSEqZ_6qfg5pxGzKv6oeDscdptvw/edit#gid=617858513)
 >
-> [📜 요구사항 정의서 예시](https://docs.google.com/spreadsheets/d/1BaDEpeytl_rQ_vckIXGJtCL4NcmPvemCSnXJnhckzLU/edit?usp=sharing)
+> [📜 요구사항 정의서](https://docs.google.com/spreadsheets/d/1rJt7wZA9ztr43o4Cxrl72BY1EK-NTIbgyyvRiYlw6fI/edit#gid=0)
 >
-> [📜 ERD 예시](https://drive.google.com/file/d/1jvaFIwfOkKLRriFZxzOwJTE-FJ7H3IFe/view?usp=sharing)
+> [📜 ERD](https://www.erdcloud.com/d/or9Mo8jJiiGdGC6EA)
 >
-> [📜 테이블 명세서 예시](https://docs.google.com/spreadsheets/d/13y8xi67UQYCzX1xgSORtlA1_vXRFq6OQuVDG2o7fhO0/edit#gid=0)
+> [📜 테이블 명세서](https://docs.google.com/spreadsheets/d/1p8lfwaGsKOd25dqSPQ8zEg9UwGYrOZHmBohxC7GWOoM/edit#gid=0)
 >
-> [📜 화면 정의서 예시](https://docs.google.com/spreadsheets/d/1vud5xV8rB9Y6akOIma49hSzdZsoj8DVG0-fYE4NdP_g/edit?usp=sharing)
+> [📜 화면 정의서](https://docs.google.com/spreadsheets/d/1k67rhaTOTAVzgYfVOZM260sAmIO5Hxz-7oMaN7tB9Mc/edit#gid=1184401130)
