@@ -33,6 +33,8 @@ const MainModal = ({ isOpen, onClose }) => {
         onClose()
     }
 
+    const filteredDogsData = dogsData.filter((dog) => dog.id !== 5)
+
     return (
         <>
             {modalVisible && (
@@ -55,7 +57,7 @@ const MainModal = ({ isOpen, onClose }) => {
                             제공받으세요!
                         </p>
                         <div className="dog-wrap">
-                            {dogsData.map((dog) => (
+                            {filteredDogsData.map((dog) => (
                                 <label key={dog.id}>
                                     <input
                                         className="main-modal-radio"
