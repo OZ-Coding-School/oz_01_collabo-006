@@ -10,21 +10,35 @@ import FormControl from '@mui/material/FormControl'
 import { useState } from 'react'
 import axios from 'axios'
 function SignupForm({ isLogin }) {
-    const [dog, setDge] = useState('')
+    const [dogs_size, setDge] = useState('')
     const handleChange = (event) => {
         setDge(event.target.value)
     }
     const [email, setEmail] = useState('')
-    const [name, setName] = useState('')
+    const [last_name, setLast_name] = useState('')
     const [password, setPassword] = useState('')
     const [password_confirm, setPassword2] = useState('')
+
+    function isValidEmail(email) {
+        var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+        return emailRegex.test(email)
+    }
+
+    function isSame(password, password_confirm) {
+        if (password === password_confirm) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             const response = await axios.post(
                 'http://223.130.153.84/api/v1/users/signup/',
-                { email, password, dog, name, password_confirm },
+                { email, password, dogs_size, last_name, password_confirm },
                 {
                     headers: {
                         accept: 'application/json',
@@ -64,8 +78,8 @@ function SignupForm({ isLogin }) {
                         name="_name"
                         variant="outlined"
                         type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={last_name}
+                        onChange={(e) => setLast_name(e.target.value)}
                     />
                     <TextField
                         fullWidth
@@ -77,6 +91,19 @@ function SignupForm({ isLogin }) {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
+                    {!isValidEmail(email) && email.length ? (
+                        <p
+                            style={{
+                                fontSize: '12px',
+                                color: 'red',
+                                marginLeft: '5px',
+                                marginBottom: '10px',
+                                marginTop: '-10px',
+                            }}
+                        >
+                            이메일 형식이 아닙니다.
+                        </p>
+                    ) : null}
                     <TextField
                         fullWidth
                         id="outlined-basic"
@@ -87,6 +114,19 @@ function SignupForm({ isLogin }) {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    {password.length < 8 && password.length ? (
+                        <p
+                            style={{
+                                fontSize: '12px',
+                                color: 'red',
+                                marginLeft: '5px',
+                                marginBottom: '10px',
+                                marginTop: '-10px',
+                            }}
+                        >
+                            8자리 이상 입력해주세요.
+                        </p>
+                    ) : null}
                     <TextField
                         fullWidth
                         id="outlined-basic"
@@ -97,6 +137,21 @@ function SignupForm({ isLogin }) {
                         value={password_confirm}
                         onChange={(e) => setPassword2(e.target.value)}
                     />
+                    {!isSame(password, password_confirm) &&
+                    password_confirm.length ? (
+                        <p
+                            style={{
+                                fontSize: '12px',
+                                color: 'red',
+                                marginLeft: '5px',
+                                marginBottom: '10px',
+                                marginTop: '-10px',
+                            }}
+                        >
+                            비밀번호가 일치하지 않습니다.
+                        </p>
+                    ) : null}
+
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">
                             멍돌이 사이즈
@@ -104,10 +159,9 @@ function SignupForm({ isLogin }) {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={dog}
+                            value={dogs_size}
                             label="멍돌이 사이즈"
                             onChange={handleChange}
-                            name="dogSize"
                         >
                             <MenuItem value={1}>소형견</MenuItem>
                             <MenuItem value={2}>중형견</MenuItem>
@@ -115,19 +169,39 @@ function SignupForm({ isLogin }) {
                             <MenuItem value={4}>맹견</MenuItem>
                         </Select>
                     </FormControl>
-                    <Button
-                        variant="contained"
-                        disableElevation
-                        type="submit"
-                        size="large"
-                        style={{
-                            backgroundColor: '#FFC145',
-                            height: '50px',
-                        }}
-                        onClick={handleSubmit}
-                    >
-                        가입
-                    </Button>
+                    {isValidEmail(email) &&
+                    isSame(password, password_confirm) &&
+                    last_name &&
+                    dogs_size ? (
+                        <Button
+                            variant="contained"
+                            disableElevation
+                            type="submit"
+                            size="large"
+                            style={{
+                                backgroundColor: '#FFC145',
+                                height: '50px',
+                            }}
+                            onClick={handleSubmit}
+                        >
+                            가입
+                        </Button>
+                    ) : (
+                        <Button
+                            disabled
+                            variant="contained"
+                            disableElevation
+                            type="submit"
+                            size="large"
+                            style={{
+                                backgroundColor: '#a7a7a7',
+                                height: '50px',
+                            }}
+                            onClick={handleSubmit}
+                        >
+                            가입
+                        </Button>
+                    )}
                 </Box>
             </form>
             <div>

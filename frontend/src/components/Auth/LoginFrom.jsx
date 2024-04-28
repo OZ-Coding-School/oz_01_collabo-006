@@ -81,7 +81,7 @@ function LoginFrom({ isLogin }) {
                     onChange={(e) => setEmail(e.target.value)}
                 />
 
-                {isValidEmail(email) ? null : (
+                {!isValidEmail(email) && email.length ? (
                     <p
                         style={{
                             fontSize: '12px',
@@ -93,7 +93,7 @@ function LoginFrom({ isLogin }) {
                     >
                         이메일 형식이 아닙니다.
                     </p>
-                )}
+                ) : null}
                 <FormControl variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">
                         비밀번호

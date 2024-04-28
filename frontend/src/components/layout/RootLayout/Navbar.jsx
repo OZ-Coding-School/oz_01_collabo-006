@@ -9,17 +9,14 @@ import { Link } from 'react-router-dom'
 import navLogo from '/images/nav_logo.png'
 import useLoginStore from '../../../store/login'
 
-
 export const _Navbar = () => {
     const { isLogined, setIsLogined } = useLoginStore((state) => state)
 
     const handleLogoutUser = () => {
         setIsLogined(false)
-        console.log(isLogined);
+        console.log(isLogined)
         localStorage.removeItem('login_state')
-
     }
-
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -49,7 +46,26 @@ export const _Navbar = () => {
                         </Typography>
                         <Box>
                             {isLogined ? (
-                              
+                                <Box
+                                    component="section"
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        gap: 1,
+                                    }}
+                                >
+                                    <Link to={'my'}>
+                                        <Avatar
+                                            alt="Remy Sharp"
+                                            src="images/nav_logo.png"
+                                            sx={{
+                                                width: 36,
+                                                height: 36,
+                                                bgcolor: green[500],
+                                            }}
+                                        />
+                                    </Link>
                                     <Button
                                         style={{
                                             backgroundColor: '#ffc145',
@@ -63,27 +79,9 @@ export const _Navbar = () => {
                                     >
                                         로그아웃
                                     </Button>
-                             
+                                </Box>
                             ) : (
-                                <Box
-                                    component="section"
-                                    sx={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        alignItems: 'center',
-                                        gap: 1,
-                                    }}
-                                >
-                                    <Avatar
-                                        alt="Remy Sharp"
-                                        src="images/nav_logo.png"
-                                        sx={{
-                                            width: 36,
-                                            height: 36,
-                                            bgcolor: green[500],
-                                        }}
-                                    />
-                                      <Link to="/auth?mode=login">
+                                <Link to="auth?mode=login">
                                     <Button
                                         style={{
                                             backgroundColor: '#ffc145',
@@ -92,12 +90,10 @@ export const _Navbar = () => {
                                         disableElevation
                                         variant="contained"
                                         size="medium"
-                                 
                                     >
                                         로그인
                                     </Button>
-                                    </Link>
-                                </Box>
+                                </Link>
                             )}
                         </Box>
                     </Toolbar>
