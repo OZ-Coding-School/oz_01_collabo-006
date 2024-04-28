@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = 'Import place data from CSV'
 
     def handle(self, *args, **kwargs):
-        csv_file = 'categories/management/commands/place_data2.csv'  # CSV 파일 경로를 정확히 지정하세요
+        csv_file = 'categories/management/commands/place_data3.csv'  # CSV 파일 경로를 정확히 지정하세요
 
         # CSV 파일을 읽고 데이터베이스에 저장합니다
         with open(csv_file, 'r', encoding='utf-8') as file:
@@ -15,7 +15,7 @@ class Command(BaseCommand):
                 place = Place.objects.create(
                     Place_Name=row['시설명'],
                     Category1=row['카테고리1'],
-                    Category2=row['카테고리2'],
+                    Category2=row['카테고리3'],
                     Latitude=row['위도'],
                     Longitude=row['경도'],
                     Province=row['시도 명칭'],

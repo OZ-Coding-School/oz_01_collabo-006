@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Place, place_Images
+from users.models import Dog
 
 from django.core.paginator import Paginator
 # viewsets 사용을 위한 추가
@@ -63,8 +64,8 @@ class SearchAPIView(APIView):
             places = Place.objects.all()
             province = request.GET.get('province',None)
             city = request.GET.get('city',None)
-            Category2 = request.GET.get('Category2', None)
-            Dog_Size = request.GET.get('Dog_Size', None)
+            category2 = request.GET.get('category2', None)
+            dog_size = request.GET.get('dog_size', None)
 
             # 시설명 검색어를 쿼리 파라미터에서 가져옵니다.
             search_query = request.GET.get('search', None)
@@ -77,10 +78,51 @@ class SearchAPIView(APIView):
                 places = places.filter(City__startswith=city)
 
             # 나머지 필터링 조건들을 적용합니다.
-            if Category2:
-                places = places.filter(Category2__contains=Category2) # 나중에 Category2__exact 로 수정하기
-            if Dog_Size:
-                places = places.filter(Dog_Size__contains=Dog_Size)
+            if category2:
+                places = places.filter(Category2__contains=category2) # 나중에 Category2__exact 로 수정하기
+            # if dog_size:
+            #     places = places.filter(Dog_Size__contains=dog_size)
+
+            from .util import filter_places_by_dog_size
+            
+            filtered_places = filter_places_by_dog_size(places, dog_size)
+            
+            # import re
+            # # 각 인스턴스에서 Dog_Size 속성을 가져와서 리스트에 저장합니다.
+            # place_dog = [place.Dog_Size for place in places]
+            # numbers = [int(re.search(r'\d+', size).group()) for size in place_dog_sizes if re.search(r'\d+', size)]
+
+            # # SearchAPIView 내의 get 메서드 내부에 해당하는 부분
+            # if dog_size:
+            #     # Dog_Size 필드에서 해당하는 문자열을 포함하는 데이터를 찾습니다.
+            #     dog = Dog.objects.filter(sizes__contains=dog_size).first()
+
+            #     # 검색된 견종이 없는 경우
+            #     if not dog:
+            #         # 적절한 에러 처리를 수행합니다.
+            #         return Response({"error": "검색된 견종이 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+
+            #     min_weight = dog.min_weight
+            #     places = places.filter(Q(Dog_Size__contains=dog_size) | (Q(min_weight__gte=min_weight)))
+                # Dog_Size 문자열에서 숫자만 추출합니다.
+                # numbers = re.findall(r'\d+', dog_size)
+
+                # # 숫자가 포함된 데이터가 없는 경우
+                # if not numbers:
+                #     # 적절한 에러 처리를 수행합니다.
+                #     return Response({"error": "검색된 데이터에 숫자가 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
+
+                # # 추출된 숫자를 정렬하여 최소값과 최대값을 확인합니다.
+                # min_weight = min(map(int, numbers))
+                # max_weight = max(map(int, numbers))
+                # min_weight = dog.min_weight
+                # max_weight = dog.max_weight
+
+                # 최소 무게보다 크거나 같고, 최대 무게보다 작은 데이터를 필터링합니다.
+                # places = places.filter(Q(Dog_Size__contains=dog_size) | (Q(min_weight__gte=min_weight))
+
+            #     # 견종에 따른 장소 필터링
+            #     places = places.filter(dog__in=dog)
 
             # 검색어가 주어진 경우, 시설명에 검색어가 포함된 장소를 필터링합니다.
             if search_query:
@@ -96,7 +138,7 @@ class SearchAPIView(APIView):
             dropdown_data = {
                 'provinces': Place.objects.values_list('Province', flat=True).distinct(),
                 'cities': set(),
-                'categories': Place.objects.values_list('Category2', flat=True).distinct(),
+                'categories': Place.objects.values_list('Category2', flat=True).distinct().order_by(),
                 # 'dog_sizes': Place.objects.values_list('Dog_Size', flat=True).distinct()
             }
             

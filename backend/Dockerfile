@@ -43,7 +43,6 @@ RUN poetry add psycopg2-binary
 COPY . /app/
 
 # run.sh 파일에 실행 권한 부여
-RUN chmod +x run.sh
 
 
 # 컨테이너에서 실행할 명령을 설정합니다.

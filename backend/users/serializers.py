@@ -1,7 +1,7 @@
 import re
 from rest_framework.exceptions import ParseError, ValidationError
 from rest_framework import serializers 
-from .models import User
+from .models import User, Dog
 from django.contrib.auth.hashers import make_password
 
 
@@ -20,8 +20,18 @@ from django.contrib.auth.hashers import make_password
 #         'short_description',
 #     )
 
+class DogSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Dog
+    fields = (
+      "id",
+      "sizes",
+      "min_weight",
+      "max_weight",
+  )
 
 class MypageSerializer(serializers.ModelSerializer):
+  dogs_size = DogSerializer()
   class Meta:
     model = User
     fields = (
