@@ -1,4 +1,3 @@
-import useLoginStore from '@/store/login'
 import { Button, Container } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Avatar from '@mui/material/Avatar'
@@ -10,18 +9,18 @@ import { Link } from 'react-router-dom'
 import navLogo from '/images/nav_logo.png'
 
 export const _Navbar = () => {
-    const { isLogined, setIsLogined } = useLoginStore((state) => state)
+    // const { isLogined, setIsLogined } = useLoginStore((state) => state)
 
-    const handleLogoutUser = () => {
-        setIsLogined(false)
-        localStorage.removeItem('key')
-    }
+    // const handleLogoutUser = () => {
+    //     setIsLogined(false)
+    //     localStorage.removeItem('key')
+    // }
 
-    const handleLoginModal = () => {
-        alert('로그인 모달창 오픈, 임시로 로그인 했다고 치겠다. ')
-        setIsLogined(true)
-        localStorage.setItem('key', 'token')
-    }
+    // const handleLoginModal = () => {
+    //     alert('로그인 모달창 오픈, 임시로 로그인 했다고 치겠다. ')
+    //     setIsLogined(true)
+    //     localStorage.setItem('key', 'token')
+    // }
 
     // const onLoginSubmit = async (e) => {
     //     e.preventDefault()
@@ -35,6 +34,11 @@ export const _Navbar = () => {
     //     const getToken = localStorage.getItem('key')
     //     setIsLogined(true)
     // }
+
+    const isLogedIn = localStorage.getItem('access')
+    const handleLogOut = () => {
+        localStorage.removeItem('access')
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -63,7 +67,7 @@ export const _Navbar = () => {
                             {/* <Weather /> */}
                         </Typography>
                         <Box>
-                            {isLogined === false ? (
+                            {isLogedIn ? (
                                 <Link to="/auth?mode=login">
                                     <Button
                                         style={{
@@ -74,8 +78,9 @@ export const _Navbar = () => {
                                         variant="contained"
                                         size="medium"
                                         // onClick={handleLoginModal}
+                                        onClick={handleLogOut}
                                     >
-                                        로그인
+                                        로그아웃
                                     </Button>
                                 </Link>
                             ) : (
@@ -105,9 +110,9 @@ export const _Navbar = () => {
                                         disableElevation
                                         variant="contained"
                                         size="medium"
-                                        onClick={handleLogoutUser}
+                                        // onClick={handleLogoutUser}
                                     >
-                                        로그아웃
+                                        로그인
                                     </Button>
                                 </Box>
                             )}
