@@ -23,7 +23,7 @@ function SignupForm({ isLogin }) {
         e.preventDefault()
         try {
             const response = await axios.post(
-                'http://175.45.192.12/api/v1/users/signup/',
+                'http://223.130.153.84/api/v1/users/signup/',
                 { email, password, dog, name, password_confirm },
                 {
                     headers: {
