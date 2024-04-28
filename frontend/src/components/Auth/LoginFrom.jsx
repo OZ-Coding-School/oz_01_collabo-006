@@ -11,7 +11,7 @@ function LoginFrom({ isLogin }) {
     const [password, setPassword] = useState('');
 
     const handleNaverLogin = () => {
-        window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=vpjcoqrRYMVgVTpRWfms&http://localhost:5173/auth?mode=login';
+        window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=8aEOJLOZ8gGmnkpScnOS&redirect_uri=http://localhost:5173/auth?mode=login';
     };
 
     const handleSubmit = async (e) => {
@@ -88,5 +88,6 @@ function LoginFrom({ isLogin }) {
         </Box>
     );
 }
+;
 
 export default LoginFrom;
