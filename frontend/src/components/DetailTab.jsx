@@ -1,5 +1,4 @@
-import { Box, Tab, Tabs, Typography } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { Box, Tab, Tabs, Typography, useTheme } from '@mui/material'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import Review from './Review'

@@ -7,11 +7,10 @@ import {
     MenuItem,
     Paper,
     Select,
+    useTheme,
 } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 import React, { useEffect, useState } from 'react'
 import dogsData from '../../public/images/dogs'
-// import placesData from '../../public/images/places'
 import instance from '../api/axios'
 import useStore from '../store/mainModal'
 
@@ -127,7 +126,7 @@ const FilterNav = ({
                     columns={{ xs: 10, md: 8, lg: 8 }}
                     style={{ display: 'flex', justifyContent: 'space-between' }}
                 >
-                    <Grid item xs={3} md={2.4} lg={2.4}>
+                    <Grid item xs={1.5} md={1.2} lg={1.2}>
                         <FormControl
                             sx={{
                                 // marginRight: { xs: 1, md: 2, lg: 2 },
@@ -135,93 +134,87 @@ const FilterNav = ({
                                 marginBottom: 1,
                                 marginLeft: 0,
                                 marginRight: 0,
-                                display: 'flex',
-                                justifyContent: 'space-between',
 
                                 // minWidth: 60,
                             }}
                             size="small"
                         >
-                            <Grid
-                                container
-                                spacing={2}
-                                columns={{ xs: 10, md: 8, lg: 8 }}
+                            <Select
+                                sx={{
+                                    fontSize: {
+                                        lg: 16,
+                                        md: 16,
+                                        xs: 12,
+                                    },
+                                }}
+                                value={provinces}
+                                onChange={handleProvincesChange}
+                                displayEmpty
+                                inputProps={{
+                                    'aria-label': 'Without label',
+                                }}
+                                input={<InputBase sx={{ border: 'none' }} />}
                             >
-                                <Grid item xs={5} md={4} lg={4}>
-                                    <Select
-                                        sx={{
-                                            fontSize: {
-                                                lg: 16,
-                                                md: 16,
-                                                xs: 12,
-                                            },
-                                        }}
-                                        value={provinces}
-                                        onChange={handleProvincesChange}
-                                        displayEmpty
-                                        inputProps={{
-                                            'aria-label': 'Without label',
-                                        }}
-                                        input={
-                                            <InputBase
-                                                sx={{ border: 'none' }}
-                                            />
-                                        }
-                                    >
-                                        <MenuItem value="">
-                                            <p>시/도</p>
+                                <MenuItem value="">
+                                    <p>시/도</p>
+                                </MenuItem>
+                                {items.provinces &&
+                                    Object.keys(items.provinces).map(
+                                        (province) => (
+                                            <MenuItem
+                                                key={province}
+                                                value={province}
+                                            >
+                                                {province}
+                                            </MenuItem>
+                                        )
+                                    )}
+                            </Select>
+                        </FormControl>
+                    </Grid>
+
+                    <Grid item xs={1.5} md={1.2} lg={1.2}>
+                        <FormControl
+                            sx={{
+                                // marginRight: { xs: 1, md: 2, lg: 2 },
+                                marginTop: 1,
+                                marginBottom: 1,
+                                marginLeft: 0,
+                                marginRight: 0,
+
+                                // minWidth: 60,
+                            }}
+                            size="small"
+                        >
+                            <Select
+                                sx={{
+                                    fontSize: {
+                                        lg: 16,
+                                        md: 16,
+                                        xs: 12,
+                                    },
+                                }}
+                                value={city}
+                                onChange={handleCityChange}
+                                displayEmpty
+                                inputProps={{
+                                    'aria-label': 'Without label',
+                                }}
+                                input={<InputBase sx={{ border: 'none' }} />}
+                            >
+                                <MenuItem value="">
+                                    <p>시/군/구</p>
+                                </MenuItem>
+                                {provinces &&
+                                    items.provinces[provinces]?.map((city) => (
+                                        <MenuItem
+                                            key={`${provinces}-${city}`}
+                                            value={city}
+                                        >
+                                            {city}
                                         </MenuItem>
-                                        {items.provinces &&
-                                            Object.keys(items.provinces).map(
-                                                (province) => (
-                                                    <MenuItem
-                                                        key={province}
-                                                        value={province}
-                                                    >
-                                                        {province}
-                                                    </MenuItem>
-                                                )
-                                            )}
-                                    </Select>
-                                </Grid>
-                                <Grid item xs={5} md={4} lg={4}>
-                                    <Select
-                                        sx={{
-                                            fontSize: {
-                                                lg: 16,
-                                                md: 16,
-                                                xs: 12,
-                                            },
-                                        }}
-                                        value={city}
-                                        onChange={handleCityChange}
-                                        displayEmpty
-                                        inputProps={{
-                                            'aria-label': 'Without label',
-                                        }}
-                                        input={
-                                            <InputBase
-                                                sx={{ border: 'none' }}
-                                            />
-                                        }
-                                    >
-                                        <MenuItem value="">
-                                            <p>시/군/구</p>
-                                        </MenuItem>
-                                        {provinces &&
-                                            items.provinces[provinces]?.map(
-                                                (city) => (
-                                                    <MenuItem
-                                                        key={`${provinces}-${city}`}
-                                                        value={city}
-                                                    >
-                                                        {city}
-                                                    </MenuItem>
-                                                )
-                                            )}
-                                    </Select>
-                                </Grid>
-                            </Grid>
+                                    ))}
+                            </Select>
                         </FormControl>
                     </Grid>
 

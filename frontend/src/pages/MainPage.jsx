@@ -1,7 +1,6 @@
 import Banner from '@/components/Banner/Banner'
 import MainModal from '@/components/modals/MainModal'
-import { Grid } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { Grid, useTheme } from '@mui/material'
 import React, { useState } from 'react'
 import FilterNav from '../components/FilterNav'
 import Places from '../components/Places'
