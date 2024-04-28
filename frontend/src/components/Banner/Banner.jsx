@@ -47,6 +47,7 @@ function Banner() {
                     columns={{ xs: 4, md: 12, lg: 12 }}
                 >
                     <Grid
+                        item
                         xs={4}
                         md={5}
                         lg={5}
@@ -75,7 +76,7 @@ function Banner() {
                             나지 않는게 좋아!{' '}
                         </h1> */}
                     </Grid>
-                    <Grid xs={4} md={7} lg={7} minHeight={160}>
+                    <Grid item xs={4} md={7} lg={7} minHeight={160}>
                         <Card
                             sx={{
                                 textAlign: 'center',
