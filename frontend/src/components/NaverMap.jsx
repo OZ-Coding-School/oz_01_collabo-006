@@ -17,7 +17,7 @@ function NaverMap( {intValue} ) {
           console.log(intValue);
           try {
             // API 호출하여 데이터 받아오기
-            const response = await fetch('http://223.130.139.240/api/v1/categories/places/');
+            const response = await fetch('http://www.pette.me/api/v1/categories/places/');
             const data = await response.json();
             
             // 받아온 데이터에서 좌표 값을 추출하여 상태로 설정
