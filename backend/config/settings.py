@@ -175,6 +175,20 @@ DATABASES = {
     }
 }
 
+# 네이버 클라우드 객체 스토리지 버킷 정보
+NCP_BUCKET_NAME = env('NCP_BUCKET_NAME')
+NCP_ACCESS_KEY = env('NCP_ACCESS_KEY')
+NCP_SECRET_KEY = env('NCP_SECRET_KEY')
+NCP_REGION_NAME = env('NCP_REGION_NAME')
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME = NCP_BUCKET_NAME
+AWS_ACCESS_KEY_ID = NCP_ACCESS_KEY
+AWS_SECRET_ACCESS_KEY = NCP_SECRET_KEY
+AWS_S3_REGION_NAME = NCP_REGION_NAME
+AWS_S3_CUSTOM_DOMAIN = f'https://kr.object.ncloudstorage.com/{NCP_BUCKET_NAME}'
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -218,7 +232,9 @@ STATICFILES_DIRS = [
 #   BASE_DIR / 'static'
 ]
 
-MEDIA_URL = 'http://www.pette.me/media/'
+MEDIA_URL = 'https://kr.object.ncloudstorage.com/240429-bucket2/'
+# MEDIA_URL = 'https://kr.object.ncloudstorage.com/pette/'
+# MEDIA_URL = 'http://www.pette.me/media/'
 # MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
