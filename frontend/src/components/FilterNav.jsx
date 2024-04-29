@@ -58,13 +58,13 @@ const FilterNav = ({ onFilterChange, filteredItems }) => {
 
     //분류
     const handleFacilityTypeChange = (event) => {
-        setFacilityType(event.target.value)
-    }
-    const handleSearch = () => {
-        // 검색 기능 코드
-        // 검색어(searchTerm)를 filteredItems에 추가
-        const updatedFilters = { ...filteredItems, search: searchTerm }
-        onFilterChange(updatedFilters) // 필터 업데이트
+        const selectedFacilityType = event.target.value
+        setFacilityType(selectedFacilityType)
+        const updatedFilters = {
+            ...filteredItems,
+            category2: selectedFacilityType,
+        }
+        onFilterChange(updatedFilters) // 필터 변경을 부모 컴포넌트에 알림
     }
 
     //인풋에 보여주기

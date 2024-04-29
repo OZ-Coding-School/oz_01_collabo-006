@@ -37,7 +37,10 @@ function MainPage() {
                 <Banner />
             </Grid>
             <Grid item xs={12}>
-                <FilterNav onFilterChange={handleFilterChange} />
+                <FilterNav
+                    onFilterChange={handleFilterChange}
+                    filteredItems={filteredItems}
+                />
             </Grid>
             <Grid item xs={12}>
                 <Places filteredItems={filteredItems} />
