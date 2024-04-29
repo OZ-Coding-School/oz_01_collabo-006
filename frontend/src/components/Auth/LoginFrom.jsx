@@ -11,8 +11,10 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
-import axios from 'axios'
+
 import useLoginStore from '../../store/login'
+import instance from '../../api/axios'
+
 function LoginFrom({ isLogin }) {
     const setIsLogined = useLoginStore((state) => state.setIsLogined)
     const isLogined = useLoginStore((state) => state.isLogined)
@@ -32,10 +34,10 @@ function LoginFrom({ isLogin }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post(
-                'http://223.130.153.84/api/v1/users/login/',
-                { email, password }
-            )
+            const response = await instance.post('/users/login/', {
+                email,
+                password,
+            })
             document.cookie = `access=${response.data.access};`
             document.cookie = `refresh=${response.data.refresh};`
             console.log('로그인 됨')

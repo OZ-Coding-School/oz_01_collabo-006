@@ -8,7 +8,8 @@ import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import { useState } from 'react'
-import axios from 'axios'
+import instance from '../../api/axios'
+
 function SignupForm({ isLogin }) {
     const [dogs_size, setDge] = useState('')
     const handleChange = (event) => {
@@ -36,8 +37,8 @@ function SignupForm({ isLogin }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post(
-                'http://223.130.153.84/api/v1/users/signup/',
+            const response = await instance.post(
+                '/users/signup/',
                 { email, password, dogs_size, last_name, password_confirm },
                 {
                     headers: {
