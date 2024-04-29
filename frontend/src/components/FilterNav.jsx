@@ -14,7 +14,7 @@ import dogsData from '../../public/images/dogs'
 import instance from '../api/axios'
 import useStore from '../store/mainModal'
 
-const FilterNav = ({ onFilterChange }) => {
+const FilterNav = ({ onFilterChange, filteredItems }) => {
     const [searchTerm, setSearchTerm] = useState('')
     const { selectedDog, setSelectedDog } = useStore() // 상태 및 액션 가져오기
     const theme = useTheme()
@@ -34,10 +34,10 @@ const FilterNav = ({ onFilterChange }) => {
     const handleProvincesChange = (event) => {
         const selectedProvince = event.target.value
         setProvinces(selectedProvince)
-        setCity('')
+        setCity('') // 시/도가 변경될 때 시/군/구 값 초기화
         const filters = {
             province: selectedProvince,
-            city: '',
+            city: '', // 시/도가 변경될 때 시/군/구 값 초기화
             category2: '',
             dog_size: '',
             search: searchTerm,
@@ -49,6 +49,11 @@ const FilterNav = ({ onFilterChange }) => {
     const handleCityChange = (event) => {
         const selectedCity = event.target.value
         setCity(selectedCity)
+        const updatedFilters = {
+            ...filteredItems,
+            city: selectedCity,
+        }
+        onFilterChange(updatedFilters) // 필터 변경을 부모 컴포넌트에 알림
     }
 
     //분류
