@@ -14,5 +14,5 @@ class ReviewSerializer(ModelSerializer):
       'created_at',
     )
   
-  def get_user_name(self, obj):
+  def get_last_name(self, obj):
     return obj.user.last_name  # 사용자의 이름을 반환하는 메서드 작성
