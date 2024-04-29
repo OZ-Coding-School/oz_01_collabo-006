@@ -1,6 +1,8 @@
 from .models import User
 
+
 # viewsets 사용을 위한 추가
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
@@ -36,7 +38,12 @@ from .serializers import MypageSerializer, SignupSerializer, ChangePasswordSeria
 class MyPageViewSet(viewsets.ModelViewSet):
   queryset = User.objects.all()
   serializer_class = MypageSerializer
-
+  permission_classes = [IsAuthenticated]
+  
+  def get_queryset(self):
+    # 현재 요청을 보낸 사용자의 아이디로 필터링된 queryset을 반환
+    return User.objects.filter(id=self.request.user.id)
+  
   # def list(self, request):
   #   pass
 

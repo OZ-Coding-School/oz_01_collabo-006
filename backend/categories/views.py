@@ -148,7 +148,7 @@ class SearchAPIView(APIView):
                 'provinces': Place.objects.values_list('Province', flat=True).distinct(),
                 'cities': set(),
                 'categories': Place.objects.values_list('Category2', flat=True).distinct().order_by(),
-                # 'dog_sizes': Place.objects.values_list('Dog_Size', flat=True).distinct()
+                'dog_sizes': Place.objects.values_list('Dog_Size', flat=True).distinct()
             }
             
 
