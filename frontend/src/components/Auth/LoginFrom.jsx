@@ -1,3 +1,4 @@
+
 import { Link, useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
@@ -11,6 +12,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
+import axios from 'axios';
 
 import useLoginStore from '../../store/login'
 import instance from '../../api/axios'
@@ -18,23 +20,26 @@ import instance from '../../api/axios'
 function LoginFrom({ isLogin }) {
     const setIsLogined = useLoginStore((state) => state.setIsLogined)
     const isLogined = useLoginStore((state) => state.isLogined)
-    function naverHandler(e) {
-        e.preventDefault()
-        alert('hi')
-    }
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+  
+   const handleNaverLogin = () => {
+        window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=8aEOJLOZ8gGmnkpScnOS&redirect_uri=http://localhost:5173/auth?mode=login';
+    };
+
     const [showPassword, setShowPassword] = useState(false)
     const handleClickShowPassword = () => setShowPassword((show) => !show)
     const handleMouseDownPassword = (event) => {
         event.preventDefault()
     }
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+  
 
     const navigate = useNavigate()
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const response = await instance.post('/users/login/', {
+
+  const response = await instance.post('/users/login/', {
                 email,
                 password,
             })
@@ -43,11 +48,14 @@ function LoginFrom({ isLogin }) {
             console.log('로그인 됨')
             setIsLogined(true)
             navigate(-1)
+
         } catch (error) {
-            console.error('로그인 실패:', error)
-            alert('아이디와 비밀번호를 다시 확인해주세요.')
+            console.error('로그인 실패:', error);
+            alert('아이디와 비밀번호를 다시 확인해주세요.');
         }
-    }
+
+    };
+
 
     function isValidEmail(email) {
         var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -56,22 +64,10 @@ function LoginFrom({ isLogin }) {
 
     return (
         <Box sx={{ mt: 7 }}>
-            <Typography
-                variant="h4"
-                gutterBottom
-                // sx={{ textAlign: 'center' }}
-            >
+            <Typography variant="h4" gutterBottom>
                 로그인
             </Typography>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 2,
-                    mt: 2,
-                    mb: 2,
-                }}
-            >
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2, mb: 2 }}>
                 <TextField
                     fullWidth
                     id="outlined-basic"
@@ -82,6 +78,8 @@ function LoginFrom({ isLogin }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
+
+              
 
                 {!isValidEmail(email) && email.length ? (
                     <p
@@ -156,28 +154,27 @@ function LoginFrom({ isLogin }) {
                         로그인
                     </Button>
                 )}
-                <Button sx={{ p: 0 }} onClick={naverHandler}>
+                <Button
+                    sx={{ p: 0 }}
+                    onClick={handleNaverLogin}
+                >
                     <img
-                        src="/images/btnG_완성형.png"
-                        alt=""
-                        style={{
-                            width: '200px',
-                        }}
+                        src="/images/btnG_완성형.png" // 네이버 소셜 로그인 버튼 이미지 경로
+                        alt="네이버 로그인"
+                        style={{ width: '200px' }}
                     />
                 </Button>
             </Box>
             <div>
                 <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>
-                    <Typography
-                        variant="span"
-                        gutterBottom
-                        sx={{ float: 'right' }}
-                    >
+                    <Typography variant="span" gutterBottom sx={{ float: 'right' }}>
                         회원이 아니신가요?
                     </Typography>
                 </Link>
             </div>
         </Box>
-    )
+    );
 }
-export default LoginFrom
+;
+
+export default LoginFrom;
