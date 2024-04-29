@@ -15,7 +15,7 @@ function DetailPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await instance.get(`/categories/places/${id}/`)
+                const response =  await instance.get(`/categories/places/${id}/`)
                 setPlace(response.data)
                 console.log('아이디', response.data)
             } catch (error) {
