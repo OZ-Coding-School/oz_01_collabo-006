@@ -218,8 +218,8 @@ STATICFILES_DIRS = [
 #   BASE_DIR / 'static'
 ]
 
-
-MEDIA_URL = 'media/'
+MEDIA_URL = 'http://www.pette.me/media/'
+# MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -249,6 +249,10 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
+    "http://*",
+    "https://*",
+    "http://www.pette.me",
+    "https://www.pette.me",
     "http://localhost:80",
     "https://localhost:80",
     "http://0.0.0.0:80",

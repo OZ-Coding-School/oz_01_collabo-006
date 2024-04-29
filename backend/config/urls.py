@@ -43,7 +43,7 @@ urlpatterns = [
     path('api/v1/reviews/', include('reviews.urls')),
     path('api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('',index,name='home'),
+    # path('',index,name='home'),
 ] + static(
   # URL의 접두어가 MEDIA_URL일 떄는 정적파일을 돌려준다.
   prefix=settings.MEDIA_URL,

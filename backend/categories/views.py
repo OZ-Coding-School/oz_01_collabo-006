@@ -24,8 +24,17 @@ class PlaceDetailAPIView(APIView):
         except Place.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         
-        serializer = PlaceSerializer(place)
+        serializer = PlaceSerializer(place, context={'request': request})
         return Response(serializer.data)
+
+class ThumbnailURLView(APIView):
+    def get(self, request, place_id):
+        try:
+            place = Place.objects.get(id=place_id)
+            serializer = PlaceSerializer(place, context={'request': request})
+            return Response(serializer.data)
+        except Place.DoesNotExist:
+            return Response({'error': 'Place not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class SearchAPIView(APIView):
@@ -132,7 +141,7 @@ class SearchAPIView(APIView):
             page_data = paginator.get_page(page)
 
             # PlaceSerializer를 사용하여 쿼리셋을 직렬화합니다.
-            serializer = PlaceSerializer(page_data, many=True)
+            serializer = PlaceSerializer(page_data, many=True, context={'request': request})
             
             # 드롭다운으로 보낼 데이터를 가져옵니다.
             dropdown_data = {

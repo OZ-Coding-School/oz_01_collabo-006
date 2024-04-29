@@ -68,11 +68,10 @@ class SignupSerializer(serializers.ModelSerializer):
       'email',
       'password',
       'password_confirm',
-      "first_name",
       "last_name",
       "dogs_size",
-      'profile_image',
-      'short_description',
+      # 'profile_image',
+      # 'short_description',
     )
 
   def validate_email(self, value):
