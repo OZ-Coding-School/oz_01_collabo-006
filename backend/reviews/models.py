@@ -7,7 +7,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class Review(CommonModel):
   id = models.AutoField(primary_key=True)
   rating = models.IntegerField(
-    null=False,
+    null=True, blank=True,
     validators=[
       MinValueValidator(1), 
       MaxValueValidator(5)
