@@ -63,7 +63,7 @@ const DetailPlace = ({ place }) => {
                     >
                         <CardMedia
                             component="img"
-                            image={place.thumbnail_url}
+                            image={place.thumbnail}
                             alt={place.Place_Name}
                             sx={{
                                 position: 'absolute',

@@ -10,16 +10,19 @@ const Places = ({ filteredItems }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await instance.get(`/categories/places/`)
+                const queryParams = new URLSearchParams(
+                    filteredItems
+                ).toString()
+                const response = await instance.get(
+                    `/categories/places/?${queryParams}`
+                )
                 setItems(response.data.places)
-                // console.log('아이템', response.data.places)
-                // console.log(response.data.places.thumbnail)
             } catch (error) {
-                console.error('저쩌구에러', error)
+                console.error('에러 발생:', error)
             }
         }
         fetchData()
-    }, [])
+    }, [filteredItems])
 
     // displayItems를 items 대신 filteredItems로 사용하도록 수정
     const displayItems =
@@ -66,7 +69,7 @@ const Places = ({ filteredItems }) => {
                                     >
                                         <CardMedia
                                             component="img"
-                                            image={item.thumbnail_url}
+                                            image={item.thumbnail}
                                             alt={item.Place_Name}
                                             sx={{
                                                 position: 'absolute',

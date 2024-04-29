@@ -14,7 +14,7 @@ import dogsData from '../../public/images/dogs'
 import instance from '../api/axios'
 import useStore from '../store/mainModal'
 
-const FilterNav = ({ filteredCity }) => {
+const FilterNav = ({ onFilterChange }) => {
     const [searchTerm, setSearchTerm] = useState('')
     const { selectedDog, setSelectedDog } = useStore() // 상태 및 액션 가져오기
     const theme = useTheme()
@@ -34,36 +34,33 @@ const FilterNav = ({ filteredCity }) => {
     const handleProvincesChange = (event) => {
         const selectedProvince = event.target.value
         setProvinces(selectedProvince)
-
-        filteredCity((prevState) => ({
-            ...prevState,
-            province: selectedProvince,
-        }))
         setCity('')
+        const filters = {
+            province: selectedProvince,
+            city: '',
+            category2: '',
+            dog_size: '',
+            search: searchTerm,
+        }
+        onFilterChange(filters)
     }
 
     //시군구
     const handleCityChange = (event) => {
         const selectedCity = event.target.value
         setCity(selectedCity)
-        filteredCity((prevState) => ({ ...prevState, city: selectedCity }))
     }
 
     //분류
     const handleFacilityTypeChange = (event) => {
         setFacilityType(event.target.value)
     }
-
-    //검색하는 코드인데 다시설정해야할듯 먹통!
-    // const handleSearch = () => {
-    //     if (!place) return // place가 유효하지 않으면 함수 종료
-
-    //     let filteredItems = place.filter((item) =>
-    //         item.Place_Name.includes(searchTerm)
-    //     )
-
-    //     setFilteredItems(filteredItems)
-    // }
+    const handleSearch = () => {
+        // 검색 기능 코드
+        // 검색어(searchTerm)를 filteredItems에 추가
+        const updatedFilters = { ...filteredItems, search: searchTerm }
+        onFilterChange(updatedFilters) // 필터 업데이트
+    }
 
     //인풋에 보여주기
     const handleChangeSearchTerm = (event) => {
