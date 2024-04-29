@@ -1,10 +1,12 @@
-import { Box, Tab, Tabs, Typography, useTheme } from '@mui/material'
-import PropTypes from 'prop-types'
-import * as React from 'react'
-import Review from './Review'
+import { Box, Tab, Tabs, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import Review from './Review';
+import NaverMap from './NaverMap'; // 네이버지도 컴포넌트를 가져옵니다.
 
 function CustomTabPanel(props) {
-    const { children, value, index, ...other } = props
+    const { children, value, index, ...other } = props;
 
     return (
         <div
@@ -20,28 +22,32 @@ function CustomTabPanel(props) {
                 </Box>
             )}
         </div>
-    )
+    );
 }
 
 CustomTabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
-}
+};
 
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
         'aria-controls': `simple-tabpanel-${index}`,
-    }
+    };
 }
 
 const DetailTab = ({ place }) => {
-    const theme = useTheme()
-    const [value, setValue] = React.useState(0)
+
+    console.log(place.id);
+
+    const theme = useTheme();
+    const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
-        setValue(newValue)
-    }
+        console.log(newValue);
+        setValue(newValue);
+    };
 
     return (
         <>
@@ -67,14 +73,14 @@ const DetailTab = ({ place }) => {
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={0}>
-                    지도뿌려
+                    <NaverMap intValue={place.id}/>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
                     <Review place={place} />
                 </CustomTabPanel>
             </Box>
         </>
-    )
-}
+    );
+};
 
-export default DetailTab
+export default DetailTab;
