@@ -7,19 +7,20 @@ import DetailPlace from '../components/DetailPlace'
 import DetailTab from '../components/DetailTab'
 import theme from '../theme'
 
+
 function DetailPage() {
     const { id } = useParams()
-    // console.log(id)
+    
     const [place, setPlace] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response =  await instance.get(`/categories/places/${id}/`)
+                const response = await instance.get(`/categories/places/${id}/`)
                 setPlace(response.data)
-                // console.log('아이디', response.data)
+                console.log('아이디', response.data)
             } catch (error) {
-                console.error('어쩌구에러c', error)
+                console.error('어쩌구에러', error)
             }
         }
         fetchData()
@@ -38,7 +39,7 @@ function DetailPage() {
             <ThemeProvider theme={theme}>
                 <DetailPlace id={id} place={place} />
 
-                <DetailTab place={place} />
+                <DetailTab id = {id} place={place} />
                 {/* 프롭스로 값을 내려줘 */}
             </ThemeProvider>
         </>

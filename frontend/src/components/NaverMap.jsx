@@ -20,15 +20,16 @@ function NaverMap( {intValue} ) {
             const response = await fetch('http://www.pette.me/api/v1/categories/places/');
             const data = await response.json();
             
-            // 받아온 데이터에서 좌표 값을 추출하여 상태로 설정
-            const latitude = parseFloat(data.results[intValue - 1].Latitude);
-            const longitude = parseFloat(data.results[intValue - 1].Longitude);
+            //받아온 데이터에서 좌표 값을 추출하여 상태로 설정
+           const latitude = parseFloat(data.places[intValue - 1].Latitude);
+           const longitude = parseFloat(data.places[intValue - 1].Longitude);
 
-            const placeName = data.results[intValue - 1].Place_Name;
-            const placewhere1 = data.results[intValue - 1].place_where1;
-            const homepage = data.results[intValue - 1].Home_Page;
+           const placeName = data.places[intValue - 1].Place_Name;
+           const placewhere1 = data.places[intValue - 1].place_where1;
+            const homepage = data.places[intValue - 1].Home_Page;
 
            
+            //console.log(intValue , latitude ,longitude , placeName , placewhere1 ,homepage);
             
             setLatitude(latitude);
             setLongitude(longitude);
