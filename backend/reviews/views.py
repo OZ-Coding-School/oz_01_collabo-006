@@ -12,20 +12,24 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
-    # def list(self, request):
-        # pass
-
-    def create(self, request):
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def list(self, request):
         pass
 
-    # def retrieve(self, request, pk=None):
-        # pass
+    def retrieve(self, request, pk=None):
+        pass
 
     # def update(self, request, pk=None):
-        # pass
+    #     pass
 
     def partial_update(self, request, pk=None):
         pass
 
-    def destroy(self, request, pk=None):
-        pass
+    # def destroy(self, request, pk=None):
+    #     pass
