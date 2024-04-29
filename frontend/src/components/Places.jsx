@@ -1,4 +1,4 @@
-import { Card, CardMedia, Grid, Pagination, Skeleton } from '@mui/material'
+import { Card, CardMedia, Grid, Pagination } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import instance from '../api/axios'
@@ -12,8 +12,8 @@ const Places = ({ filteredItems }) => {
             try {
                 const response = await instance.get(`/categories/places/`)
                 setItems(response.data.places)
-                console.log('아이템', response.data.places)
-                console.log(response.data.places.thumbnail)
+                // console.log('아이템', response.data.places)
+                // console.log(response.data.places.thumbnail)
             } catch (error) {
                 console.error('저쩌구에러', error)
             }
@@ -64,27 +64,19 @@ const Places = ({ filteredItems }) => {
                                             cursor: 'pointer',
                                         }}
                                     >
-                                        {item.thumbnail ? (
-                                            <CardMedia
-                                                component="img"
-                                                image={item.thumbnail}
-                                                alt={item.Place_Name}
-                                                sx={{
-                                                    position: 'absolute',
-                                                    top: 0,
-                                                    left: 0,
-                                                    width: '100%',
-                                                    height: '100%',
-                                                    objectFit: 'cover',
-                                                }}
-                                            />
-                                        ) : (
-                                            <Skeleton
-                                                variant="rectangular"
-                                                width={210}
-                                                height={118}
-                                            />
-                                        )}
+                                        <CardMedia
+                                            component="img"
+                                            image={item.thumbnail_url}
+                                            alt={item.Place_Name}
+                                            sx={{
+                                                position: 'absolute',
+                                                top: 0,
+                                                left: 0,
+                                                width: '100%',
+                                                height: '100%',
+                                                objectFit: 'cover',
+                                            }}
+                                        />
                                     </Card>
                                 </Link>
                             </Grid>

@@ -17,7 +17,7 @@ function DetailPage() {
             try {
                 const response = await instance.get(`/categories/places/${id}/`)
                 setPlace(response.data)
-                console.log('아이디', response.data)
+                // console.log('아이디', response.data)
             } catch (error) {
                 console.error('어쩌구에러', error)
             }

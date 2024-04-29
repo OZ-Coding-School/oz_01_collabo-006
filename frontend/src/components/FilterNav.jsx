@@ -76,7 +76,7 @@ const FilterNav = ({ filteredCity }) => {
             try {
                 const response = await instance.get(`/categories/places/`)
                 setItems(response.data.dropdown_data)
-                console.log('아이템', response.data.dropdown_data)
+                // console.log('아이템', response.data.dropdown_data)
             } catch (error) {
                 console.error('저쩌구에러', error)
             }

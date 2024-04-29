@@ -6,6 +6,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { green } from '@mui/material/colors'
 import { Link } from 'react-router-dom'
+import Weather from './Weather'
 import navLogo from '/images/nav_logo.png'
 import useLoginStore from '../../../store/login'
 
@@ -42,7 +43,7 @@ export const _Navbar = () => {
                             component="div"
                             sx={{ flexGrow: 1, cursor: 'default' }}
                         >
-                            {/* <Weather /> */}
+                            <Weather />
                         </Typography>
                         <Box>
                             {isLogined ? (
