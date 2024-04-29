@@ -11,53 +11,14 @@ import {
     useTheme,
 } from '@mui/material'
 import * as React from 'react'
-import prin from '../../public/images/prin.jpg'
-
-// function createData(name, detail) {
-//     return { name, detail }
-// }
-
-// const firstRows = [
-//     createData(
-//         '쉬는날',
-//         placesData.map((place) => place.closed)
-//     ),
-//     createData(
-//         '분류',
-//         placesData.map((place) => place.sectors)
-//     ),
-//     createData(
-//         '이용시간',
-//         placesData.map((place) => place.time)
-//     ),
-// ]
-
-// const secondRows = [
-//     createData(
-//         '애완견 기준',
-//         placesData.map((place) => place.dog)
-//     ),
-//     createData(
-//         '실내',
-//         placesData.map((place) => place.inside)
-//     ),
-//     createData(
-//         '실외',
-//         placesData.map((place) => place.outside)
-//     ),
-// ]
 
 const DetailPlace = ({ place }) => {
     const theme = useTheme()
-    // const { id } = useParams()
-    // const place = placesData.find((place) => place.id === parseInt(id))
 
-    // place가 null이거나 undefined이면 해당하는 데이터가 없다는 메시지를 표시합니다.
     if (!place) {
         return <div>해당하는 데이터를 찾을 수 없습니다.</div>
     }
 
-    // id 값에 해당하는 장소 정보를 사용하여 firstRows와 secondRows를 업데이트합니다.
     const firstRows = [
         { name: '쉬는날', detail: place.Off_Day },
         { name: '분류', detail: place.Category2 },
@@ -70,6 +31,15 @@ const DetailPlace = ({ place }) => {
         { name: '주차가능여부', detail: place.Parking },
         { name: '상세설명', detail: place.Location_Description },
     ]
+
+    const handleButtonClick = () => {
+        if (place.Home_Page === '정보없음') {
+            alert('링크가 존재하지 않습니다!')
+        } else {
+            window.open(place.Home_Page, '_blank')
+        }
+    }
+
     return (
         <>
             <Grid
@@ -80,28 +50,28 @@ const DetailPlace = ({ place }) => {
                 <Grid item xs={12} md={12} lg={6}>
                     <Card
                         sx={{
-                            width: '100%', // Card의 너비를 100%로 설정
-                            height: '0', // Card의 높이를 0으로 설정하여 aspect ratio를 조정할 수 있도록 함
-                            paddingBottom: '70%', // Card의 paddingBottom을 100%로 설정하여 정사각형이 되도록 함
+                            width: '100%',
+                            height: '0',
+                            paddingBottom: '70%',
                             textAlign: 'center',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            position: 'relative', // Card의 자식 요소들을 절대 위치로 배치하기 위해 position 속성을 추가
+                            position: 'relative',
                             cursor: 'pointer',
                         }}
                     >
                         <CardMedia
                             component="img"
-                            image={prin}
+                            image={place.thumbnail_url}
                             alt={place.Place_Name}
                             sx={{
-                                position: 'absolute', // 이미지를 절대 위치로 설정하여 Card 안에 꽉 차게 배치
+                                position: 'absolute',
                                 top: 0,
                                 left: 0,
                                 width: '100%',
                                 height: '100%',
-                                objectFit: 'cover', // 이미지가 Card 안에 꽉 차게 표시되도록 설정
+                                objectFit: 'cover',
                             }}
                         />
                     </Card>
@@ -175,11 +145,7 @@ const DetailPlace = ({ place }) => {
                             </TableContainer>
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
-                            <a
-                                href={place.Home_Page}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
+                            {place.Home_Page === '정보없음' ? (
                                 <Button
                                     variant="contained"
                                     disableElevation
@@ -190,10 +156,32 @@ const DetailPlace = ({ place }) => {
                                         borderRadius: '25px',
                                         width: '100%',
                                     }}
+                                    onClick={handleButtonClick}
                                 >
                                     홈페이지 바로가기
                                 </Button>
-                            </a>
+                            ) : (
+                                <a
+                                    href={place.Home_Page}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Button
+                                        variant="contained"
+                                        disableElevation
+                                        style={{
+                                            marginTop: '8px',
+                                            backgroundColor:
+                                                theme.palette.common
+                                                    .customYellow,
+                                            borderRadius: '25px',
+                                            width: '100%',
+                                        }}
+                                    >
+                                        홈페이지 바로가기
+                                    </Button>
+                                </a>
+                            )}
                         </Grid>
                     </Grid>
                 </Grid>
