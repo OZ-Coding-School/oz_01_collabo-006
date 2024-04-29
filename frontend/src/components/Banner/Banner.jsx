@@ -1,5 +1,5 @@
-import { Box, Card, CardActionArea } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
+import { Box, Card, CardActionArea, Grid } from '@mui/material'
+
 import { useTheme } from '@mui/material/styles'
 import React from 'react'
 import 'swiper/css'
@@ -15,26 +15,26 @@ function Banner() {
             title: '중랑 캠핑숲',
             information: '# 밤 산책',
             information1: '# 야경',
-            img: '../../../public/images/banner1.png',
+            img: '/images/banner1.png',
         },
         {
             title: '북촌 문화센터',
             information: '# 한옥마을',
             information1: '# 한옥카페',
             information2: '# 실내가능',
-            img: '../../../public/images/banner2.png',
+            img: '/images/banner2.png',
         },
         {
             title: '어라운드 데이',
             information: '# 성수',
             information1: '# 루프탑',
-            img: '../../../public/images/banner3.png',
+            img: '/images/banner3.png',
         },
         {
             title: '디어 앨리스',
             information: '# 이태원',
             information1: '# 와인바',
-            img: '../../../public/images/banner4.png',
+            img: '/images/banner4.png',
         },
     ]
 
@@ -47,6 +47,7 @@ function Banner() {
                     columns={{ xs: 4, md: 12, lg: 12 }}
                 >
                     <Grid
+                        item
                         xs={4}
                         md={5}
                         lg={5}
@@ -75,7 +76,7 @@ function Banner() {
                             나지 않는게 좋아!{' '}
                         </h1> */}
                     </Grid>
-                    <Grid xs={4} md={7} lg={7} minHeight={160}>
+                    <Grid item xs={4} md={7} lg={7} minHeight={160}>
                         <Card
                             sx={{
                                 textAlign: 'center',

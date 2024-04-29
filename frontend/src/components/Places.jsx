@@ -1,48 +1,29 @@
-import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
-import { Card, CardMedia, Pagination } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
+import { Card, CardMedia, Grid, Pagination } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import prin from '../../public/images/prin.jpg'
 import instance from '../api/axios'
 
-const Places = ({ naviSelected, sortBy, filteredItems }) => {
+const Places = ({ filteredItems }) => {
     const [items, setItems] = useState([])
-    const [currentPage, setCurrentPage] = React.useState(1)
+    const [currentPage, setCurrentPage] = useState(1)
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await instance.get(`/categories/places/`)
-                setItems(response.data.results)
-                console.log('아이템', response.data.results)
+                setItems(response.data.places)
+                // console.log('아이템', response.data.places)
+                // console.log(response.data.places.thumbnail)
             } catch (error) {
                 console.error('저쩌구에러', error)
             }
         }
         fetchData()
-        // setItems(placesData)
     }, [])
 
-    useEffect(() => {
-        // 필터링된 결과가 바뀔 때마다 페이지를 1로 초기화합니다.
-        setCurrentPage(1)
-    }, [filteredItems])
-
-    useEffect(() => {
-        if (sortBy === 'popularity') {
-            // 인기순으로 정렬하는 식 추가.
-        }
-        if (sortBy === 'distance') {
-            let sortedItems =
-                filteredItems.length > 0 ? [...filteredItems] : [...items]
-            sortedItems.sort((a, b) => a.distance - b.distance)
-            setItems(sortedItems)
-        }
-    }, [sortBy, filteredItems])
-
     // displayItems를 items 대신 filteredItems로 사용하도록 수정
-    let displayItems = Array.isArray(filteredItems) ? filteredItems : items
+    const displayItems =
+        filteredItems && filteredItems.length > 0 ? filteredItems : items
 
     const itemsPerPage = 20
 
@@ -61,7 +42,7 @@ const Places = ({ naviSelected, sortBy, filteredItems }) => {
                 columns={{ xs: 4, md: 8, lg: 12 }}
             >
                 {/* 현재 페이지에 맞는 아이템들을 보여줌 */}
-                {items.slice(startIndex, endIndex).map((item) => (
+                {displayItems.slice(startIndex, endIndex).map((item) => (
                     <Grid item xs={2} md={4} lg={3} key={item.id}>
                         <Grid
                             container
@@ -85,7 +66,7 @@ const Places = ({ naviSelected, sortBy, filteredItems }) => {
                                     >
                                         <CardMedia
                                             component="img"
-                                            image={prin}
+                                            image={item.thumbnail_url}
                                             alt={item.Place_Name}
                                             sx={{
                                                 position: 'absolute',
@@ -100,30 +81,10 @@ const Places = ({ naviSelected, sortBy, filteredItems }) => {
                                 </Link>
                             </Grid>
                             <Grid item xs={4} md={8} lg={12}>
-                                <Grid
-                                    container
-                                    spacing={1}
-                                    columns={{ xs: 6, md: 8, lg: 8 }}
-                                >
-                                    <Grid item xs={3.6} md={6.6} lg={4.8}>
-                                        <p>{item.Place_Name}</p>
-                                        <p>{item.Opening_hours}</p>
-                                    </Grid>
-                                    <Grid item xs={2.4} md={1.4} lg={3.2}>
-                                        {naviSelected && (
-                                            <p>
-                                                00
-                                                {/* {item.Off_Day} */}
-                                                {'km'}
-                                                <LocationOnRoundedIcon
-                                                    style={{
-                                                        fontSize: '21px',
-                                                    }}
-                                                />
-                                            </p>
-                                        )}
-                                    </Grid>
-                                </Grid>
+                                <p>{item.Place_Name}</p>
+                                <p style={{ color: 'var(--gray)' }}>
+                                    {item.Opening_hours}
+                                </p>
                             </Grid>
                         </Grid>
                     </Grid>

@@ -8,11 +8,9 @@ const useLoginStore = create(
             setIsLogined: (value) => set({ isLogined: value }),
         }),
         {
-            name: 'login state',
+            name: 'login_state',
         }
     )
 )
 
 export default useLoginStore
-
-// https://velog.io/@hyunn/Zustand-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%83%81%ED%83%9C-%EC%A0%84%EC%97%AD%EA%B4%80%EB%A6%AC

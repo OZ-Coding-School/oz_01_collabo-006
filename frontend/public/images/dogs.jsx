@@ -30,6 +30,10 @@ const dogsData = [
         alt: 'fierce dog',
         title: '맹견',
     },
+    {
+        id: 5,
+        title: '모두가능',
+    },
 ]
 
 export default dogsData

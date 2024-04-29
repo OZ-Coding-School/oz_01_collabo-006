@@ -1,7 +1,6 @@
 import Banner from '@/components/Banner/Banner'
 import MainModal from '@/components/modals/MainModal'
-import { Grid } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { Grid, useTheme } from '@mui/material'
 import React, { useState } from 'react'
 import FilterNav from '../components/FilterNav'
 import Places from '../components/Places'
@@ -9,9 +8,11 @@ import Places from '../components/Places'
 function MainPage() {
     const [isModalOpen, setIsModalOpen] = useState(true)
     const [selectedDog, setSelectedDog] = useState(null)
-    const [naviSelected, setNaviSelected] = useState(false)
     const [sortBy, setSortBy] = useState('')
-    const [filteredItems, setFilteredItems] = useState([])
+    const [filteredItems, setFilteredItems] = useState({
+        facilityType: '',
+    })
+
     const theme = useTheme()
 
     const handleCloseModal = () => {
@@ -29,8 +30,6 @@ function MainPage() {
             </Grid>
             <Grid item xs={12}>
                 <FilterNav
-                    naviSelected={naviSelected}
-                    setNaviSelected={setNaviSelected}
                     sortBy={sortBy}
                     setSortBy={setSortBy}
                     setFilteredItems={setFilteredItems}
@@ -38,11 +37,7 @@ function MainPage() {
                 />
             </Grid>
             <Grid item xs={12}>
-                <Places
-                    sortBy={sortBy}
-                    naviSelected={naviSelected}
-                    filteredItems={filteredItems}
-                />
+                <Places sortBy={sortBy} filteredItems={filteredItems} />
             </Grid>
             <Grid item xs={12}>
                 <MainModal
