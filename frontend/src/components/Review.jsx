@@ -8,16 +8,63 @@ import {
     useTheme,
 } from '@mui/material'
 import * as React from 'react'
-// import userData from '../../public/images/user'
-// import instance from '../api/axios'
+import instance from '../api/axios'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 const Review = ({ place }) => {
     const theme = useTheme()
-    // const reviewData = userData[0]
-
-    // place가 null이거나 undefined이면 해당하는 데이터가 없다는 메시지를 표시합니다.
     if (!place) {
         return <div>해당하는 데이터를 찾을 수 없습니다.</div>
+    }
+
+    const [content, setContent] = useState('')
+    const placeId = place.id
+    async function getUserId() {
+        try {
+            const accessCookieRegex = /access=([^;]*)/
+            const userToken = document.cookie
+                .match(accessCookieRegex)[0]
+                .split('=')[1]
+
+            console.log(userToken)
+            // 유저 아이디를 넘겨야한다.
+            // retrun userid
+        } catch (error) {
+            console.log('유저 조회 실패 ', error)
+        }
+    }
+
+    // useEffect(() => {
+    //     async function handleGetReview() {
+    //         try {
+    //             const response = await instance.get(
+    //                 `/categories/places/${placeId}`
+    //             )
+    //             console.log('불러오기', response)
+    //         } catch (error) {
+    //             console.log('리뷰 겟 에러 ', error)
+    //         }
+    //     }
+    //     handleGetReview()
+    // }, [])
+
+    async function handleUpload() {
+        try {
+            // const user = getUserId()
+            const response = await instance.post(
+                '/reviews/review',
+                { content, place: placeId, user: 1 },
+                {
+                    headers: {
+                        accept: 'application/json',
+                    },
+                }
+            )
+            console.log(response.data)
+        } catch (error) {
+            console.error('리뷰 업로드 실패:', error)
+        }
     }
 
     return (
@@ -61,7 +108,24 @@ const Review = ({ place }) => {
                                             sx={{
                                                 width: '100%',
                                             }}
+                                            value={content}
+                                            onChange={(e) =>
+                                                setContent(e.target.value)
+                                            }
                                         />
+                                        {content.length > 1 &&
+                                        content.length <= 8 ? (
+                                            <p
+                                                style={{
+                                                    fontSize: '12px',
+                                                    marginLeft: '5px',
+
+                                                    color: 'red',
+                                                }}
+                                            >
+                                                8자 이상 입력하세요.
+                                            </p>
+                                        ) : null}
                                     </Grid>
                                     <Grid
                                         item
@@ -72,19 +136,38 @@ const Review = ({ place }) => {
                                         lg={2}
                                         lgOffset={10}
                                     >
-                                        <Button
-                                            variant="contained"
-                                            disableElevation
-                                            style={{
-                                                backgroundColor:
-                                                    theme.palette.common
-                                                        .customYellow,
-                                                borderRadius: '25px',
-                                                width: '100%',
-                                            }}
-                                        >
-                                            올리기
-                                        </Button>
+                                        {content.length >= 8 ? (
+                                            <Button
+                                                variant="contained"
+                                                disableElevation
+                                                style={{
+                                                    backgroundColor:
+                                                        theme.palette.common
+                                                            .customYellow,
+                                                    borderRadius: '25px',
+                                                    width: '100%',
+                                                }}
+                                                onClick={handleUpload}
+                                            >
+                                                올리기
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                disabled
+                                                variant="contained"
+                                                disableElevation
+                                                style={{
+                                                    backgroundColor:
+                                                        theme.palette.common
+                                                            .customYellow,
+                                                    borderRadius: '25px',
+                                                    width: '100%',
+                                                }}
+                                                onClick={handleUpload}
+                                            >
+                                                올리기
+                                            </Button>
+                                        )}
                                     </Grid>
                                 </Grid>
                             </Grid>
