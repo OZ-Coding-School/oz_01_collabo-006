@@ -10,7 +10,11 @@ function MainPage() {
     const [selectedDog, setSelectedDog] = useState(null)
     const [sortBy, setSortBy] = useState('')
     const [filteredItems, setFilteredItems] = useState({
-        facilityType: '',
+        province: '',
+        city: '',
+        category2: '',
+        dog_size: '',
+        search: '',
     })
 
     const theme = useTheme()
@@ -23,6 +27,10 @@ function MainPage() {
         setSelectedDog(dog)
     }
 
+    const handleFilterChange = (filter) => {
+        setFilteredItems(filter)
+    }
+
     return (
         <Grid container maxWidth="md" spacing={1.8}>
             <Grid item xs={12}>
@@ -30,14 +38,12 @@ function MainPage() {
             </Grid>
             <Grid item xs={12}>
                 <FilterNav
-                    sortBy={sortBy}
-                    setSortBy={setSortBy}
-                    setFilteredItems={setFilteredItems}
+                    onFilterChange={handleFilterChange}
                     filteredItems={filteredItems}
                 />
             </Grid>
             <Grid item xs={12}>
-                <Places sortBy={sortBy} filteredItems={filteredItems} />
+                <Places filteredItems={filteredItems} />
             </Grid>
             <Grid item xs={12}>
                 <MainModal

@@ -14,7 +14,7 @@ import dogsData from '../../public/images/dogs'
 import instance from '../api/axios'
 import useStore from '../store/mainModal'
 
-const FilterNav = ({ filteredCity }) => {
+const FilterNav = ({ onFilterChange, filteredItems }) => {
     const [searchTerm, setSearchTerm] = useState('')
     const { selectedDog, setSelectedDog } = useStore() // 상태 및 액션 가져오기
     const theme = useTheme()
@@ -34,36 +34,45 @@ const FilterNav = ({ filteredCity }) => {
     const handleProvincesChange = (event) => {
         const selectedProvince = event.target.value
         setProvinces(selectedProvince)
-
-        filteredCity((prevState) => ({
-            ...prevState,
+        setCity('') // 시/도가 변경될 때 시/군/구 값 초기화
+        const filters = {
             province: selectedProvince,
-        }))
-        setCity('')
+            city: '', // 시/도가 변경될 때 시/군/구 값 초기화
+            category2: '',
+            dog_size: '',
+            search: searchTerm,
+        }
+        onFilterChange(filters)
     }
 
     //시군구
     const handleCityChange = (event) => {
         const selectedCity = event.target.value
         setCity(selectedCity)
-        filteredCity((prevState) => ({ ...prevState, city: selectedCity }))
+        const updatedFilters = {
+            ...filteredItems,
+            city: selectedCity,
+        }
+        onFilterChange(updatedFilters) // 필터 변경을 부모 컴포넌트에 알림
     }
 
     //분류
     const handleFacilityTypeChange = (event) => {
-        setFacilityType(event.target.value)
+        const selectedFacilityType = event.target.value
+        setFacilityType(selectedFacilityType)
+        const updatedFilters = {
+            ...filteredItems,
+            category2: selectedFacilityType,
+        }
+        onFilterChange(updatedFilters) // 필터 변경을 부모 컴포넌트에 알림
     }
 
-    //검색하는 코드인데 다시설정해야할듯 먹통!
-    // const handleSearch = () => {
-    //     if (!place) return // place가 유효하지 않으면 함수 종료
-
-    //     let filteredItems = place.filter((item) =>
-    //         item.Place_Name.includes(searchTerm)
-    //     )
-
-    //     setFilteredItems(filteredItems)
-    // }
+    const handleSearch = () => {
+        // 검색 기능 코드
+        // 검색어(searchTerm)를 filteredItems에 추가
+        const updatedFilters = { ...filteredItems, search: searchTerm }
+        onFilterChange(updatedFilters) // 필터 업데이트
+    }
 
     //인풋에 보여주기
     const handleChangeSearchTerm = (event) => {
