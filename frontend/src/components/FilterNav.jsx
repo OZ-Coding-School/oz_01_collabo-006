@@ -67,6 +67,13 @@ const FilterNav = ({ onFilterChange, filteredItems }) => {
         onFilterChange(updatedFilters) // 필터 변경을 부모 컴포넌트에 알림
     }
 
+    const handleSearch = () => {
+        // 검색 기능 코드
+        // 검색어(searchTerm)를 filteredItems에 추가
+        const updatedFilters = { ...filteredItems, search: searchTerm }
+        onFilterChange(updatedFilters) // 필터 업데이트
+    }
+
     //인풋에 보여주기
     const handleChangeSearchTerm = (event) => {
         setSearchTerm(event.target.value)
