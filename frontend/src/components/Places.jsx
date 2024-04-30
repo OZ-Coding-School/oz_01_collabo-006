@@ -10,9 +10,11 @@ const Places = ({ filteredItems }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const queryParams = new URLSearchParams(
-                    filteredItems
-                ).toString()
+                const queryParams = new URLSearchParams({
+                    ...filteredItems,
+                    page: 1, // 페이지 번호를 1로 설정하여 일단 첫 번째 페이지부터 시작합니다.
+                    page_size: 80, // 페이지 크기를 20으로 설정합니다.
+                }).toString()
                 const response = await instance.get(
                     `/categories/places/?${queryParams}`
                 )
