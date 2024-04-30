@@ -9,4 +9,5 @@ export default defineConfig({
             { find: '@', replacement: '/src' },
         ],
     },
+    optimizeDeps: { exclude: ['js-big-decimal'] },
 })
